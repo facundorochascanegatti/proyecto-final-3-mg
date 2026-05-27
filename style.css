@@ -1,0 +1,40 @@
+body{
+	margin:0;
+	height:100vh;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#000000;
+	font-family:Arial;
+}
+
+.Login{
+	background:#2d18a3;
+	padding: 50px;
+	border-radius:50px;
+	width: 600px;
+}
+
+h1{
+	text-align:center;
+	color:#000;
+}
+
+label{
+	color: white
+}
+
+input{
+	width:100%;
+	padding:10px;
+	margin-top:5px;
+	border:1px solid #000;
+	border-radius:5px;
+	box-sizing:border-box;
+}
+
+input[type="submit"]{
+	background:#000;
+	color:#fff;
+	cursor:pointer;
+}

@@ -42,5 +42,21 @@ input[type="submit"]{
 	border:none;
 	color:#fff;
 	cursor:pointer;
-	border-radius: 10%;
+	border-radius: 10px;
+}
+
+.Register {
+	position: absolute;
+	top: 80%
+
+}
+ 
+.Registro {
+	background-color: #FFFFFF;
+	padding: 50px;
+	border-radius: 8px;
+	width: 600px;
+	font-family: 'Montserrat', sans-serif;
+	border: 1px solid #BDB5A6;
+
 }

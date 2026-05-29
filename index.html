@@ -7,20 +7,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <title>Liga de Futbol</title>
 </head>
 <body>
     <div class="Login">   
-        <h1><b>Login</b></h1>
-
+        <h1><b>Inicio de Sesión</b></h1>
+        
         <form action="php/login.php" method="post">
-            <label for="username">Username:</label>
+            <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required><br><br>
 
-            <label for="password">Password:</label>
+            <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required><br><br>
 
-            <input type="submit" value="Login">
+            <input type="submit" value="Iniciar Sesión">
+
+    </div>
+
+    <div class="Register">
+        <h1><b>¿No estas registrado?</b></h1>
+        <a href="register.html">Registrarse</a>
 
     </div>
     

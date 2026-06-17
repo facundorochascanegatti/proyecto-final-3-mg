@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <title>Liga de Futbol</title>
 </head>
-<body>
+<body class="bodylogin">
     <div class="Login">   
         <h1><b>Inicio de Sesión</b></h1>
         
-        <form action="indexadmin.html" method="post">
+        <form action="comprobanteLogin.php" method="post">
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required><br><br>
 
@@ -23,7 +23,7 @@
             <input type="password" id="password" name="password" required><br><br>
 
             <input type="submit" value="Iniciar Sesión">
-            <a href="administrador.html"></a>
+            <a href="indexadmin.html"></a>
 
     </div>
 </body>

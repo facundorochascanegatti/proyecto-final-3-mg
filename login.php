@@ -23,7 +23,7 @@
             <input type="password" id="password" name="password" required><br><br>
 
             <input type="submit" value="Iniciar Sesión">
-            <a href="indexadmin.html">Administrador</a>
+            <a href="indexadmin.html"></a>
 
     </div>
 </body>

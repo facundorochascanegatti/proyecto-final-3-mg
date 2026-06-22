@@ -9,7 +9,7 @@
     <link href="css/indexadmin.css" rel="stylesheet">
 </head>
 <body>
-        <div class="sideBar">
+        <div class="topBar">
             <a href="#">Gestionar Clubes</a>
             <a href="#">Gestionar Jugadores</a>
             <a href="gestionarCategoria.php">Gestionar Categorias</a>

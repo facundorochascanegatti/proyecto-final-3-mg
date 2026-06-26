@@ -4,7 +4,7 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.sideBar {
+.topBar {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -14,7 +14,7 @@ body {
     padding: 15px 20px;
 }
 
-.sideBar a {
+.topBar a {
     display: inline-block;
     color: #000000;
     padding: 10px;

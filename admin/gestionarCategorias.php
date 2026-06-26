@@ -10,3 +10,4 @@ mysqli_query($conn, $sql);
 
 echo "Categoría guardada correctamente";
 ?>
+

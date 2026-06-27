@@ -11,6 +11,20 @@ body {
     text-align: center;
     color: #2D6A4F;
     font-family: 'montserrat', sans-serif;
+    border-radius: 10px;
+    border: 2px solid #000000;
+
+}
+
+.parrafoCategoria {
+
+    text-align: center;
+    color: #000000;
+    font-family: 'montserrat', sans-serif;
+    
+
+
+
 
 }
 

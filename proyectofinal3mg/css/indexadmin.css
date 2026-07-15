@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    background: #F5F5DC;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.topBar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #2D6A4F;
+    padding: 15px 20px;
+}
+
+.topBar a {
+    display: inline-block;
+    color: #000000;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #F5F5DC;
+    text-decoration: none;
+}
+
+.carrusel {
+    max-width: 200px;
+    margin: 30px auto;
+}
+.contenedorCards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}

@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["usuario"] = $usuario;
 
         if ($usuario == "administrador") {
-            header("Location: indexadmin.php");
+            header("Location: ../admin/indexadmin.php");
         } else {
-            header("Location: index.php");
+            header("Location: ../index.php");
         }
         exit;
     } else {

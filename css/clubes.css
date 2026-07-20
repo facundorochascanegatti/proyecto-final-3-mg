@@ -56,7 +56,7 @@ form input[type="text"] {
 
 .tablaClubes {
     margin: 10px auto;
-    background-color: #F5F5F5;
+    background: radial-gradient(circle, #F5F5DC, #BDB5A6);
     padding: 10px 20px;
 
 }

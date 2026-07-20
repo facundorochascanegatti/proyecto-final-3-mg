@@ -27,8 +27,30 @@ mysqli_query($conn, $sql);
         <input type="text" id="nombreClub" name="nombreClub" required><br><br>
         <input type="submit" value="Agregar Club">
     </form>
+
+    <a href="indexadmin.php">Volver al panel de administración</a>
 </body>
 </html>
+
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "liga");
+
+if (isset($_GET["id"])) {
+
+    $id = $_GET["id"];
+
+    $sql = "DELETE FROM club WHERE id = $id";
+
+    mysqli_query($conn, $sql);
+
+    header("Location: gestionClubes.php");
+    exit();
+}
+
+?>
+
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn = mysqli_connect("localhost", "root", "", "liga");
@@ -42,14 +64,13 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 ?>
 
 
-
-///
 <?php
 $conn = mysqli_connect("localhost", "root", "", "liga");
 
 $sql = "SELECT * FROM club";
 $resultado = mysqli_query($conn, $sql);
 ?>
+
 
 <table class="tablaClubes" border="1">
     <tr>
@@ -62,9 +83,10 @@ $resultado = mysqli_query($conn, $sql);
         echo "<tr>";
         echo "<td>" . $fila["id"] . "</td>";
         echo "<td>" . $fila["clubes"] . "</td>";
+        echo "<td><a href='gestionClubes.php?id=" . $fila["id"] . "'>Eliminar</a></td>";
+        echo "<td><a href='editarClub.php?id=" . $fila["id"] . "'>Editar</a></td>";
         echo "</tr>";
     }
     ?>
+
 </table>
-//agregar columna mañana, en teoria el select sirve (que es para poder mostrar los datos del club) pero no se si lo hace bien, hay que probarlo.
-//acomodar esta mierda y entenderlo despues.

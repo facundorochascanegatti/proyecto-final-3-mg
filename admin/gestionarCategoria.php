@@ -14,10 +14,6 @@
         <input type="text" id="nombreCategoria" name="nombreCategoria" required><br><br>
         <input type="submit" value="Agregar Categoría">
     </form>
-
-
-
-
-    
+        
 </body>
 </html>

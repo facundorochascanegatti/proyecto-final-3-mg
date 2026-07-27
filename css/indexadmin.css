@@ -1,0 +1,129 @@
+body{
+    margin:0;
+
+    background-image: url("images/BG.png"); /* Asigna la imagen de fondo */
+
+    background-size:cover; /* Asigana el tamaño para que cubra todo el área */
+    
+    background-position:center; /* Asigna la poisicion de la imagen */
+
+    background-attachment:fixed; /* Evita que la imagen se mueva al scrollear */
+}
+
+
+header{ /* NavBar */
+    height:50px; /* Tamaño del NavBar */
+    background: #31387e;
+}
+
+main{ /* Ordenar el contenido en forma de Grid */
+    display:grid;
+    
+    grid-template-columns:220px 1fr 220px; /* Ordena las divs de Main y Aside en 3 columnas seguidas */
+
+    gap:20px; /* Separa el main y los asides */
+
+    padding:30px; /* Separa el contenido del borde de la pantalla */
+    
+    min-height:calc(100vh - 50px); /* Asigana el tamaño para que ocupe toda la pantalla menos el tamaño del NavBar */
+}
+
+nav a{ /* Config de los enlaces del NavBar */
+    text-decoration: none; /* Elimina el estilo del texo (le saca el aspecto de link) */
+
+    font-family: "Montserrat", sans-serif; /* Fuente del texto */
+
+    font-weight: 300; /* Peso de la fuente */
+
+    color: white; /* Color del texto */
+
+    padding: 10px 30px; /* Agrega un padding para darle la apariencia de boton a los link (a) */
+
+    border-radius: 20px; /* Agrega bordes redondeados */
+
+    display:inline-block; /* Convierte los enlaces en bloques en línea */
+
+    transition:.3s; /* Transición suave para los cambios de estilo */
+
+    margin-top: 5px; /* Agrega un margen superior para separar los enlaces del borde del NavBar */
+}
+
+nav{
+
+    display:flex; /* Display del NavBar */
+
+    gap:30px; /* Distancia entre botones */
+
+    justify-content:center; /* Centra los botones del NavBar */
+
+
+
+}
+
+nav a:hover{
+
+    background:rgb(24, 87, 150); /* Color de fondo al pasar el mouse por encima */
+
+}
+
+.home {
+    color: white; /* Color del icono */
+    
+    ont-size: 25px; /* Tamaño del icono */
+
+    text-decoration: none; /* Elimina el estilo del texto */
+
+    margin-bottom: 5px; /* Lo mueve hacia arriba */
+}
+
+aside,
+section{
+
+    background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */
+
+    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
+
+    border-radius:15px; /* Agrega bordes redondeados */
+
+    padding:20px; /* Agrega un padding para darle espacio interno */
+
+    box-shadow:0 5px 20px rgba(0,0,0,.3); /* Sombra suave para dar profundidad */
+
+}
+
+footer{
+
+    background:rgba(255,255,255,0.15); /* Color del fondo (Red, Green, Blue, Transparencia) */
+
+    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
+
+    border-top:1px solid #555; /* Borde superior */
+
+    display:flex;
+
+    justify-content:center; /* Centra el contenido del footer */
+
+    font-family: "Montserrat", sans-serif; /* Fuente del texto */
+
+    font-weight: bold; /* Negrita */
+
+    font-size: 20px; /* Tamaño de la fuente */
+
+    align-items:center; /* Alinea los items del footer al medio */
+
+    height:35px; /* Altura del footer */
+
+}
+
+.footer .Datix { /* Palabra "Datix" del logo */
+	position: relative;
+	top: 0px; /* Valores positivos lo mueven hacia abajo y valores negativos lo mueven hacia arriba */
+	color: #31387e;
+}
+
+.footer .Llave { /* Llave del logo */
+	position: relative;
+	top: -2px; /* Valores positivos lo mueven hacia abajo y valores negativos lo mueven hacia arriba */
+	right: -1px; /* Valores positivos lo mueven hacia la derecha y valores negativos lo mueven hacia la izquierda */
+	color: #525ccf;
+}

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($resultado) == 1) {
         $_SESSION["usuario"] = $usuario;
 
-        if ($usuario == "administrador") {
+        if ($usuario == "administrador" || $usuario == "admin" || $usuario == "Administrador") {
             header("Location: ../admin/indexadmin.php");
         } else {
             header("Location: ../index.php");

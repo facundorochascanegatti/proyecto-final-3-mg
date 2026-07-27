@@ -19,7 +19,7 @@
             </a>
             <a href="admin/gestionSanciones.php">Sanciones</a>
             <a href="admin/gestionCarnets.php">Carnets</a>
-            <a href="admin/gestionCategorias.php">Categorias</a>
+            <a href="../admin/gestionCategorias.php">Categorias</a>
             <a href="../admin/gestionClubes.php">Clubes</a>
             <a href="admin/gestionJugadores.php">Jugadores</a>
         </nav>

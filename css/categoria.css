@@ -53,3 +53,28 @@ form input[type="text"] {
         padding: 10px;
         background-color: #FFFFFF;
 }
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .tituloCategoria {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .parrafoCategoria {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+
+    form input[type="text"] {
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+    }
+}

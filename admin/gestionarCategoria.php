@@ -10,8 +10,8 @@
     <h1 class="tituloCategoria">Gestionar Categorías</h1>
     <p class="parrafoCategoria">Aquí puedes gestionar las categorías de los jugadores.</p>
     <form action="gestionarCategorias.php" method="post">
-        <label for="nombreCategoria">Nombre de la Categoría:</label>
-        <input type="text" id="nombreCategoria" name="nombreCategoria" required><br><br>
+        <label for="año">Año de categoria:</label>
+        <input type="text" id="año" name="año" required><br><br>
         <input type="submit" value="Agregar Categoría">
     </form>
         

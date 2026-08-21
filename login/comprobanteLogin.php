@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = mysqli_connect("localhost", "root", "", "liga");
 
-    $sql = "SELECT * FROM login WHERE usuario = '$usuario' AND contraseña = '$password'";
+    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contraseña = '$password'";
     $resultado = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($resultado) == 1) {
         $_SESSION["usuario"] = $usuario;
 
-        if ($usuario == "administrador" || $usuario == "admin" || $usuario == "Administrador") {
+        if ($usuario == "administrador" || $usuario == "admin" || $usuario == "Administrador" || $usuario == "Admin") {
             header("Location: ../admin/indexadmin.php");
         } else {
             header("Location: ../index.php");

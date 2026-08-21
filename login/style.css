@@ -50,7 +50,7 @@ input[type="submit"]{
 	top: 80%
 
 }
- 
+
 .Registro {
 	background-color: #FFFFFF;
 	padding: 50px;
@@ -59,4 +59,33 @@ input[type="submit"]{
 	font-family: 'Montserrat', sans-serif;
 	border: 1px solid #BDB5A6;
 
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .Login,
+    .Registro {
+        width: 100%;
+        max-width: 600px;
+        padding: 30px 20px;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    .Register {
+        position: static;
+        margin-top: 20px;
+    }
 }

@@ -28,26 +28,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/clubes.css">
-    <title>Editar Club</title>
-</head>
-<body>
-    <h1 class="tituloClubes">Bienvenido a la edicion del club, a continuacion podra editar el nombre del club.</h1>
-    <form action="editarClub.php" method="post">
-
-    <input type="hidden" name="id" value="<?php echo $club["id"]; ?>">
-
-    <label>Nombre del club:</label>
-
-    <input type="text" name="nombreClub" value="<?php echo $club["clubes"]; ?>">
-
-    <input type="submit" value="Guardar">
-
-</form>
-</body>
-</html>

@@ -4,7 +4,7 @@ $conn = mysqli_connect("localhost", "root", "", "liga");
 
 $club = $_POST["nombreClub"];
 
-$sql = "INSERT INTO club (clubes)
+$sql = "INSERT INTO club (nombre)
         VALUES ('$club')";
 
 mysqli_query($conn, $sql);
@@ -27,8 +27,6 @@ mysqli_query($conn, $sql);
         <input type="text" id="nombreClub" name="nombreClub" required><br><br>
         <input type="submit" value="Agregar Club">
     </form>
-
-    <a href="indexadmin.php">Volver al panel de administración</a>
 </body>
 </html>
 
@@ -40,6 +38,8 @@ if (isset($_GET["id"])) {
 
     $id = $_GET["id"];
 
+
+    
     $sql = "DELETE FROM club WHERE id = $id";
 
     mysqli_query($conn, $sql);
@@ -55,7 +55,7 @@ if (isset($_GET["id"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn = mysqli_connect("localhost", "root", "", "liga");
 
-$sql = "SELECT clubes FROM club";
+$sql = "SELECT nombre FROM club";
 $resultado = mysqli_query($conn, $sql);
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -82,9 +82,9 @@ $resultado = mysqli_query($conn, $sql);
     while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr>";
         echo "<td>" . $fila["id"] . "</td>";
-        echo "<td>" . $fila["clubes"] . "</td>";
+        echo "<td>" . $fila["nombre"] . "</td>";
         echo "<td><a href='gestionClubes.php?id=" . $fila["id"] . "'>Eliminar</a></td>";
-        echo "<td><a href='editarClub.php?id=" . $fila["id"] . "'>Editar</a></td>";
+        echo "<td><a href='editarClub.php?id=" . $fila["id"] . "'>Editar Nombre</a></td>";
         echo "</tr>";
     }
     ?>

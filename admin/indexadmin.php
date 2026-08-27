@@ -23,7 +23,7 @@
             <a href="admin/gestionCarnets.php">Carnets</a>
             <a href="../admin/gestionarCategoria.php">Categorias</a>
             <a href="../admin/gestionClubes.php">Clubes</a>
-            <a href="admin/gestionJugadores.php">Jugadores</a>
+            <a href="../admin/gestionarJugadores.php">Jugadores</a>
         </nav>
     </header>
 

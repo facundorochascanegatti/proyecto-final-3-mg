@@ -31,21 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellido = $_POST["apellido"];
     $cedula = $_POST["cedula"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
-    
 
-    $sql = "INSERT INTO jugadores (nombre, apellido, cedula, fecha_nacimiento) VALUES ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento')";
+    $sql = "INSERT INTO jugadores 
+            (nombre, apellido, cedula, fecha_nacimiento) 
+            VALUES 
+            ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento')";
 
-    $sql = "SELECT jugadores.nombre, jugadores.apellido, jugadores.cedula,
-            jugadores.fecha_nacimiento, club.nombre AS club
-        FROM jugadores
-        INNER JOIN club ON jugadores.id_club = club.id";
-
-$resultado = mysqli_query($conn, $sql);
-
-    mysqli_query($conn, $sql);
-
-    header("Location: gestionarJugadores.php");
-    exit();
+    if (mysqli_query($conn, $sql)) {
+        header("Location: gestionarJugadores.php");
+        exit();
+    } else {
+        echo "Error al agregar jugador: " . mysqli_error($conn);
+    }
 }
 
 $sql = "SELECT * FROM jugadores";

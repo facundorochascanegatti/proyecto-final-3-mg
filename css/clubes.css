@@ -1,62 +1,88 @@
-body {
-    background-color: #BDB5A6;
-    font-family: 'montserrat', sans-serif;
-    margin: 0;
-    padding: 20px;
-
-
+body{
+    margin:0;
+    background: #b8b0a0; /* Fondo gris/beige sólido, sin imagen */
 }
 
-.tituloClubes {
-    text-align: center;
-    color: #2D6A4F;
-    font-family: 'montserrat', sans-serif;
-    border-radius: 10px;
-    border: 2px solid #000000;
-
+header{ /* NavBar */
+    height:0; /* Sin navbar visible en la referencia */
+    background: transparent;
 }
 
-.parrafoClubes {
-
-    text-align: center;
-    color: #000000;
-    font-family: 'montserrat', sans-serif;
-    
-
-
-
-
+main{
+    display:block; /* Sin grid de 3 columnas */
+    padding:30px;
+    min-height:calc(100vh - 50px);
 }
 
-input[type="submit"] {
-
-    border-radius: 10px;
-    background-color: #2D6A4F;
-    color: #fff;
-    border-color: #000000;
-    margin: auto;
-    display: block;
-    padding: 10px 20px;
+nav a{
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display:inline-block;
+    transition:.3s;
+    margin-top: 5px;
 }
 
-form {
-
-    text-align: center;
-    border-radius: 10px;
-    font-family: 'montserrat', sans-serif;
-
+nav{
+    display:flex;
+    gap:30px;
+    justify-content:center;
 }
 
-form input[type="text"] {
-
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #FFFFFF;
+nav a:hover{
+    background:rgb(24, 87, 150);
 }
 
-.tablaClubes {
-    margin: 10px auto;
-    background: radial-gradient(circle, #F5F5DC, #BDB5A6);
-    padding: 10px 20px;
+.home {
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
 
+aside,
+section{
+    background: #b8b0a0; /* Mismo tono que el fondo, sin transparencia ni blur */
+    backdrop-filter: none;
+    border-radius:0;
+    padding:20px;
+    box-shadow:none;
+}
+
+footer{
+    background:#b8b0a0;
+    backdrop-filter:none;
+    border-top:1px solid #555;
+    display:flex;
+    justify-content:center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    align-items:center;
+    height:35px;
+}
+
+.footer .Datix {
+	position: relative;
+	top: 0px;
+	color: #31387e;
+}
+
+.footer .Llave {
+	position: relative;
+	top: -2px;
+	right: -1px;
+	color: #525ccf;
+}
+
+@media (max-width: 768px) {
+    header { height: auto; padding: 10px 0; }
+    nav { flex-direction: column; align-items: center; gap: 5px; }
+    nav a { padding: 8px 20px; margin-top: 0; }
+    main { padding: 15px; min-height: auto; }
+    aside, section { padding: 15px; }
+    footer { font-size: 16px; height: auto; min-height: 35px; padding: 10px; box-sizing: border-box; }
 }

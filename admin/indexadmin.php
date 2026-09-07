@@ -19,7 +19,7 @@
             <a href="#" class="home">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="admin/gestionSanciones.php">Sanciones</a>
+            <a href="gestionSanciones.php">Sanciones</a>
             <a href="admin/gestionCarnets.php">Carnets</a>
             <a href="../admin/gestionarCategoria.php">Categorias</a>
             <a href="../admin/gestionClubes.php">Clubes</a>

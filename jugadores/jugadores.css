@@ -1,0 +1,205 @@
+/* =========================
+   GENERAL
+========================= */
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background-image:url("../imagenes/BG.png");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+    height:50px;
+    background:#31387e;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+}
+
+nav a{
+    text-decoration:none;
+    font-family:"Montserrat", sans-serif;
+    font-weight:300;
+    color:white;
+    padding:10px 30px;
+    border-radius:20px;
+    display:inline-block;
+    transition:.3s;
+    margin-top:5px;
+}
+
+nav a:hover{
+    background:rgb(24,87,150);
+}
+
+nav a .fa-house{
+    color:white;
+    font-size:25px;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:350px;
+    box-sizing:border-box;
+    margin:30px auto 0;
+    padding:30px;
+    background:rgba(255,255,255,0.15);
+    border-radius:8px;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+    backdrop-filter:blur(10px);
+}
+
+form h1{
+    font-weight:normal;
+    text-align:center;
+    color:rgb(56,56,56);
+    text-shadow:3px 3px 5px rgba(0,0,0,0.3);
+    margin:0 0 25px;
+}
+
+form label{
+    align-self:flex-start;
+    font-weight:bold;
+    color:#31387e;
+    margin-bottom:5px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form select{
+    width:100%;
+    box-sizing:border-box;
+    padding:10px;
+    border:1px solid #BDB5A6;
+    border-radius:10px;
+    background:rgba(255,255,255,0.8);
+    font-size:14px;
+    outline:none;
+    transition:.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus{
+    border-color:#31387e;
+    box-shadow:0 0 5px rgba(49,56,126,0.3);
+}
+
+form input[type="submit"]{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#31387e;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+form input[type="submit"]:hover{
+    background:rgb(24,87,150);
+}
+
+
+/* =========================
+   TABLA
+========================= */
+
+.Tabla{
+    display:flex;
+    width:fit-content;
+    margin:30px auto 0;
+}
+
+.tablaClubes{
+    border-collapse:collapse;
+}
+
+.tablaClubes th,
+.tablaClubes td{
+    border:1px solid #dddddd;
+    padding:8px;
+}
+
+.tablaClubes a{
+    text-decoration:none;
+    color:white;
+    text-shadow:
+        -1px -1px 0 #c3c9ff,
+         1px -1px 0 #c3c9ff,
+        -1px  1px 0 #c3c9ff,
+         1px  1px 0 #c3c9ff;
+}
+
+.tablaClubes th{
+    color:#31387e;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    header{
+        height:auto;
+        padding:10px 0;
+    }
+
+    nav{
+        flex-direction:column;
+        align-items:center;
+        gap:5px;
+    }
+
+    nav a{
+        padding:8px 20px;
+        margin-top:0;
+    }
+
+    form{
+        width:100%;
+        padding:20px;
+    }
+
+    .Tabla{
+        width:100%;
+        overflow-x:auto;
+        justify-content:flex-start;
+    }
+
+    .tablaClubes{
+        min-width:600px;
+    }
+    
+}

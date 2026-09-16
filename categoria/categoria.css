@@ -1,0 +1,255 @@
+/* Estilos para la gestión de categorías */
+
+
+/* =========================
+   GENERAL
+========================= */
+
+body{
+    margin:0;
+
+    background-image:url("../imagenes/BG.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    font-family:"Montserrat", sans-serif;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+    height:50px;
+
+    background:#31387e;
+}
+
+nav{
+    display:flex;
+
+    gap:30px;
+
+    justify-content:center;
+}
+
+nav a{
+    text-decoration:none;
+
+    font-family:"Montserrat", sans-serif;
+
+    font-weight:300;
+
+    color:white;
+
+    padding:10px 30px;
+
+    border-radius:20px;
+
+    display:inline-block;
+
+    transition:.3s;
+
+    margin-top:5px;
+}
+
+nav a:hover{
+    background:rgb(24,87,150);
+}
+
+.home{
+    color:white;
+
+    font-size:25px;
+
+    text-decoration:none;
+
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+main{
+    display:block;
+
+    padding:30px;
+
+    min-height:calc(100vh - 50px);
+}
+
+.tituloCategoria{
+    font-family:Arial, Helvetica, sans-serif;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    color:rgb(56,56,56);
+
+    text-shadow:3px 3px 5px rgba(0,0,0,.3);
+
+    margin-top:40px;
+}
+
+.parrafoCategoria{
+    text-align:center;
+
+    font-family:"Montserrat", sans-serif;
+
+    color:rgb(56,56,56);
+
+    font-size:17px;
+
+    margin-bottom:30px;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+form{
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:350px;
+
+    margin:30px auto;
+
+    padding:30px;
+
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,.1);
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:8px;
+
+    backdrop-filter:blur(10px);
+}
+
+form label{
+    align-self:flex-start;
+
+    font-family:"Montserrat", sans-serif;
+
+    font-weight:bold;
+
+    color:rgb(56,56,56);
+
+    margin-bottom:8px;
+}
+
+form input[type="text"],
+form select{
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:10px;
+
+    border:1px solid #BDB5A6;
+
+    border-radius:10px;
+
+    font-family:"Montserrat", sans-serif;
+
+    outline:none;
+
+    margin-bottom:20px;
+}
+
+form input[type="text"]:focus,
+form select:focus{
+    border-color:#31387e;
+}
+
+form input[type="submit"]{
+    width:100%;
+
+    padding:10px;
+
+    border:1px solid #BDB5A6;
+
+    border-radius:10px;
+
+    background:#31387e;
+
+    color:white;
+
+    font-family:"Montserrat", sans-serif;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+form input[type="submit"]:hover{
+    background:rgb(24,87,150);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+    header{
+        height:auto;
+
+        padding:10px 0;
+    }
+
+    nav{
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:5px;
+    }
+
+    nav a{
+        padding:8px 20px;
+
+        margin-top:0;
+    }
+
+    main{
+        padding:15px;
+
+        min-height:auto;
+    }
+
+    .tituloCategoria{
+        font-size:28px;
+    }
+
+    .parrafoCategoria{
+        font-size:15px;
+
+        padding:0 15px;
+    }
+
+    form{
+        width:100%;
+
+        box-sizing:border-box;
+
+        padding:20px;
+    }
+}

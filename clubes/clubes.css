@@ -1,0 +1,255 @@
+/* Que alguien me recuerde comentar todo pq me dio pereza hoy, muchas gracias :) */
+
+body{
+    margin:0;
+    
+    background-image: url("../imagenes/BG.png");
+
+    background-size:cover;
+    
+    background-position:center;
+
+    background-attachment:fixed;
+}
+
+header{ 
+    height:50px; 
+
+    background: #31387e;
+}
+
+main{
+    display:block;
+
+    padding:30px;
+
+    min-height:calc(100vh - 50px);
+}
+
+nav a{
+    text-decoration: none;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 300;
+
+    color: white;
+
+    padding: 10px 30px;
+
+    border-radius: 20px;
+
+    display:inline-block;
+
+    transition:.3s;
+
+    margin-top: 5px;
+}
+
+nav{
+    display:flex;
+
+    gap:30px;
+
+    justify-content:center;
+
+}
+
+nav a:hover{
+    background:rgb(24, 87, 150);
+}
+
+.home {
+    color: white;
+    
+    font-size: 20px;
+
+    text-decoration: none;
+}
+
+aside,
+section{
+    background: #b8b0a0;
+
+    backdrop-filter: none;
+
+    border-radius:0;
+
+    padding:20px;
+
+    box-shadow:none;
+}
+
+footer{
+    background:#b8b0a0;
+
+    backdrop-filter:none;
+
+    border-top:1px solid #555;
+
+    display:flex;
+
+    justify-content:center;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: bold;
+
+    font-size: 20px;
+
+    align-items:center;
+
+    height:35px;
+}
+
+.footer .Datix {
+	position: relative;
+
+	top: 0px;
+
+	color: #31387e;
+
+}
+
+.footer .Llave {
+	position: relative;
+
+	top: -2px;
+
+	right: -1px;
+
+	color: #525ccf;
+
+}
+
+.tituloClubes {
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-weight: 0px;
+
+    text-align: center;
+
+    color: rgb(56, 56, 56);
+
+    text-shadow: 3px 3px 5px rgba(0,0,0,.3);
+
+}
+
+.Casilla {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 200px;
+
+    width: 350px;
+
+    margin: 30px auto 0;
+
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+
+    background: rgba(255,255,255,0.15);
+
+    border-radius: 8px;
+
+    backdrop-filter: blur(10px);
+
+}
+
+.Casilla .nombreClub{
+    position: relative;
+
+    right: 55px;
+
+    display:flex;
+
+    width: 150%;
+	
+    padding: 10px;
+	
+	border: 1px solid #BDB5A6;
+	
+    border-radius: 10px;
+	
+    align-items:center;
+
+}
+
+.Casilla .Agregar{
+
+    position: relative;
+
+    right: 0px;
+
+    display:flex;
+
+    width: 100%;
+	
+    padding: 10px;
+	
+	border: 1px solid #BDB5A6;
+	
+    border-radius: 10px;
+	
+    align-items:center;
+
+}
+
+.Tabla {
+    display: flex;
+    
+    width: fit-content;
+
+    margin: 30px auto 0
+
+}
+
+.tablaClubes {
+    font-family: Arial, Helvetica, sans-serif;
+
+    text-decoration: none;
+
+    border-collapse: collapse;
+
+    width: auto;
+}
+
+.tablaClubes th, td {
+
+  border: 1px solid #dddddd; 
+
+  padding: 8px;          
+}
+
+.tablaClubes a {
+    text-decoration: none;
+
+    color: white;
+
+    text-shadow: 
+    -1px -1px 0 #c3c9ff,  
+     1px -1px 0 #c3c9ff,
+    -1px  1px 0 #c3c9ff,
+     1px  1px 0 #c3c9ff;
+    
+}
+
+.tablaClubes th {
+    color: #31387e;
+
+    font-weight: 700;
+    
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    header { height: auto; padding: 10px 0; }
+    nav { flex-direction: column; align-items: center; gap: 5px; }
+    nav a { padding: 8px 20px; margin-top: 0; }
+    main { padding: 15px; min-height: auto; }
+    aside, section { padding: 15px; }
+    footer { font-size: 16px; height: auto; min-height: 35px; padding: 10px; box-sizing: border-box; }
+}
+

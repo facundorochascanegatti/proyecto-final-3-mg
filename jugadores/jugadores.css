@@ -1,5 +1,5 @@
 /* =========================
-   GENERAL
+        GENERAL
 ========================= */
 
 body{
@@ -13,12 +13,12 @@ body{
 
 
 /* =========================
-   NAVBAR
+        NAVBAR
 ========================= */
 
 header{
     height:50px;
-    background:#31387e;
+    background:#252A2E;
 }
 
 nav{
@@ -40,7 +40,7 @@ nav a{
 }
 
 nav a:hover{
-    background:rgb(24,87,150);
+    background:#2F6F62
 }
 
 nav a .fa-house{
@@ -50,7 +50,7 @@ nav a .fa-house{
 
 
 /* =========================
-   FORMULARIO
+        FORMULARIO
 ========================= */
 
 form{
@@ -78,8 +78,8 @@ form h1{
 form label{
     align-self:flex-start;
     font-weight:bold;
-    color:#31387e;
-    margin-bottom:5px;
+    color: #FFFF;
+    margin-bottom: 5px;
 }
 
 form input[type="text"],
@@ -99,8 +99,8 @@ form select{
 form input[type="text"]:focus,
 form input[type="date"]:focus,
 form select:focus{
-    border-color:#31387e;
-    box-shadow:0 0 5px rgba(49,56,126,0.3);
+    border-color:#2F6F62;
+    box-shadow:  0 5px rgba(47,111,98,0.3);
 }
 
 form input[type="submit"]{
@@ -109,7 +109,7 @@ form input[type="submit"]{
     margin-top:10px;
     border:none;
     border-radius:10px;
-    background:#31387e;
+    background:#2F6F62;
     color:white;
     font-size:15px;
     font-weight:bold;
@@ -123,7 +123,7 @@ form input[type="submit"]:hover{
 
 
 /* =========================
-   TABLA
+        TABLA
 ========================= */
 
 .Tabla{
@@ -162,7 +162,7 @@ form input[type="submit"]:hover{
 
 
 /* =========================
-   RESPONSIVE
+        RESPONSIVE
 ========================= */
 
 @media (max-width:768px){
@@ -202,4 +202,4 @@ form input[type="submit"]:hover{
         min-width:600px;
     }
     
-}
+}   

@@ -33,7 +33,7 @@ if (isset($_POST["año"]) && isset($_POST["genero"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../categoria/categoria.css" rel="stylesheet">
-    <!-- ESTO DE ABAJO ES UNA LIBRERIA PARA LOS ICONOS DE LA PAGINA -->
+   
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Gestionar Categorías</title>
 </head>
@@ -65,13 +65,15 @@ if (isset($_POST["año"]) && isset($_POST["genero"])) {
 
         <label for="genero">Género:</label>
         <select name="genero" id="genero" required>
+        
             <option value="">Seleccione un género</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
+        
         </select>
-
+        
         <br><br>
-
+        
         <input type="submit" value="Agregar Categoría">
 
     </form>

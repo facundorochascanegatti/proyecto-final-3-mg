@@ -11,57 +11,38 @@
     <title>Index Admin</title>
 </head>
 <body>
-    <body>
-
     <header>
-
         <nav>
-            <a href="#" class="home">
+            <a href="../admin/indexadmin.php" class="home">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="admin/gestionSanciones.php">Sanciones</a>
+            <a href="gestionSanciones.php">Sanciones</a>
             <a href="admin/gestionCarnets.php">Carnets</a>
-            <a href="../admin/gestionarCategoria.php">Categorias</a>
-            <a href="../admin/gestionClubes.php">Clubes</a>
-            <a href="../admin/gestionarJugadores.php">Jugadores</a>
+            <a href="../categoria/gestionarCategoria.php">Categorias</a>
+            <a href="../clubes/gestionClubes.php">Clubes</a>
+            <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
+            <a href="../fixture/gestionarPartidos.php">Partidos</a>
         </nav>
     </header>
 
     <main>
 
-        <aside class="left">
-            Contenido lateral izquierdo
-        </aside>
-
         <section>
-            <div>
-                <div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+            <div class="parent">
+                <div class="contenido">
+                    
+                    izquierda
+                    <img src="../imagenes/dortmund.png">
+
+                </div>
+
+                <div class="tabla">
+                    
+                    derecha
+
+                </div>
             </div>
         </section>
-
-        <aside class="right">
-            Contenido lateral derecho
-        </aside>
 
     </main>
 
@@ -69,6 +50,5 @@
         <p class="Datix">DATIX</p> <p class="Llave">}</p>
     </footer>
 
-</body>
 </body>
 </html>

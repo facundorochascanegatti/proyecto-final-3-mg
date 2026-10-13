@@ -1,0 +1,226 @@
+/* =========================
+        GENERAL
+========================= */
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background-image:url("../imagenes/BG.png");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+
+/* =========================
+        NAVBAR
+========================= */
+
+header{
+    height:50px;
+    background:#252A2E;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+}
+
+nav a{
+    text-decoration:none;
+    font-family:"Montserrat", sans-serif;
+    font-weight:300;
+    color:white;
+    padding:10px 30px;
+    border-radius:20px;
+    display:inline-block;
+    transition:.3s;
+    margin-top:5px;
+}
+
+nav a:hover{
+    background:#2F6F62
+}
+
+nav a .fa-house{
+    color:white;
+    font-size:25px;
+}
+
+
+/* =========================
+        FORMULARIO
+========================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:350px;
+    box-sizing:border-box;
+    margin:30px auto 0;
+    padding:30px;
+    background:rgba(255,255,255,0.15);
+    border-radius:8px;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+    backdrop-filter:blur(10px);
+}
+
+form h1{
+    font-weight:normal;
+    text-align:center;
+    color:rgb(56,56,56);
+    text-shadow:3px 3px 5px rgba(0,0,0,0.3);
+    margin:0 0 25px;
+}
+
+form label{
+    align-self:flex-start;
+    font-weight:bold;
+    color: #FFFF;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form select{
+    width:100%;
+    box-sizing:border-box;
+    padding:10px;
+    border:1px solid #BDB5A6;
+    border-radius:10px;
+    background:rgba(255,255,255,0.8);
+    font-size:14px;
+    outline:none;
+    transition:.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus{
+    border-color:#2F6F62;
+    box-shadow:  0 5px rgba(47,111,98,0.3);
+}
+
+form input[type="submit"]{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#2F6F62;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+form input[type="submit"]:hover{
+    background:rgb(24,87,150);
+}
+
+
+/* =========================
+        TABLA
+========================= */
+
+.Tabla{
+    display:flex;
+    width:fit-content;
+    margin:30px auto 0;
+    padding:15px;
+    background:rgba(255,255,255,0.15);
+    border-radius:8px;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+    backdrop-filter:blur(10px);
+}
+
+.tablaClubes{
+    border-collapse:collapse;
+}
+
+.tablaClubes th,
+.tablaClubes td{
+    border:1px solid rgba(255,255,255,0.4);
+    padding:10px;
+}
+
+.tablaClubes th{
+    background:#252A2E;
+    color:white;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.tablaClubes td{
+    background:rgba(255,255,255,0.7);
+    color:#383838;
+}
+
+.tablaClubes a{
+    text-decoration:none;
+    color:#2F6F62;
+    font-weight:bold;
+}
+
+.tablaClubes a:hover{
+    color:#185796;
+}
+
+.mensajeError{
+    width:fit-content;
+    margin:10px auto;
+    padding:10px 20px;
+    border-radius:8px;
+    background:rgba(170,50,50,.85);
+    color:white;
+    font-family:"Montserrat", sans-serif;
+    text-align:center;
+}
+
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    header{
+        height:auto;
+        padding:10px 0;
+    }
+
+    nav{
+        flex-direction:column;
+        align-items:center;
+        gap:5px;
+    }
+
+    nav a{
+        padding:8px 20px;
+        margin-top:0;
+    }
+
+    form{
+        width:100%;
+        padding:20px;
+    }
+
+    .Tabla{
+        width:100%;
+        overflow-x:auto;
+        justify-content:flex-start;
+    }
+
+    .tablaClubes{
+        min-width:600px;
+    }
+    
+}   

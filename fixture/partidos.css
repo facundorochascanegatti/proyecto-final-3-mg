@@ -1,0 +1,225 @@
+
+/* =========================
+        GENERAL
+========================= */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../imagenes/BG.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+        NAVBAR
+========================= */
+
+header {
+    min-height: 50px;
+    background: #252A2E;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: .3s;
+    margin-top: 5px;
+}
+
+nav a:hover {
+    background: #2F6F62;
+}
+
+nav a .fa-house {
+    color: white;
+    font-size: 25px;
+}
+
+
+/* =========================
+        FORMULARIO
+========================= */
+
+.Casilla {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    box-sizing: border-box;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.Casilla form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.tituloPartidos {
+    font-weight: normal;
+    text-align: center;
+    color: rgb(56, 56, 56);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    margin: 0 0 25px;
+}
+
+.Casilla label {
+    align-self: flex-start;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.Casilla input[type="date"],
+.Casilla input[type="number"],
+.Casilla select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #BDB5A6;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    outline: none;
+}
+
+.Casilla input[type="date"]:focus,
+.Casilla input[type="number"]:focus,
+.Casilla select:focus {
+    border-color: #2F6F62;
+}
+
+.Casilla .Agregar {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #2F6F62;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.Casilla .Agregar:hover {
+    background: #185796;
+}
+
+
+/* =========================
+        TABLA
+========================= */
+
+.Tabla {
+    display: block;
+    width: fit-content;
+    max-width: calc(100% - 30px);
+    box-sizing: border-box;
+    margin: 30px auto;
+    padding: 15px;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.tablaPartidos {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tablaPartidos th,
+.tablaPartidos td {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.tablaPartidos th {
+    background: #252A2E;
+    color: white;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.tablaPartidos td {
+    background: rgba(255, 255, 255, 0.7);
+    color: #383838;
+}
+
+.tablaPartidos a {
+    text-decoration: none;
+    color: #2F6F62;
+    font-weight: bold;
+}
+
+.tablaPartidos a:hover {
+    color: #185796;
+}
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 8px 20px;
+        margin-top: 0;
+    }
+
+    .Casilla {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .Tabla {
+        width: calc(100% - 20px);
+        max-width: none;
+        margin: 20px 10px;
+        padding: 10px;
+    }
+
+    .tablaPartidos {
+        min-width: 750px;
+    }
+}

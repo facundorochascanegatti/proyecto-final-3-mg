@@ -1,7 +1,7 @@
 body{
     margin:0;
 
-    background-image: url("images/BG.png");
+    background-image: url("../imagenes/BG.png");
 
     background-size:cover;
     
@@ -17,15 +17,54 @@ header{ /* NavBar */
 }
 
 main{ /* Ordenar el contenido en forma de Grid */
-    display:grid;
+
+    padding-left: 60px;
+
+    padding-right: 60px;
     
-    grid-template-columns:220px 1fr 220px; /* Ordena las divs de Main y Aside en 3 columnas seguidas */
+    padding-top: 30px;
 
-    gap:20px; /* Separa el main y los asides */
-
-    padding:30px; /* Separa el contenido del borde de la pantalla */
+    padding-bottom: 30px;
     
     min-height:calc(100vh - 50px); /* Asigana el tamaño para que ocupe toda la pantalla menos el tamaño del NavBar */
+}
+
+.parent {
+  display: flex;
+  gap: 16px;
+  
+}
+
+.contenido{
+
+   width: 50%;
+
+    background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */
+
+    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
+
+    border-radius:15px; /* Agrega bordes redondeados */
+
+    padding:20px; /* Agrega un padding para darle espacio interno */
+
+    overflow: hidden; /* Evita que el contenido se desborde del contenedor */
+
+}
+
+.tabla{
+    
+    width: 50%;
+
+    background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */
+
+    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
+
+    border-radius:15px; /* Agrega bordes redondeados */
+
+    padding:20px; /* Agrega un padding para darle espacio interno */
+
+    
+
 }
 
 nav a{ /* Config de los enlaces del NavBar */
@@ -76,7 +115,6 @@ nav a:hover{
     margin-bottom: 5px; /* Lo mueve hacia arriba */
 }
 
-aside,
 section{
 
     background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */

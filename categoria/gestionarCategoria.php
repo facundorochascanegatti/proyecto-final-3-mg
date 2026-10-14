@@ -45,9 +45,9 @@ if (isset($_POST["año"]) && isset($_POST["genero"])) {
             <a href="../admin/indexadmin.php" class="home">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="gestionSanciones.php">Sanciones</a>
-            <a href="admin/gestionCarnets.php">Carnets</a>
-            <a href="../admin/gestionarCategoria.php">Categorias</a>
+            <a href="../sanciones/gestionarSanciones.php">Sanciones</a>
+            <a href="../carnets/gestionarCarnets.php">Carnets</a>
+            <a href="../categoria/gestionarCategoria.php">Categorias</a>
             <a href="../clubes/gestionClubes.php">Clubes</a>
             <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
         </nav>

@@ -56,8 +56,8 @@ $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
         <th>Jugador</th>
         <th>Club</th>
         <th>Categoría</th>
-        <th>🟨</th>
-        <th>🟥</th>
+        <th>Amarillas</th>
+        <th>Rojas</th>
         <th>Estado</th>
         <th><i class="fa-solid fa-rotate-left"></i></th>
     </tr>

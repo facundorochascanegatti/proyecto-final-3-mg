@@ -16,7 +16,7 @@ body{
 
     background-attachment:fixed;
 
-    font-family:"Montserrat", sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
@@ -26,52 +26,7 @@ body{
 
 header{
     height:50px;
-
-    background:#31387e;
 }
-
-nav{
-    display:flex;
-
-    gap:30px;
-
-    justify-content:center;
-}
-
-nav a{
-    text-decoration:none;
-
-    font-family:"Montserrat", sans-serif;
-
-    font-weight:300;
-
-    color:white;
-
-    padding:10px 30px;
-
-    border-radius:20px;
-
-    display:inline-block;
-
-    transition:.3s;
-
-    margin-top:5px;
-}
-
-nav a:hover{
-    background:rgb(24,87,150);
-}
-
-.home{
-    color:white;
-
-    font-size:25px;
-
-    text-decoration:none;
-
-    margin-bottom:5px;
-}
-
 
 /* =========================
    CONTENIDO
@@ -86,17 +41,17 @@ main{
 }
 
 .tituloCategoria{
-    font-family:Arial, Helvetica, sans-serif;
 
-    font-weight:bold;
+    font-weight:normal;
 
     text-align:center;
 
-    color:rgb(56,56,56);
+    color:white;
 
-    text-shadow:3px 3px 5px rgba(0,0,0,.3);
+    text-shadow:2px 2px 6px rgba(0,0,0,.7);
 
-    margin-top:40px;
+    margin-top:-7px;
+
 }
 
 .parrafoCategoria{
@@ -121,35 +76,33 @@ form{
 
     flex-direction:column;
 
-    justify-content:center;
-
     align-items:center;
 
-    width:350px;
+    width:300px;
 
-    margin:30px auto;
+    margin:80px auto 0;
 
     padding:30px;
 
     box-shadow:3px 3px 6px 3px rgba(0,0,0,.1);
 
-    background:rgba(255,255,255,.15);
-
     border-radius:8px;
 
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(5px);
+
+    color:white;
+
+    gap:4px;
 }
 
 form label{
     align-self:flex-start;
 
-    font-family:"Montserrat", sans-serif;
-
     font-weight:bold;
 
-    color:rgb(56,56,56);
+    margin-bottom:5px;
 
-    margin-bottom:8px;
+    color:white;
 }
 
 form input[type="text"],
@@ -160,15 +113,17 @@ form select{
 
     padding:10px;
 
-    border:1px solid #BDB5A6;
+    border:1px solid rgba(255, 255, 255, 0.18);
 
-    border-radius:10px;
-
-    font-family:"Montserrat", sans-serif;
+    border-radius:8px;
 
     outline:none;
 
     margin-bottom:20px;
+
+    color:white;
+
+    background:rgba(0, 0, 0, 0.35);
 }
 
 form input[type="text"]:focus,
@@ -178,23 +133,15 @@ form select:focus{
 
 form input[type="submit"]{
     width:100%;
-
     padding:10px;
-
-    border:1px solid #BDB5A6;
-
+    margin-top:10px;
+    border:none;
     border-radius:10px;
-
-    background:#31387e;
-
+    background:#2F6F62;
     color:white;
-
-    font-family:"Montserrat", sans-serif;
-
+    font-size:15px;
     font-weight:bold;
-
     cursor:pointer;
-
     transition:.3s;
 }
 
@@ -202,6 +149,52 @@ form input[type="submit"]:hover{
     background:rgb(24,87,150);
 }
 
+/* =========================
+        TABLA
+========================= */
+
+.Tabla{
+    display:flex;
+    width:fit-content;
+    margin:30px auto 0;
+    padding:15px;
+    background:rgba(255,255,255,0.15);
+    border-radius:8px;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+    backdrop-filter:blur(10px);
+}
+
+.tablaClubes{
+    border-collapse:collapse;
+}
+
+.tablaClubes th,
+.tablaClubes td{
+    border:1px solid rgba(255,255,255,0.4);
+    padding:10px;
+}
+
+.tablaClubes th{
+    background:#252A2E;
+    color:white;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.tablaClubes td{
+    background:rgba(255,255,255,0.7);
+    color:#383838;
+}
+
+.tablaClubes a{
+    text-decoration:none;
+    color:#2F6F62;
+    font-weight:bold;
+}
+
+.tablaClubes a:hover{
+    color:#185796;
+}
 
 /* =========================
    RESPONSIVE

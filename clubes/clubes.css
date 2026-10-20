@@ -10,12 +10,14 @@ body{
     background-position:center;
 
     background-attachment:fixed;
+
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 header{ 
+
     height:50px; 
 
-    background: #31387e;
 }
 
 main{
@@ -26,46 +28,6 @@ main{
     min-height:calc(100vh - 50px);
 }
 
-nav a{
-    text-decoration: none;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-weight: 300;
-
-    color: white;
-
-    padding: 10px 30px;
-
-    border-radius: 20px;
-
-    display:inline-block;
-
-    transition:.3s;
-
-    margin-top: 5px;
-}
-
-nav{
-    display:flex;
-
-    gap:30px;
-
-    justify-content:center;
-
-}
-
-nav a:hover{
-    background:rgb(24, 87, 150);
-}
-
-.home {
-    color: white;
-    
-    font-size: 20px;
-
-    text-decoration: none;
-}
 
 aside,
 section{
@@ -122,126 +84,163 @@ footer{
 
 }
 
-.tituloClubes {
-    font-family: Arial, Helvetica, sans-serif;
-
-    font-weight: 0px;
-
-    text-align: center;
-
-    color: rgb(56, 56, 56);
-
-    text-shadow: 3px 3px 5px rgba(0,0,0,.3);
-
-}
-
-.Casilla {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    height: 200px;
-
-    width: 350px;
-
-    margin: 30px auto 0;
-
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
-
-    background: rgba(255,255,255,0.15);
-
-    border-radius: 8px;
-
-    backdrop-filter: blur(10px);
-
-}
-
-.Casilla .nombreClub{
-    position: relative;
-
-    right: 55px;
+form {
 
     display:flex;
 
-    width: 150%;
-	
-    padding: 10px;
-	
-	border: 1px solid #BDB5A6;
-	
-    border-radius: 10px;
-	
+    flex-direction:column;
+
     align-items:center;
 
-}
+    width:350px;
 
-.Casilla .Agregar{
+    box-sizing:border-box;
 
-    position: relative;
+    margin:80px auto 0;
 
-    right: 0px;
+    padding:30px;
 
-    display:flex;
+    border-radius:8px;
 
-    width: 100%;
-	
-    padding: 10px;
-	
-	border: 1px solid #BDB5A6;
-	
-    border-radius: 10px;
-	
-    align-items:center;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+
+    backdrop-filter:blur(5px);
+
+    gap:7px;
 
 }
 
-.Tabla {
-    display: flex;
-    
-    width: fit-content;
+form input[type="text"]{
 
-    margin: 30px auto 0
+    width:100%;
 
-}
+    box-sizing:border-box;
 
-.tablaClubes {
-    font-family: Arial, Helvetica, sans-serif;
+    padding:8px;
 
-    text-decoration: none;
+    border:1px solid rgba(255, 255, 255, 0.18);
 
-    border-collapse: collapse;
+    border-radius:8px;
 
-    width: auto;
-}
+    background:rgba(0, 0, 0, 0.35);
 
-.tablaClubes th, td {
-
-  border: 1px solid #dddddd; 
-
-  padding: 8px;          
-}
-
-.tablaClubes a {
-    text-decoration: none;
+    font-size:13px;
 
     color: white;
 
-    text-shadow: 
-    -1px -1px 0 #c3c9ff,  
-     1px -1px 0 #c3c9ff,
-    -1px  1px 0 #c3c9ff,
-     1px  1px 0 #c3c9ff;
-    
 }
 
-.tablaClubes th {
-    color: #31387e;
+form input[type="submit"]{
 
-    font-weight: 700;
-    
-    letter-spacing: 0.5px;
+    width:100%;
+
+    padding:10px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2F6F62;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+form input[type="submit"]:hover{
+
+    background:rgb(24,87,150);
+
+}
+
+form h1{
+
+    font-weight:normal;
+
+    text-align:center;
+
+    text-shadow:3px 3px 5px rgba(0,0,0,0.3);
+
+    margin:0 0 25px;
+
+    color:white;
+
+    text-shadow:2px 2px 6px rgba(0,0,0,.7);
+
+}
+
+form label{
+
+    align-self:flex-start;
+
+    font-weight:bold;
+
+    color: #FFFF;
+
+    margin-bottom: 5px;
+
+}
+
+.Tabla{
+    display:flex;
+    width:fit-content;
+    margin:30px auto 0;
+    border-radius:8px;
+    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
+    margin-bottom:30px;
+}
+
+.tablaClubes{
+    border-collapse:collapse;
+}
+
+.tablaClubes th,
+.tablaClubes td{
+    border:1px solid rgba(255,255,255,0.4);
+    padding:10px;
+}
+
+.tablaClubes th{
+    background:#252A2E;
+    color:white;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.tablaClubes td{
+    background:rgba(255,255,255,0.7);
+    color:#383838;
+}
+
+.tablaClubes a{
+    text-decoration:none;
+    color:#2F6F62;
+    font-weight:bold;
+}
+
+.tablaClubes a:hover{
+    color:#185796;
+}
+
+.tituloClubes {
+    text-align: center;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #FFFF;
+
+    margin-top: 30px;
 }
 
 @media (max-width: 768px) {

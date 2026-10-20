@@ -11,20 +11,60 @@
 <link href="style.css" rel="stylesheet">
 <title>Liga de Futbol</title>
 </head>
-<body class="bodylogin">
-    <div class="Login">
-        <h1><b>Inicio de Sesión</b></h1>
+<body>
+    <div class="login-box">
+
+        <div class="izq">
+
+            <div class="top">
+                
+            </div>
+
+            <div class="contenido">
+                <img src="../imagenes/Logo.png" alt="Logo">
+                <h1><b>¡BIENVENIDO!</b></h1>
+                <p>Inicia sesión para acceder a la administración de la liga de futbol.</p>
+            </div>   
+
+            <div class="footer">
+                <p>© 2026 DATIX. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+
+        <div class="der">
+            
+            <div class="iniciar">
+
+                <h1><b>Iniciar Sesión<br>en el panel</b></h1>
+                <p>¿Eres nuevo? Contacta con un administrador para obtener acceso.</p>
+
+            </div>
         
-        <form action="comprobanteLogin.php" method="post">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required><br><br>
+            <form action="comprobanteLogin.php" method="post">
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required><br><br>
+                <div class="campo">
 
-            <input type="submit" value="Iniciar Sesión">
-            <a href="admin/indexadmin.html"></a>
+                    <input type="text" id="username" name="username" required placeholder="Usuario">
 
-    </div>
+                </div>    
+                
+                <div class="campo">
+
+                    <input type="password" id="password" name="password" required placeholder="Contraseña">
+
+                </div>   
+                
+                <div class="campo">
+
+                    <input type="submit" value="Iniciar Sesión">
+                    <p>¿Olvidaste tu contraseña? <a href="../admin/indexadmin.php">Haz clic aquí</a></p>
+
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>    
 </body>
 </html>

@@ -1,5 +1,6 @@
+<?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <?php
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require "../conexion.php";   // esto reemplaza al mysqli_connect
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];

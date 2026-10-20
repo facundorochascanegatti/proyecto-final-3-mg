@@ -1,0 +1,562 @@
+/* Iconos y fuentes */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: #383838;
+    background-image: url("../imagenes/BG.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main {
+    padding: 30px 60px;
+    min-height: calc(100vh - 85px);
+}
+
+h1 {
+    margin: 0 0 5px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #383838;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.subtitulo {
+    color: #383838;
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    height: 50px;
+    background: #31387e;
+}
+
+header nav {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+header nav a {
+    text-decoration: none;
+    font-weight: 300;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: .3s;
+    margin-top: 5px;
+}
+
+header nav a:hover {
+    background: rgb(24, 87, 150);
+}
+
+header nav a.salir:hover {
+    background: rgba(170, 50, 50, .85);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    height: 50px;
+    background: #31387e;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: .3s;
+    margin-top: 5px;
+}
+
+nav a:hover {
+    background: rgb(24, 87, 150);
+}
+
+nav a.salir:hover {
+    background: rgba(170, 50, 50, .85);
+}
+
+.home {
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   PANELES
+========================= */
+
+.tarjeta {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #383838;
+}
+
+.grilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.grilla .tarjeta {
+    margin-bottom: 0;
+}
+
+.numero {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.tarjeta .numero.ok {
+    color: #2F6F62;
+}
+
+.tarjeta .numero.mal {
+    color: #aa3232;
+}
+
+/* =========================
+   AVISOS
+========================= */
+
+.aviso {
+    background: rgba(255, 255, 255, 0.7);
+    color: #383838;
+    border-left: 5px solid #31387e;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+}
+
+.aviso small {
+    color: #666;
+    margin-left: 8px;
+}
+
+/* =========================
+   TABLAS
+========================= */
+
+.tabla-scroll {
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.tarjeta .tabla-scroll {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 10px;
+}
+
+th {
+    background: #252A2E;
+    color: white;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-align: left;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.7);
+    color: #383838;
+    font-size: 14px;
+}
+
+td a {
+    text-decoration: none;
+    color: #2F6F62;
+    font-weight: bold;
+}
+
+td a:hover {
+    color: #185796;
+}
+
+.foto {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* =========================
+   ESTADOS Y MENSAJES
+========================= */
+
+.ok {
+    color: #2F6F62;
+    font-weight: bold;
+}
+
+.mal {
+    color: #aa3232;
+    font-weight: bold;
+}
+
+.tarjeta p.mal {
+    color: #aa3232;
+}
+
+.vacio {
+    text-align: center;
+    color: #383838;
+    padding: 15px;
+}
+
+td.vacio {
+    color: #383838;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+form.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+select,
+input[type="text"],
+textarea {
+    padding: 10px;
+    border: 1px solid #BDB5A6;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    outline: none;
+    transition: .3s;
+}
+
+select:focus,
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #31387e;
+}
+
+textarea {
+    width: 100%;
+    min-height: 90px;
+}
+
+/* Botones */
+
+button,
+input[type="submit"],
+.boton {
+    background: #31387e;
+    color: white;
+    border: 1px solid #BDB5A6;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.boton:hover {
+    background: rgb(24, 87, 150);
+}
+
+button.rojo {
+    background: rgba(170, 50, 50, .85);
+}
+
+button.rojo:hover {
+    background: rgb(140, 30, 30);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.footer .Datix {
+    color: #8d97ff;
+}
+
+.footer .Llave {
+    color: #525ccf;
+    position: relative;
+    top: -2px;
+}
+
+/* =========================
+   PLANILLA IMPRIMIBLE
+========================= */
+
+.hoja {
+    background: #fff;
+    color: #000;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.encabezado img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.encabezado h2,
+.encabezado h3 {
+    margin: 0;
+}
+
+.linea {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    min-width: 260px;
+}
+
+.hoja p {
+    margin: 10px 0;
+}
+
+.hoja table th,
+.hoja table td {
+    border: 1px solid #000;
+    height: 28px;
+}
+
+.hoja table th {
+    background: #e5e7eb;
+    color: #000;
+}
+
+.hoja table td {
+    background: #fff;
+    color: #000;
+}
+
+.caja {
+    border: 1px solid #000;
+    min-height: 110px;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.firmas {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.firmas div {
+    border-top: 1px solid #000;
+    width: 40%;
+    text-align: center;
+    padding-top: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    header nav a {
+        padding: 8px 20px;
+        margin-top: 0;
+    }
+
+    main {
+        padding: 15px;
+        min-height: auto;
+    }
+
+    .tarjeta {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitulo {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+
+    footer {
+        font-size: 16px;
+        height: auto;
+        min-height: 35px;
+        padding: 10px;
+    }
+
+    table {
+        min-width: 560px;
+    }
+
+    .encabezado {
+        flex-wrap: wrap;
+    }
+
+    .linea {
+        min-width: 150px;
+        max-width: 100%;
+    }
+
+    .firmas {
+        gap: 20px;
+    }
+}
+
+/* =========================
+   IMPRESIÓN
+========================= */
+
+@media print {
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    header,
+    footer,
+    form.filtros,
+    .no-imprimir {
+        display: none !important;
+    }
+
+    main {
+        padding: 0;
+        min-height: 0;
+    }
+
+    .tarjeta,
+    .tabla-scroll {
+        background: none;
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    h1,
+    .subtitulo {
+        color: #000;
+        text-shadow: none;
+    }
+
+    td {
+        background: #fff;
+    }
+
+    .hoja {
+        padding: 0;
+        page-break-after: always;
+    }
+
+    .hoja:last-child {
+        page-break-after: auto;
+    }
+}

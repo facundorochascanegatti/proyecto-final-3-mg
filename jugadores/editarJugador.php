@@ -1,59 +1,90 @@
+<?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <?php
-/* esto sirve para conectar la base de datos "liga" */
-$conn = mysqli_connect("localhost", "root", "", "liga");
-/* esta variable guarda los datos del jugador, la iniciamos en null por si no se encuentra algun jugador */
-$jugador = null;
+require_once "../conexion.php";
 
-/*verifica si se recibio un id por GET, si es asi, busca el jugador en la base de datos y guarda sus datos en la variable $jugador */
-if (isset($_GET["id"])) {
-    /*esta variable guarda el id del jugador que se quiere editar*/
-    $id = $_GET["id"];
-    /*busca el jugador en la base de datos y guarda sus datos en la variable $jugador*/
-    $resultado = mysqli_query($conn, "SELECT * FROM jugadores WHERE id = $id");
-    /*guarda los datos del jugador en la variable $jugador*/
-    $jugador = mysqli_fetch_assoc($resultado);
+$id = (int) ($_GET["id"] ?? $_POST["id"] ?? 0);
+
+$resultado = mysqli_query($conn, "SELECT * FROM jugadores WHERE id = $id");
+$jugador = mysqli_fetch_assoc($resultado);
+
+if (!$jugador) {
+    header("Location: gestionarJugadores.php");
+    exit();
 }
-/*verifica si se recibio un formulario por POST, si es asi, actualiza los datos del jugador en la base de datos*/
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    /*se obtiene los datos enviados desde el formulario*/
-    $id = $_POST["id"];
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $cedula = $_POST["cedula"];
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre = trim($_POST["nombre"]);
+    $apellido = trim($_POST["apellido"]);
+    $cedula = trim($_POST["cedula"]);
     $fechaNacimiento = $_POST["fecha_nacimiento"];
     $masa = $_POST["masa"];
     $altura = $_POST["altura"];
+
     $gravedad = 9.8;
     $peso = $masa * $gravedad;
-    /*actualiza los datos del jugador en la base de datos*/
-    mysqli_query($conn, "UPDATE jugadores SET nombre = '$nombre', apellido = '$apellido', cedula = '$cedula', fecha_nacimiento = '$fechaNacimiento', masa = '$masa', altura = '$altura', peso = '$peso' WHERE id = $id");
-    /*redirige a la pagina de gestion de jugadores*/
-    header("Location: gestionarJugadores.php");
-    /*para de ejecutar el codigo*/
-    exit();
+    $velocidad = (2 * $gravedad * $altura) ** 0.5;
+
+    $stmt = mysqli_prepare($conn, "UPDATE jugadores SET nombre = ?, apellido = ?, cedula = ?, fecha_nacimiento = ?, masa = ?, altura = ?, peso = ?, velocidad = ? WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "ssssidddi", $nombre, $apellido, $cedula, $fechaNacimiento, $masa, $altura, $peso, $velocidad, $id);
+
+    try {
+        mysqli_stmt_execute($stmt);
+        header("Location: gestionarJugadores.php");
+        exit();
+    } catch (mysqli_sql_exception $e) {
+        $error = "No se pudieron guardar los cambios. Verificá que la cédula no esté registrada en otro jugador.";
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="jugadores.css" rel="stylesheet">
+    <link href="../nav/nav.css" rel="stylesheet">
+    <title>Editar Jugador</title>
+</head>
 <body>
+    <header>
+        <nav>
+            <a href="gestionarJugadores.php">Volver a Jugadores</a>
+            <a href="../admin/indexadmin.php" class="home">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </nav>
+    </header>
 
-<?php if ($jugador): ?>
-        <!-- Formulario para editar los datos del jugador -->
-    <form action="editarJugador.php" method="post">
-        <!-- Campo oculto que guarda el ID del jugador -->
-        <input type="hidden" name="id" value="<?= $jugador['id'] ?>">
-        <!-- Campo para editar el nombre -->
-        <input type="text" name="nombre" value="<?= $jugador['nombre'] ?>">
-        <!-- Campo para editar el apellido -->
-        <input type="text" name="apellido" value="<?= $jugador['apellido'] ?>">
-        <!-- Campo para editar la cédula -->
-        <input type="text" name="cedula" value="<?= $jugador['cedula'] ?>">
-        <!-- Campo para editar la fecha de nacimiento -->
-        <input type="date" name="fecha_nacimiento" value="<?= $jugador['fecha_nacimiento'] ?>">
-        <!-- Botón para guardar los cambios -->
+    <h1>Editar Jugador</h1>
+
+    <?php if ($error): ?>
+        <p><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
+    <form action="editarJugador.php?id=<?= $id ?>" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required value="<?= htmlspecialchars($jugador["nombre"]) ?>">
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required value="<?= htmlspecialchars($jugador["apellido"]) ?>">
+
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" required value="<?= htmlspecialchars($jugador["cedula"]) ?>">
+
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required value="<?= htmlspecialchars($jugador["fecha_nacimiento"]) ?>">
+
+        <label for="masa">Masa:</label>
+        <input type="text" id="masa" name="masa" required value="<?= htmlspecialchars($jugador["masa"]) ?>">
+
+        <label for="altura">Altura:</label>
+        <input type="text" id="altura" name="altura" required value="<?= htmlspecialchars($jugador["altura"]) ?>">
+
         <input type="submit" value="Guardar">
     </form>
-<?php endif; ?>
-
 </body>
 </html>

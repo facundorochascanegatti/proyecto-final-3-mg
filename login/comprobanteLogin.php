@@ -1,28 +1,35 @@
 <?php
-session_start();
+require_once __DIR__ . "/../conexion.php";
+require_once __DIR__ . "/../auth.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario  = $_POST["username"];
-    $password = $_POST["password"];
-
-    $conn = mysqli_connect("localhost", "root", "", "liga");
-
-    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contraseña = '$password'";
-    $resultado = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($resultado) == 1) {
-        $_SESSION["usuario"] = $usuario;
-
-        if ($usuario == "administrador" || $usuario == "admin" || $usuario == "Administrador" || $usuario == "Admin") {
-            header("Location: ../admin/indexadmin.php");
-        } else {
-            header("Location: ../index.php");
-        }
-        exit;
-    } else {
-        echo "Usuario o contraseña incorrectos.";
-    }
-
-    mysqli_close($conn);
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header("Location: login.php");
+    exit();
 }
-?>
+
+$usuario = trim($_POST["username"] ?? "");
+$password = $_POST["password"] ?? "";
+
+// Consulta con prepare: así no se puede meter SQL en el usuario
+$stmt = mysqli_prepare($conn, "SELECT usuario, `contraseña`, rol, id_club FROM usuarios WHERE usuario = ?");
+mysqli_stmt_bind_param($stmt, "s", $usuario);
+mysqli_stmt_execute($stmt);
+$fila = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+// password_verify compara la contraseña escrita con el hash guardado
+if ($fila && password_verify($password, $fila["contraseña"])) {
+    session_regenerate_id(true);
+    $_SESSION["usuario"] = $fila["usuario"];
+    $_SESSION["rol"] = $fila["rol"];
+    $_SESSION["id_club"] = $fila["id_club"];
+
+    if ($fila["rol"] === "admin") {
+        header("Location: ../admin/indexadmin.php");
+    } else {
+        header("Location: ../club/indexclub.php");
+    }
+    exit();
+}
+
+header("Location: login.php?error=1");
+exit();

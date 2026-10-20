@@ -1,169 +1,230 @@
 body{
+
 	margin:0;
+
 	height:100vh;
+
 	background:#ffffff;
+
 	font-family: 'Montserrat', sans-serif;
+
 	background-image: url('../imagenes/BG.png');
+
 	background-size: cover;
-}
-
-.Login{
-	background-color: #FFFFFF;
-	padding: 50px;
-	border-radius: 8px;
-	width: 380px;
-	height: 420px;
-	font-family: 'Montserrat', sans-serif;
-	box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
-	position: fixed;
-    top: 58%;          
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-h1{
-	text-align:center;
-	color:#000;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 32px;
-}
-
-label{
-	color: #2D6A4F;
-	font-size: 18px;
-}
-
-input{
-	width: 100%;
-	padding: 10px;
-	
-	border: 1px solid #BDB5A6;
-	border-radius: 10px;
-	box-sizing:border-box;
-	display:flex;
-	align-items:center;
-}
-
-input[type="submit"]{
-	background: #525ccf;
-	border:none;
-	color:#fff;
-	cursor:pointer;
-	border-radius: 10px;
-}
-
-.Register {
-	position: absolute;
-	top: 80%
-
-}
- 
-.Registro {
-	background-color: #FFFFFF;
-	padding: 50px;
-	border-radius: 8px;
-	width: 600px;
-	font-family: 'Montserrat', sans-serif;
-	border: 1px solid #BDB5A6;
 
 }
 
-.User i {
-    transform: translate(15px, 35px);
-    font-size: 16px;
-    color: #888;
+.login-box{
+
+ display: flex;
+
 }
 
-.Password i {
-    transform: translate(15px, 35px);
-    font-size: 16px;
-    color: #888;
-}
-
-.User{
-	margin-bottom: 15px;
-}
-
-.Password{
-	margin-bottom: 40px;
-}
-
-.User input{
-	padding-left: 35px;
-}
-
-.Password input{
-	padding-left: 35px;
-}
-
-.Top .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #31387e;
-}
-
-.Top .encabezado {
-	position: fixed;
-    top: 75px;
-    left: 0;
-	align-self: center;
-	width: 100%;
-	height: 60px;
-	color: #000000;
+.izq{
 	display: flex;
-	justify-content: center;
+
+	flex: 1.3;
+
+	background:rgba(15, 45, 30, 0.75);
+	
+	padding:20px;
+
+	overflow: hidden;
+
+	height: 100vh;
+
+	color: white;
+
 	align-items: center;
-	font-family: 'Montserrat', sans-serif;
-	font-weight: bold;
+
+	justify-content: space-between;
+
+	flex-direction: column;
+	
+
 }
 
-.encabezado .logo {
-	width: 100px;
-	height: 100px;
-	position: fixed;
-    transform: translate(-155%, -30%);
+.top{
+
+	margin-bottom: -260px;
+
 }
 
-.titulos {
-	position: fixed;
-	transform: translate(10%, -45%);
+.contenido h1{
+
+	margin-top: 5px;
+
+	font-size: 60px;
+
+	margin-bottom: 40px;
+
 }
 
-.subtitulos {
-	position: fixed;
-	transform: translate(0%, 100%);
-	font-size: 35px;
+.contenido p{
+
+	font-size: 25px;
+
+	line-height: 1.5;
+
+	margin-bottom: 30px;
+
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 35px;
-    background: #ffffff;
-    border-top: 1px solid #555;
+.contenido img{
 
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    font-size: 18px;
-	font-weight: bold;
+	margin-left: 200px;
+
+	width: 400px;
+
+	height: 400px;
+
 }
 
-.footer .Datix {
-	position: relative;
-	top: 8px;
-	color: #31387e;
+.footer{
+	top: -50px;
 }
 
-.footer .Llave {
-	position: relative;
-	top: 7px;
-	right: -1px;
-	color: #525ccf;
+.der{
+
+	flex: 1;
+
+	background:white;
+
+	padding:20px;
+
+	overflow: hidden;
+
+	height: 100vh;
+
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+
+	flex-direction: column;
+
+}
+
+.campo{
+
+	display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-bottom: 15px;
+
+}
+
+.campo input[type="text"],
+input[type="password"]{
+
+	width: 30rem;
+
+	padding: 10px;
+
+	border: 1px solid #ccc;
+
+	border-radius: 4px;
+
+	font-size: 16px;
+
+}
+
+.iniciar{
+
+	font-size: 50px;
+
+	margin-bottom: 20px;
+
+	text-align: left;
+
+	width: 80%;
+
+    max-width: 480px;
+
+
+}
+
+.iniciar p{
+
+	font-size: 15px;
+
+	margin-top: 10px;
+
+	text-align: left;
+
+	width:100%;
+
+	white-space: nowrap;
+
+	letter-spacing: -1px;
+
+}
+
+.iniciar h1{
+
+	letter-spacing: -2px;
+
+}
+
+.campo input[type="submit"]{
+
+	background: #1b1b1b;
+
+	color: white;
+
+	border: none;
+
+	padding: 10px 20px;
+
+	border-radius: 4px;
+
+	font-size: 16px;
+
+	cursor: pointer;
+
+	transition: background-color 0.3s ease;
+
+	margin-top: 40px;
+
+}
+
+.campo input[type="submit"]:hover{
+
+	background: #333;
+
+	transform: translateY(-2px);/* Mueve el botón hacia arriba al pasar el mouse */
+
+    box-shadow: 0 4px 8px rgba(90, 90, 90, 0.4);/* Agrega una sombra al botón al pasar el mouse */
+
+}
+
+.campo p{
+
+	font-size: 14px;
+
+	margin-top: 20px;
+
+	text-align: center;
+
+}
+
+.campo a{
+
+	color: #005822;
+
+	text-decoration: none;
+
+	font-weight: 650;
+
+}
+
+.campo a:hover{
+
+	text-decoration: underline;
+
 }
 

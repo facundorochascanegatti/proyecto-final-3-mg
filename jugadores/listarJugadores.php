@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,7 @@
 <body>
 
 <?php
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require "../conexion.php";   // esto reemplaza al mysqli_connect
 
 $sql = "SELECT jugadores.*, categorias.año, club.nombre AS nombre_club
         FROM jugadores
@@ -31,7 +32,7 @@ $resultado = mysqli_query($conn, $sql);
         <th>Masa</th>
         <th>Altura</th>
         <th>Velocidad</th>
-        <th>Peso</th>
+        <th>F.Peso</th>
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>

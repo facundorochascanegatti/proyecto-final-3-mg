@@ -97,30 +97,29 @@ CREATE TABLE `club` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1,
-  `password` varchar(255) NOT NULL
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `club`
 --
 
-INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`, `password`) VALUES
-(18, 'Montevideo City Torque', NULL, 1, ''),
-(19, 'Nacional', NULL, 1, ''),
-(20, 'Cerro Largo', NULL, 1, ''),
-(21, 'Peñarol', NULL, 1, ''),
-(22, 'Deportivo Maldonado', NULL, 1, ''),
-(23, 'Racing', NULL, 1, ''),
-(24, 'Liverpool', NULL, 1, ''),
-(25, 'Wanderers', NULL, 1, ''),
-(26, 'Albion', NULL, 1, ''),
-(27, 'Juventud', NULL, 1, ''),
-(28, 'Central', NULL, 1, ''),
-(29, 'Boston River', NULL, 1, ''),
-(30, 'Cerro', NULL, 1, ''),
-(31, 'Danubio', NULL, 1, ''),
-(32, 'Progreso', NULL, 1, '');
+INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`) VALUES
+(18, 'Montevideo City Torque', NULL, 1),
+(19, 'Nacional', NULL, 1),
+(20, 'Cerro Largo', NULL, 1),
+(21, 'Peñarol', NULL, 1),
+(22, 'Deportivo Maldonado', NULL, 1),
+(23, 'Racing', NULL, 1),
+(24, 'Liverpool', NULL, 1),
+(25, 'Wanderers', NULL, 1),
+(26, 'Albion', NULL, 1),
+(27, 'Juventud', NULL, 1),
+(28, 'Central', NULL, 1),
+(29, 'Boston River', NULL, 1),
+(30, 'Cerro', NULL, 1),
+(31, 'Danubio', NULL, 1),
+(32, 'Progreso', NULL, 1);
 
 -- --------------------------------------------------------
 

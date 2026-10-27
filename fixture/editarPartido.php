@@ -2,6 +2,7 @@
 
 <?php
 require_once __DIR__ . "/../conexion.php";
+require_once __DIR__ . "/validarPartido.php";
 
 if (!isset($_GET["id"])) {
     header("Location: gestionarPartidos.php");
@@ -26,18 +27,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $competicion = (int) $_POST["Competicion"];
     $fecha = $_POST["fecha"];
     $estado = $_POST["estado"];
-    $golesLocal = $_POST["goles_local"];
-    $golesVisitante = $_POST["goles_visitante"];
+    $golesLocal = trim($_POST["goles_local"]);
+    $golesVisitante = trim($_POST["goles_visitante"]);
 
-    if ($local == $visitante) {
-        $mensaje = "Los dos clubes no pueden ser el mismo.";
+    // si le sacó la fecha a un partido programado, pasa a sin_fecha
+    if ($fecha == "" && $estado == "programado") {
+        $estado = "sin_fecha";
+    }
+
+    // revisa clubes, fecha, estado y goles (está en validarPartido.php)
+    $error = validarPartido($local, $visitante, $fecha, $estado, $golesLocal, $golesVisitante);
+
+    if ($error != "") {
+        $mensaje = $error;
     } else {
         if ($fecha == "") {
             $fechaSQL = "NULL";
-
-            if ($estado == "programado") {
-                $estado = "sin_fecha";
-            }
         } else {
             $fechaSQL = "'" . mysqli_real_escape_string($conn, $fecha) . "'";
         }
@@ -49,8 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $golesLocalSQL = (int) $golesLocal;
             $golesVisitanteSQL = (int) $golesVisitante;
         }
-
-        $estado = mysqli_real_escape_string($conn, $estado);
 
         $sql = "UPDATE partidos SET
                 id_club_local = $local,
@@ -72,7 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
+// los clubes activos, y también los dos de este partido por si alguno quedó inactivo
+$sqlClubes = "SELECT * FROM club WHERE activo = 1 OR id = " . $partido['id_club_local'] . " OR id = " . $partido['id_club_visitante'];
+$resultadoClubes = mysqli_query($conn, $sqlClubes);
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
 $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
 ?>
@@ -84,18 +89,11 @@ $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar partido</title>
     <link rel="stylesheet" href="partidos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
 <header>
-    <nav>
-        <link rel="stylesheet" href="../nav/nav.css">
-        <a href="gestionarPartidos.php">Volver a partidos</a>
-        <a href="../admin/indexadmin.php" class="home">
-            <i class="fa-solid fa-house"></i>
-        </a>
-    </nav>
+    <?php include "../nav/nav.php"; ?>
 </header>
 
 <div class="Casilla">
@@ -121,7 +119,7 @@ $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
         </select>
 
         <?php
-        $resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
+        $resultadoClubes = mysqli_query($conn, $sqlClubes);
         ?>
 
         <label for="EquipoVisitante">Club visitante:</label>
@@ -138,6 +136,7 @@ $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
 
         <label for="Categoria">Categoría:</label>
         <select name="Categoria" id="Categoria" required>
+            <option value="">Seleccione una categoría</option>
             <?php while ($categoria = mysqli_fetch_assoc($resultadoCategorias)) { ?>
                 <option value="<?php echo $categoria['id']; ?>"
                     <?php if ($categoria['id'] == $partido['id_categoria']) {
@@ -161,7 +160,7 @@ $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
         </select>
 
         <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha" min="2026-01-01" max="2026-12-31"
+        <input type="date" name="fecha" id="fecha"
             value="<?php
             if ($partido['fecha'] != NULL) {
                 echo htmlspecialchars($partido['fecha']);

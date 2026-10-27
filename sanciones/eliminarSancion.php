@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <?php
 // Conexión a la base de datos "liga"
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require_once __DIR__ . "/../conexion.php";
 
 // Quita la última tarjeta cargada a ese jugador (por si se cargó por error)
 if (isset($_GET["jugador"])) {

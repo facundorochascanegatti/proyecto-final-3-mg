@@ -13,7 +13,7 @@ $sql = "SELECT partidos.*,
         ON partidos.id_club_local = local.id
         INNER JOIN club AS visitante
         ON partidos.id_club_visitante = visitante.id
-        INNER JOIN categorias
+        LEFT JOIN categorias
         ON partidos.id_categoria = categorias.id
         INNER JOIN competicion
         ON partidos.id_competicion = competicion.id
@@ -40,7 +40,16 @@ $resultado = mysqli_query($conn, $sql);
         <tr>
             <td><?php echo htmlspecialchars($fila['nombre_local']); ?></td>
             <td><?php echo htmlspecialchars($fila['nombre_visitante']); ?></td>
-            <td><?php echo htmlspecialchars($fila['nombre_categoria']); ?></td>
+            <td>
+                <?php
+                // LEFT JOIN: si la categoría del partido no existe igual aparece, para poder editarlo
+                if ($fila['nombre_categoria'] == NULL) {
+                    echo "Sin categoría";
+                } else {
+                    echo htmlspecialchars($fila['nombre_categoria']);
+                }
+                ?>
+            </td>
             <td><?php echo htmlspecialchars($fila['nombre_competicion']); ?></td>
 
             <td>

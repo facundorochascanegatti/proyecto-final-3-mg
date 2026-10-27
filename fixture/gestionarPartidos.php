@@ -8,21 +8,11 @@
     <title>Gestionar Partidos</title>
 
     <link href="partidos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
 <header>
-    <nav>
-        <link rel="stylesheet" href="../nav/nav.css">
-        <a href="../admin/indexadmin.php" class="home"><i class="fa-solid fa-house"></i></a>
-        <a href="../sanciones/gestionSanciones.php">Sanciones</a>
-        <a href="../categoria/gestionarCategoria.php">Categorias</a>
-        <a href="../clubes/gestionClubes.php">Clubes</a>
-        <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
-        <a href="gestionarPartidos.php">Partidos</a>
-        <a href="posiciones.php">Posiciones</a>
-    </nav>
+    <?php include "../nav/nav.php"; ?>
 </header>
 
 <?php include("agregarPartido.php"); ?>

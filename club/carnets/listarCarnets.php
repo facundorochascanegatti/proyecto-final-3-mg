@@ -1,14 +1,20 @@
 <?php
+require_once __DIR__ . "/../../auth.php";
+requerirClub();
 // Conexión a la base de datos "liga"
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require_once __DIR__ . "/../../conexion.php";
 
-// Todos los jugadores con su carnet (LEFT JOIN: también aparecen los que no tienen)
+$miClub = (int) $_SESSION["id_club"];
+
+// Los jugadores del club con su carnet (LEFT JOIN: también aparecen los que no tienen)
+// (los de otros clubes se ven en "Jugadores", solo lectura)
 $sql = "SELECT jugadores.nombre, jugadores.apellido, jugadores.cedula, club.nombre AS club,
         carnets.id AS id_carnet, carnets.foto, carnets.fecha_vencimiento
     FROM jugadores
     INNER JOIN club ON jugadores.id_club = club.id
     LEFT JOIN carnets ON carnets.id_jugador = jugadores.id
-    ORDER BY club.nombre, jugadores.apellido";
+    WHERE jugadores.id_club = $miClub
+    ORDER BY jugadores.apellido";
 $resultado = mysqli_query($conn, $sql);
 
 // Fecha de hoy, para saber si el carnet sigue vigente
@@ -32,7 +38,7 @@ $hoy = date("Y-m-d");
     while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr>";
         // Foto en miniatura (si tiene carnet)
-        echo "<td>" . ($fila["foto"] ? "<a href='fotos/" . $fila["foto"] . "' target='_blank'><img src='fotos/" . $fila["foto"] . "' class='fotoCarnet'></a>" : "-") . "</td>";
+        echo "<td>" . ($fila["foto"] ? "<a href='fotos/" . htmlspecialchars($fila["foto"]) . "' target='_blank'><img src='fotos/" . htmlspecialchars($fila["foto"]) . "' class='fotoCarnet'></a>" : "-") . "</td>";
         echo "<td>" . htmlspecialchars($fila["apellido"] . ", " . $fila["nombre"]) . "</td>";
         echo "<td>" . htmlspecialchars($fila["cedula"]) . "</td>";
         echo "<td>" . htmlspecialchars($fila["club"]) . "</td>";

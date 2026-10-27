@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <?php
 // Conexión a la base de datos "liga"
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require_once __DIR__ . "/../conexion.php";
 
 // Mensaje por si algo sale mal al subir el PDF
 $errorBoletin = "";
@@ -9,7 +9,7 @@ $errorBoletin = "";
 // Si se subió un boletín, se guarda el PDF en la carpeta "boletines" y su nombre en la base
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["pdf"])) {
 
-    $titulo = $_POST["titulo"];
+    $titulo = trim($_POST["titulo"]);
     $extension = strtolower(pathinfo($_FILES["pdf"]["name"], PATHINFO_EXTENSION));
 
     // Solo se aceptan archivos PDF
@@ -18,15 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["pdf"])) {
     } else {
         // Nombre único para que no se pise con otro boletín
         $nombreArchivo = "boletin_" . time() . ".pdf";
-        move_uploaded_file($_FILES["pdf"]["tmp_name"], __DIR__ . "/boletines/" . $nombreArchivo);
 
-        $fecha = date("Y-m-d");
-        $stmt = mysqli_prepare($conn, "INSERT INTO boletines (titulo, archivo, fecha) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "sss", $titulo, $nombreArchivo, $fecha);
-        mysqli_stmt_execute($stmt);
+        // si el archivo no se pudo guardar en la carpeta, no se anota en la base
+        if (!move_uploaded_file($_FILES["pdf"]["tmp_name"], __DIR__ . "/boletines/" . $nombreArchivo)) {
+            $errorBoletin = "No se pudo subir el PDF.";
+        } else {
+            $fecha = date("Y-m-d");
+            $stmt = mysqli_prepare($conn, "INSERT INTO boletines (titulo, archivo, fecha) VALUES (?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sss", $titulo, $nombreArchivo, $fecha);
+            mysqli_stmt_execute($stmt);
 
-        header("Location: boletines.php");
-        exit();
+            header("Location: boletines.php");
+            exit();
+        }
     }
 }
 
@@ -40,21 +44,11 @@ $resultadoBoletines = mysqli_query($conn, "SELECT * FROM boletines ORDER BY fech
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boletines de Sanciones</title>
     <link href="sanciones.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
         <!-- BARRA DE NAVEGACIÓN -->
-        <nav>
-            <a href="../admin/indexadmin.php" class="home">
-                <i class="fa-solid fa-house"></i>
-            </a>
-            <a href="../sanciones/gestionarSanciones.php">Sanciones</a>
-            <a href="../carnets/gestionarCarnets.php">Carnets</a>
-            <a href="../categoria/gestionarCategoria.php">Categorias</a>
-            <a href="../clubes/gestionClubes.php">Clubes</a>
-            <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
-        </nav>
+        <?php include '../nav/nav.php'; ?>
     </header>
 <!-- Botón para volver a las tarjetas -->
 <div class="botonera">
@@ -94,7 +88,7 @@ $resultadoBoletines = mysqli_query($conn, "SELECT * FROM boletines ORDER BY fech
         echo "<tr>";
         echo "<td>" . date("d/m/Y", strtotime($fila["fecha"])) . "</td>";
         echo "<td>" . htmlspecialchars($fila["titulo"]) . "</td>";
-        echo "<td><a href='boletines/" . $fila["archivo"] . "' target='_blank'>Ver PDF</a></td>";
+        echo "<td><a href='boletines/" . htmlspecialchars($fila["archivo"]) . "' target='_blank'>Ver PDF</a></td>";
         echo "</tr>";
     }
     if (mysqli_num_rows($resultadoBoletines) == 0) {

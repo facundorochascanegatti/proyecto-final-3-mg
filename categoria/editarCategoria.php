@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <form action="editarCategoria.php?id=<?= $id ?>" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <label for="año">Año de categoría:</label>
-        <input type="text" id="año" name="año" maxlength=10" required value="<?= htmlspecialchars($categoria["año"]) ?>">
+        <input type="text" id="año" name="año" maxlength="10" required value="<?= htmlspecialchars($categoria["año"]) ?>">
         <input type="submit" value="Guardar">
     </form>
 </body>

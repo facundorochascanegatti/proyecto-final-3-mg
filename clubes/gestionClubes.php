@@ -1,5 +1,7 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require_once __DIR__ . "/../auth.php";
+requerirAdmin();
+require "../conexion.php";
  
 $sql = "SELECT * FROM club";
 $resultado = mysqli_query($conn, $sql);
@@ -17,17 +19,19 @@ $resultado = mysqli_query($conn, $sql);
 <body>
  
     <header>
-        <nav>
-            <?php include '../nav/nav.php'; ?>
-        </nav>
+        <?php include '../nav/nav.php'; ?>
     </header>
         <form action="guardarClub.php" method="post">
             <h1>Agregar Club</h1>
+            <?php
+            // eliminarClub.php vuelve con ?enUso=1 si el club tenía jugadores o partidos
+            if (isset($_GET["enUso"])) {
+                echo "<p style='color: white;'>No se puede eliminar un club que tiene jugadores o partidos.</p>";
+            }
+            ?>
             <label for="nombreClub">Nombre del Club:</label>
-            <input type="text" id="nombreClub" name="nombreClub" required="Nombre del Club" class="nombreClub" value="">
+            <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" value="">
             <br><br>
-            <label for="contraseña">Contraseña del Club:</label>
-            <input type="number" id="contraseña" name="Contraseña del Club" required="Contraseña del Club" class="contraseña" value="">
             <input type="submit" value="Agregar" class="Agregar">
         </form>
  
@@ -44,8 +48,8 @@ $resultado = mysqli_query($conn, $sql);
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td>" . $fila["id"] . "</td>";
-            echo "<td>" . $fila["nombre"] . "</td>";
-            echo "<td><a href='eliminarClub.php?id=" . $fila["id"] . "'>Eliminar</a></td>";
+            echo "<td>" . htmlspecialchars($fila["nombre"]) . "</td>";
+            echo "<td><a href='eliminarClub.php?id=" . $fila["id"] . "' onclick=\"return confirm('¿Eliminar este club?')\">Eliminar</a></td>";
             echo "<td><a href='editarClub.php?id=" . $fila["id"] . "'>Editar Nombre</a></td>";
             echo "</tr>";
         }

@@ -1,5 +1,14 @@
 <?php
+require_once __DIR__ . "/../auth.php";
+requerirAdmin();
 require "../conexion.php";
+
+$mensaje = "";
+
+// eliminarCategoria.php vuelve con ?enUso=1 si la categoría tenía jugadores o partidos
+if (isset($_GET["enUso"])) {
+    $mensaje = "No se puede eliminar una categoría que tiene jugadores o partidos.";
+}
 
 if (isset($_POST["año"])) {
     $año = mysqli_real_escape_string($conn, $_POST["año"]);
@@ -8,16 +17,14 @@ if (isset($_POST["año"])) {
     $resultado = mysqli_query($conn, $buscar);
 
     if (mysqli_num_rows($resultado) > 0) {
-        echo "<p class='mensajeError'>Esa categoria ya esta registrada, intente con otra.</p>";
+        $mensaje = "Esa categoria ya esta registrada, intente con otra.";
     } else {
         $sql = "INSERT INTO categorias (año) VALUES ('$año')";
         mysqli_query($conn, $sql);
 
-        echo "<p class='mensajeError'>Categoría guardada correctamente</p>";
+        $mensaje = "Categoría guardada correctamente";
     }
 }
-
-$categorias = mysqli_query($conn, "SELECT * FROM categorias ORDER BY año");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,13 +37,15 @@ $categorias = mysqli_query($conn, "SELECT * FROM categorias ORDER BY año");
 </head>
 <body>
     <header>
-        <nav>
-            <?php include '../nav/nav.php'; ?>
-        </nav>
+        <?php include '../nav/nav.php'; ?>
     </header>
 
     <form action="gestionarCategoria.php" method="post">
         <h1 class="tituloCategoria">Gestionar Categorías</h1>
+
+        <?php if ($mensaje != ""): ?>
+            <p class="parrafoCategoria"><?= htmlspecialchars($mensaje) ?></p>
+        <?php endif; ?>
 
         <label for="año">Año de categoría:</label>
         <input type="text" id="año" name="año" required>
@@ -44,7 +53,7 @@ $categorias = mysqli_query($conn, "SELECT * FROM categorias ORDER BY año");
 
         <input type="submit" value="Agregar Categoría">
     </form>
+
+    <?php include("listarCategoria.php"); ?>
 </body>
 </html>
-
-<?php include("listarCategoria.php"); ?>

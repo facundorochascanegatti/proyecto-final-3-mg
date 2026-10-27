@@ -21,7 +21,6 @@
             </div>
 
             <div class="contenido">
-                <img src="../imagenes/Logo.png" alt="Logo">
                 <h1><b>¡BIENVENIDO!</b></h1>
                 <p>Inicia sesión para acceder a la administración de la liga de futbol.</p>
             </div>   
@@ -33,6 +32,8 @@
         </div>
 
         <div class="der">
+
+            <img src="../imagenes/datix.png" alt="Datix" class="logoDatix">
             
             <div class="iniciar">
 

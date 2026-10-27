@@ -4,17 +4,18 @@ require_once __DIR__ . "/../auth.php";
 requerirAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_anuncio'])) {
-    $titulo = $conn->real_escape_string($_POST['titulo']);
-    $contenido = $conn->real_escape_string($_POST['contenido']);
+    $titulo = mysqli_real_escape_string($conn, $_POST['titulo']);
+    $contenido = mysqli_real_escape_string($conn, $_POST['contenido']);
 
-    $conn->query("INSERT INTO avisos (titulo, contenido) VALUES ('$titulo', '$contenido')");
+    // la fecha es obligatoria en la tabla avisos, CURDATE() es la fecha de hoy
+    mysqli_query($conn, "INSERT INTO avisos (titulo, contenido, fecha) VALUES ('$titulo', '$contenido', CURDATE())");
     header("Location: indexadmin.php");
     exit();
 }
 
 if (isset($_GET['eliminar'])) {
     $id = intval($_GET['eliminar']);
-    $conn->query("DELETE FROM avisos WHERE id = $id");
+    mysqli_query($conn, "DELETE FROM avisos WHERE id = $id");
     header("Location: indexadmin.php");
     exit();
 }
@@ -59,10 +60,10 @@ if (isset($_GET['eliminar'])) {
                     <h3 class="text-white mb-3">Anuncios Activos</h3>
 
                     <?php
-                    $resultado = $conn->query("SELECT * FROM avisos ORDER BY fecha DESC");
+                    $resultado = mysqli_query($conn, "SELECT * FROM avisos ORDER BY fecha DESC");
 
-                    if ($resultado && $resultado->num_rows > 0) {
-                        while ($row = $resultado->fetch_assoc()) {
+                    if (mysqli_num_rows($resultado) > 0) {
+                        while ($row = mysqli_fetch_assoc($resultado)) {
                             echo '<div class="anuncio-card">';
                             echo '<h4 class="mb-1 tituloA" style="font-size: 16px;">' . htmlspecialchars($row['titulo']) . '</h4>';
                             echo '<small class="fechaA" style="font-size: 12px;">' . htmlspecialchars($row['fecha']) . '</small>';

@@ -1,21 +1,13 @@
-<?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Jugadores</title>
-    <link href="../css/jugadores.css" rel="stylesheet">
-</head>
-<body>
-
 <?php
-require "../conexion.php";   // esto reemplaza al mysqli_connect
+require_once __DIR__ . "/../auth.php";
+requerirAdmin();
+require_once __DIR__ . "/../conexion.php";   // esto reemplaza al mysqli_connect
 
+// LEFT JOIN: si un jugador tiene una categoría o un club que no existe igual aparece, y se puede editar para corregirlo
 $sql = "SELECT jugadores.*, categorias.año, club.nombre AS nombre_club
         FROM jugadores
-        INNER JOIN categorias ON jugadores.id_categoria = categorias.id
-        INNER JOIN club ON jugadores.id_club = club.id";
+        LEFT JOIN categorias ON jugadores.id_categoria = categorias.id
+        LEFT JOIN club ON jugadores.id_club = club.id";
 $resultado = mysqli_query($conn, $sql);
 ?>
 <br><br>
@@ -41,23 +33,21 @@ $resultado = mysqli_query($conn, $sql);
     <?php
     while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr>";
-        echo "<td>" . $fila["nombre"] . "</td>";
-        echo "<td>" . $fila["apellido"] . "</td>";
-        echo "<td>" . $fila["cedula"] . "</td>";
+        echo "<td>" . htmlspecialchars($fila["nombre"]) . "</td>";
+        echo "<td>" . htmlspecialchars($fila["apellido"]) . "</td>";
+        echo "<td>" . htmlspecialchars($fila["cedula"]) . "</td>";
         echo "<td>" . $fila["fecha_nacimiento"] . "</td>";
-        echo "<td>" . $fila["año"] . "</td>";
-        echo "<td>" . $fila["nombre_club"] . "</td>";
+        echo "<td>" . ($fila["año"] ? htmlspecialchars($fila["año"]) : "Sin categoría") . "</td>";
+        echo "<td>" . ($fila["nombre_club"] ? htmlspecialchars($fila["nombre_club"]) : "Sin club") . "</td>";
         echo "<td>" . $fila["masa"] . "</td>";
         echo "<td>" . $fila["altura"] . "</td>";
         echo "<td>" . $fila["velocidad"] . "</td>";
         echo "<td>" . $fila["peso"] . "</td>";
         echo "<td><a href='editarJugador.php?id=" . $fila["id"] . "'>Editar</a></td>";
-        echo "<td><a href='eliminarJugador.php?id=" . $fila["id"] . "'>Eliminar</a></td>";
+        echo "<td><a href='eliminarJugador.php?id=" . $fila["id"] . "' onclick=\"return confirm('¿Eliminar este jugador?')\">Eliminar</a></td>";
         echo "</tr>";
     }
     ?>
 <!-- ESTO ES PARA CERRAR LA TABLA -->
 </table>
 </div>
-</body>
-</html>

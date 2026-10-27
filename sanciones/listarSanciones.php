@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../auth.php";
 requerirAdmin();
 
-$conn = mysqli_connect("localhost", "root", "", "liga");
+require_once __DIR__ . "/../conexion.php";
 
 // Filtros
 $club = (int) ($_GET["club"] ?? 0);

@@ -46,7 +46,7 @@ body{
 
 .top{
 
-	margin-bottom: -260px;
+	margin-bottom: 0;
 
 }
 
@@ -70,18 +70,20 @@ body{
 
 }
 
-.contenido img{
-
-	margin-left: 200px;
-
-	width: 400px;
-
-	height: 400px;
-
-}
 
 .footer{
 	top: -50px;
+}
+
+/* Logo de Datix arriba de "Iniciar Sesión" (va en el lado blanco) */
+.logoDatix{
+
+	width: 280px;
+
+	max-width: 70%;
+
+	margin-bottom: 30px;
+
 }
 
 .der{
@@ -240,11 +242,6 @@ input[type="password"]{
 		font-size: 20px;
 	}
 
-	.contenido img{
-		width: 300px;
-		height: 300px;
-		margin-left: 0;
-	}
 
 	.campo input[type="text"],
 	.campo input[type="password"]{
@@ -300,13 +297,6 @@ input[type="password"]{
 		margin-bottom: 20px;
 	}
 
-	.contenido img{
-		display: block;
-		width: 100%;
-		max-width: 280px;
-		height: auto;
-		margin: 0 auto;
-	}
 
 	.footer{
 		top: 0;

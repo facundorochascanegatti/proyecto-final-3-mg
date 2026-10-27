@@ -36,18 +36,30 @@ $hoy = date("Y-m-d");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugadores</title>
     <link rel="stylesheet" href="club.css">
-</head>
     <script src="../js/buscador.js"></script>
+</head>
 <body>
 <?php include "menu.php"; ?>
 <main>
     <h1>Jugadores de <?= h($club["nombre"] ?? "-") ?></h1>
     <p class="subtitulo">Solo lectura<?= $verClub != $miClub ? " (estás viendo otro club)" : "" ?></p>
 
-<div class="filtros">
+<!-- elegir el club y la categoría a ver (al cambiar se recarga la página) -->
+<form method="get" class="filtros">
+    <select name="club" onchange="this.form.submit()">
+        <?php while ($c = mysqli_fetch_assoc($clubes)): ?>
+            <option value="<?= $c["id"] ?>" <?= $c["id"] == $verClub ? "selected" : "" ?>><?= h($c["nombre"]) ?></option>
+        <?php endwhile; ?>
+    </select>
+    <select name="categoria" onchange="this.form.submit()">
+        <option value="0">Todas las categorías</option>
+        <?php while ($cat = mysqli_fetch_assoc($categorias)): ?>
+            <option value="<?= $cat["id"] ?>" <?= $cat["id"] == $verCat ? "selected" : "" ?>><?= h($cat["año"]) ?></option>
+        <?php endwhile; ?>
+    </select>
     <input type="text" id="buscador" placeholder="Buscar jugador...">
     <button type="button" onclick="window.print()">Imprimir lista</button>
-</div>
+</form>
 
     <div class="tabla-scroll">
     <table id="tablaJugadores">
@@ -63,7 +75,7 @@ $hoy = date("Y-m-d");
         <tr>
             <td>
                 <?php if ($j["foto"]): ?>
-                    <a href="../carnets/fotos/<?= h($j["foto"]) ?>" target="_blank"><img class="foto" src="../carnets/fotos/<?= h($j["foto"]) ?>" alt="carnet"></a>
+                    <a href="carnets/fotos/<?= h($j["foto"]) ?>" target="_blank"><img class="foto" src="carnets/fotos/<?= h($j["foto"]) ?>" alt="carnet"></a>
                 <?php else: ?>-<?php endif; ?>
             </td>
             <td><?= h($j["nombre"] . " " . $j["apellido"]) ?></td>

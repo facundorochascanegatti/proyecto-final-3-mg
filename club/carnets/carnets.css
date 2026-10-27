@@ -18,7 +18,7 @@ body {
     margin: 0;
     font-family: "Montserrat", Arial, sans-serif;
     color: #e2e8f0;
-    background: url("../imagenes/BG.png") center / cover fixed;
+    background: url("../../imagenes/BG.png") center / cover fixed;
 }
 
 header {

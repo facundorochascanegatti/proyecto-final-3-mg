@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posiciones</title>
     <link href="partidos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
@@ -82,7 +81,7 @@
         <?php while ($f = mysqli_fetch_assoc($fechas)) { ?>
             <tr>
                 <td><?php echo $f["fecha"] == NULL ? "Sin fecha" : htmlspecialchars($f["fecha"]); ?></td>
-                <td><?php echo htmlspecialchars($f["categoria"]); ?></td>
+                <td><?php echo htmlspecialchars($f["categoria"] ?? "Sin categoría"); ?></td>
                 <td><?php echo htmlspecialchars($f["local"]); ?></td>
                 <td>
                     <?php

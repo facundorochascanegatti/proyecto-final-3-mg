@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion de Sanciones</title>
     <link href="sanciones.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
         <!-- BARRA DE NAVEGACIÓN -->
-        <nav>
-            <?php include '../nav/nav.php'; ?>
-        </nav>
+        <?php include '../nav/nav.php'; ?>
     </header>
 <!-- Botón para ir a los boletines en PDF -->
 <div class="botonera">

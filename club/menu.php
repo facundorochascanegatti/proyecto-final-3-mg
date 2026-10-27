@@ -1,27 +1,15 @@
 <?php
 // Barra de navegación del club. Se incluye en todas las páginas del club.
+// BASE_URL es la carpeta del proyecto (sale de sesion.php), así los links andan desde club/ y desde club/carnets/
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../nav/nav.css">
-</head>
-<body>
-    
-</body>
-</html>
 <nav class="menu">
-    <a href="/proyectofinal3mg/club/indexclub.php">Inicio</a>
-    <a href="/proyectofinal3mg/club/jugadores.php">Jugadores</a>
-    <a href="/proyectofinal3mg/club/sanciones.php">Sanciones</a>
-    <a href="/proyectofinal3mg/club/partidos.php">Partidos</a>
-    <a href="/proyectofinal3mg/club/posiciones.php">Posiciones</a>
-    <a href="/proyectofinal3mg/club/avisos.php">Avisos y boletines</a>
-    <a href="/proyectofinal3mg/club/carnets/gestionarCarnets.php">Carnets</a>
-    <a href="/proyectofinal3mg/club/planilla.php">Planilla</a>
-    <a href="/proyectofinal3mg/login/logout.php?rol=club" class="salir">Cerrar Sesión</a>
-</nav>
+    <a href="<?= BASE_URL ?>/club/indexclub.php">Inicio</a>
+    <a href="<?= BASE_URL ?>/club/jugadores.php">Jugadores</a>
+    <a href="<?= BASE_URL ?>/club/sanciones.php">Sanciones</a>
+    <a href="<?= BASE_URL ?>/club/partidos.php">Partidos</a>
+    <a href="<?= BASE_URL ?>/club/posiciones.php">Posiciones</a>
+    <a href="<?= BASE_URL ?>/club/avisos.php">Avisos y boletines</a>
+    <a href="<?= BASE_URL ?>/club/carnets/gestionarCarnets.php">Carnets</a>
+    <a href="<?= BASE_URL ?>/club/planilla.php">Planilla</a>
+    <a href="<?= BASE_URL ?>/login/logout.php?rol=club" class="salir">Cerrar Sesión</a>
 </nav>

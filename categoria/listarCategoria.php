@@ -20,7 +20,7 @@ $resultado = mysqli_query($conn, $sql);
         <?php
         echo "<td>" . htmlspecialchars($fila["año"]) . "</td>";
         echo "<td><a href='editarCategoria.php?id=" . (int) $fila["id"] . "'>Editar</a></td>";
-        echo "<td><a href='eliminarCategoria.php?id=" . (int) $fila["id"] . "'>Eliminar</a></td>";
+        echo "<td><a href='eliminarCategoria.php?id=" . (int) $fila["id"] . "' onclick=\"return confirm('¿Eliminar esta categoría?')\">Eliminar</a></td>";
         ?>
     </tr>
     <?php endwhile; ?>

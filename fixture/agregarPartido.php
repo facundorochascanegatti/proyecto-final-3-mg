@@ -2,6 +2,7 @@
 
 <?php
 require_once __DIR__ . "/../conexion.php";
+require_once __DIR__ . "/validarPartido.php";
 
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
@@ -13,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $categoria = (int) $_POST["Categoria"];
     $competicion = (int) $_POST["Competicion"];
     $fecha = $_POST["fecha"];
-    $golesLocal = $_POST["goles_local"];
-    $golesVisitante = $_POST["goles_visitante"];
+    $golesLocal = trim($_POST["goles_local"]);
+    $golesVisitante = trim($_POST["goles_visitante"]);
 
     // si no cargó los goles, se guardan como NULL
     if ($golesLocal == "" || $golesVisitante == "") {
@@ -25,15 +26,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $golesVisitanteSQL = (int) $golesVisitante;
     }
 
-    if ($local == $visitante) {
-        echo "<p>Los dos clubes no pueden ser el mismo.</p>";
+    // el estado sale solo: sin fecha, programado, o jugado si ya se cargaron los goles
+    if ($fecha == "") {
+        $estado = "sin_fecha";
+    } elseif ($golesLocal != "" || $golesVisitante != "") {
+        $estado = "jugado";
+    } else {
+        $estado = "programado";
+    }
+
+    // revisa clubes, fecha, estado y goles (está en validarPartido.php)
+    $error = validarPartido($local, $visitante, $fecha, $estado, $golesLocal, $golesVisitante);
+
+    if ($error != "") {
+        echo "<p>" . htmlspecialchars($error) . "</p>";
     } else {
         if ($fecha == "") {
             $fechaSQL = "NULL";
-            $estado = "sin_fecha";
         } else {
             $fechaSQL = "'" . mysqli_real_escape_string($conn, $fecha) . "'";
-            $estado = "programado";
         }
 
         $sql = "INSERT INTO partidos
@@ -99,12 +110,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
 
         <label for="fecha">Fecha (opcional):</label>
-        <input type="date" name="fecha" id="fecha" min="2026-01-01" max="2026-12-31">
+        <input type="date" name="fecha" id="fecha">
 
-        <label for="golesLocal">Goles del club local:</label>
+        <label for="golesLocal">Goles del club local (solo si ya se jugó):</label>
         <input type="number" name="goles_local" id="golesLocal" min="0">
 
-        <label for="golesVisitante">Goles del club visitante:</label>
+        <label for="golesVisitante">Goles del club visitante (solo si ya se jugó):</label>
         <input type="number" name="goles_visitante" id="golesVisitante" min="0">
 
         <input class="Agregar" type="submit" value="Agregar partido">

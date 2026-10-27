@@ -26,6 +26,8 @@ $resultado = mysqli_query($conn, $sql);
             <label for="nombreClub">Nombre del Club:</label>
             <input type="text" id="nombreClub" name="nombreClub" required="Nombre del Club" class="nombreClub" value="">
             <br><br>
+            <label for="contraseña">Contraseña del Club:</label>
+            <input type="number" id="contraseña" name="Contraseña del Club" required="Contraseña del Club" class="contraseña" value="">
             <input type="submit" value="Agregar" class="Agregar">
         </form>
  

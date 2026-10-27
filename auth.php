@@ -1,14 +1,7 @@
 <?php
 
-// Inicia la sesión del usuario
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Obtiene la ruta principal del proyecto
-$carpetaProyecto = str_replace("\\", "/", __DIR__);
-$carpetaServidor = str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"]);
-define("BASE_URL", rtrim(substr($carpetaProyecto, strlen($carpetaServidor)), "/"));
+require_once __DIR__ . "/sesion.php";
+iniciarSesionPorRol(rolSesionDeLaSolicitud());
 
 // Protege los textos que se muestran en HTML
 function h($texto) {
@@ -43,7 +36,7 @@ function requerirClub() {
     }
 
     if (empty($_SESSION["id_club"])) {
-        header("Location: " . BASE_URL . "/login/logout.php");
+        header("Location: " . BASE_URL . "/login/logout.php?rol=club");
         exit();
     }
 }

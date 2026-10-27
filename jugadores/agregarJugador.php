@@ -2,7 +2,6 @@
 
 require_once __DIR__ . "/../conexion.php";
 
-
 // Consulta para obtener todas las categorías
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
 
@@ -19,46 +18,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
     $categorias = $_POST["categorias"];
     $club = $_POST["club"];
-
-    // aca abajo se calcula la parte de fisica, lo de mecanica clasica.
-    $gravedad = 9.8;
     $masa = $_POST["masa"];
     $altura = $_POST["altura"];
-    $peso = $masa * $gravedad;
-    $velocidad = (2 * $gravedad * $altura) ** 0.5;
 
-    // Consulta para verificar si ya existe un jugador con esa cédula
-    $sqlChequeo = "SELECT * FROM jugadores WHERE cedula = '$cedula'";
-
-    // Ejecuta la consulta de verificación
-    $resultadoChequeo = mysqli_query($conn, $sqlChequeo);
-
-    // Comprueba si se encontró algún jugador con esa cédula
-    if (mysqli_num_rows($resultadoChequeo) > 0) {
-
-        // Muestra un mensaje indicando que la cédula ya está registrada
-        echo "<p class='mensajeError'>Esa cédula ya pertenece a otro jugador.</p>";
-
+    // Verifica que la cédula tenga 8 dígitos
+    if (!preg_match("/^[0-9]{8}$/", $cedula)) {
+        echo "<p class='mensajeError'>La cédula debe tener 8 dígitos.</p>";
     } else {
 
-        // Consulta SQL para insertar un nuevo jugador
-        $sql = "INSERT INTO jugadores
-                (nombre, apellido, cedula, fecha_nacimiento, id_categoria, id_club, masa, altura, peso, velocidad)
-                VALUES ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento', $categorias, $club, $masa, $altura, $peso, $velocidad)";
+        // aca abajo se calcula la parte de fisica, lo de mecanica clasica.
+        $gravedad = 9.8;
+        $peso = $masa * $gravedad;
+        $velocidad = (2 * $gravedad * $altura) ** 0.5;
 
-        // Ejecuta la consulta y verifica si se agregó correctamente
-        if (mysqli_query($conn, $sql)) {
+        // Consulta para verificar si ya existe un jugador con esa cédula
+        $sqlChequeo = "SELECT * FROM jugadores WHERE cedula = '$cedula'";
 
-            // Redirige a la página de gestión de jugadores
-            header("Location: gestionarJugadores.php");
+        // Ejecuta la consulta de verificación
+        $resultadoChequeo = mysqli_query($conn, $sqlChequeo);
 
-            // Detiene la ejecución del código
-            exit();
+        // Comprueba si se encontró algún jugador con esa cédula
+        if (mysqli_num_rows($resultadoChequeo) > 0) {
+
+            // Muestra un mensaje indicando que la cédula ya está registrada
+            echo "<p class='mensajeError'>Esa cédula ya pertenece a otro jugador.</p>";
 
         } else {
 
-            // Muestra un mensaje con el error de la base de datos
-            echo "Error al agregar jugador: " . mysqli_error($conn);
+            // Consulta SQL para insertar un nuevo jugador
+            $sql = "INSERT INTO jugadores
+                    (nombre, apellido, cedula, fecha_nacimiento, id_categoria, id_club, masa, altura, peso, velocidad)
+                    VALUES ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento', $categorias, $club, $masa, $altura, $peso, $velocidad)";
+
+            // Ejecuta la consulta y verifica si se agregó correctamente
+            if (mysqli_query($conn, $sql)) {
+
+                // Redirige a la página de gestión de jugadores
+                header("Location: gestionarJugadores.php");
+
+                // Detiene la ejecución del código
+                exit();
+
+            } else {
+
+                // Muestra un mensaje con el error de la base de datos
+                echo "Error al agregar jugador: " . mysqli_error($conn);
+            }
         }
     }
 }
@@ -89,27 +94,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="field">
         <!-- Campo para ingresar la cédula -->
         <label for="cedula">Cédula:</label>
-        <input type="text" id="cedula" name="cedula" required>
+        <input type="text" id="cedula" name="cedula" maxlength="8" required>
     </div>
     
     <div class="field">
         <!-- Campo para seleccionar la fecha de nacimiento -->
         <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" min="2013-01-01" max="2020-12-31" required>
     </div>
 
     <div class="field-row">
         
         <div class="field">
             <!-- Campo para ingresar la masa -->
-            <label for="masa">Masa:</label>
-            <input type="text" id="masa" name="masa" required>
+            <label for="masa">Peso:</label>
+            <input type="number" id="masa" name="masa" required>
         </div>
 
         <div class="field">
             <!-- Campo para ingresar la altura -->
             <label for="altura">Altura:</label>
-            <input type="text" id="altura" name="altura" required>
+            <input type="number" step="0.01" id="altura" name="altura" required>
         </div>
     </div>
 

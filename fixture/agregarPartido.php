@@ -5,14 +5,25 @@ require_once __DIR__ . "/../conexion.php";
 
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
+$resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $local = (int) $_POST["EquipoLocal"];
     $visitante = (int) $_POST["EquipoVisitante"];
     $categoria = (int) $_POST["Categoria"];
+    $competicion = (int) $_POST["Competicion"];
     $fecha = $_POST["fecha"];
     $golesLocal = $_POST["goles_local"];
     $golesVisitante = $_POST["goles_visitante"];
+
+    // si no cargó los goles, se guardan como NULL
+    if ($golesLocal == "" || $golesVisitante == "") {
+        $golesLocalSQL = "NULL";
+        $golesVisitanteSQL = "NULL";
+    } else {
+        $golesLocalSQL = (int) $golesLocal;
+        $golesVisitanteSQL = (int) $golesVisitante;
+    }
 
     if ($local == $visitante) {
         echo "<p>Los dos clubes no pueden ser el mismo.</p>";
@@ -26,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $sql = "INSERT INTO partidos
-                (id_club_local, id_club_visitante, id_categoria, fecha, estado, goles_local, goles_visitante)
+                (id_club_local, id_club_visitante, id_categoria, id_competicion, fecha, estado, goles_local, goles_visitante)
                 VALUES
-                ($local, $visitante, $categoria, $fechaSQL, '$estado', $golesLocal, $golesVisitante)";
+                ($local, $visitante, $categoria, $competicion, $fechaSQL, '$estado', $golesLocalSQL, $golesVisitanteSQL)";
 
         if (mysqli_query($conn, $sql)) {
             header("Location: gestionarPartidos.php");
@@ -78,8 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php } ?>
         </select>
 
+        <label for="Competicion">Competición:</label>
+        <select name="Competicion" id="Competicion" required>
+            <?php while ($competicion = mysqli_fetch_assoc($resultadoCompeticiones)) { ?>
+                <option value="<?php echo $competicion['id']; ?>">
+                    <?php echo htmlspecialchars($competicion['nombre']); ?>
+                </option>
+            <?php } ?>
+        </select>
+
         <label for="fecha">Fecha (opcional):</label>
-        <input type="date" name="fecha" id="fecha">
+        <input type="date" name="fecha" id="fecha" min="2026-01-01" max="2026-12-31">
 
         <label for="golesLocal">Goles del club local:</label>
         <input type="number" name="goles_local" id="golesLocal" min="0">

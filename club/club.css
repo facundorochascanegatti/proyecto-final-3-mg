@@ -13,7 +13,7 @@
 body {
     margin: 0;
     font-family: "Montserrat", Arial, sans-serif;
-    color: #383838;
+    color: #e2e8f0;
     background-image: url("../imagenes/BG.png");
     background-size: cover;
     background-position: center;
@@ -21,7 +21,7 @@ body {
 }
 
 main {
-    padding: 30px 60px;
+    padding: 80px 60px 30px;
     min-height: calc(100vh - 85px);
 }
 
@@ -30,14 +30,15 @@ h1 {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color: #383838;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 .subtitulo {
-    color: #383838;
+    color: #e2e8f0;
     text-align: center;
     margin: 0 0 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* =========================
@@ -45,46 +46,20 @@ h1 {
 ========================= */
 
 header {
-    height: 50px;
-    background: #31387e;
-}
-
-header nav {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-}
-
-header nav a {
-    text-decoration: none;
-    font-weight: 300;
-    color: white;
-    padding: 10px 30px;
-    border-radius: 20px;
-    display: inline-block;
-    transition: .3s;
-    margin-top: 5px;
-}
-
-header nav a:hover {
-    background: rgb(24, 87, 150);
-}
-
-header nav a.salir:hover {
-    background: rgba(170, 50, 50, .85);
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
-header {
-    height: 50px;
-    background: #31387e;
+    height: 60px;
 }
 
 nav {
     display: flex;
+    align-items: center;
+    background: rgba(10, 15, 28, 0.75) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     gap: 30px;
     justify-content: center;
 }
@@ -93,7 +68,7 @@ nav a {
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    color: white;
+    color: #e2e8f0;
     padding: 10px 30px;
     border-radius: 20px;
     display: inline-block;
@@ -102,38 +77,41 @@ nav a {
 }
 
 nav a:hover {
-    background: rgb(24, 87, 150);
+    color: #00d2ff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 nav a.salir:hover {
-    background: rgba(170, 50, 50, .85);
+    color: #f87171;
+    background: rgba(170, 50, 50, 0.2);
 }
 
 .home {
-    color: white;
+    color: #e2e8f0;
     font-size: 25px;
     text-decoration: none;
     margin-bottom: 5px;
 }
 
-
 /* =========================
-   PANELES
+   PANELES TRANSPARENTES
 ========================= */
 
 .tarjeta {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(10, 15, 28, 0.30);
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .tarjeta h2 {
     margin-top: 0;
     font-size: 20px;
-    color: #383838;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .grilla {
@@ -150,14 +128,16 @@ nav a.salir:hover {
 .numero {
     font-size: 36px;
     font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .tarjeta .numero.ok {
-    color: #2F6F62;
+    color: #4ade80;
 }
 
 .tarjeta .numero.mal {
-    color: #aa3232;
+    color: #f87171;
 }
 
 /* =========================
@@ -165,16 +145,16 @@ nav a.salir:hover {
 ========================= */
 
 .aviso {
-    background: rgba(255, 255, 255, 0.7);
-    color: #383838;
-    border-left: 5px solid #31387e;
+    background: rgba(241, 245, 249, 0.92);
+    color: #1e293b;
+    border-left: 5px solid #6366f1;
     border-radius: 8px;
-    padding: 10px 14px;
+    padding: 12px 14px;
     margin-bottom: 12px;
 }
 
 .aviso small {
-    color: #666;
+    color: #64748b;
     margin-left: 8px;
 }
 
@@ -184,17 +164,19 @@ nav a.salir:hover {
 
 .tabla-scroll {
     overflow-x: auto;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(10, 15, 28, 0.30);
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
 }
 
 .tarjeta .tabla-scroll {
     padding: 0;
     background: none;
+    border: none;
     box-shadow: none;
     margin-bottom: 0;
 }
@@ -206,32 +188,32 @@ table {
 
 th,
 td {
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid #cbd5e1;
     padding: 10px;
 }
 
 th {
-    background: #252A2E;
-    color: white;
+    background: #252a40;
+    color: #ffffff;
     font-weight: 700;
     letter-spacing: .5px;
     text-align: left;
 }
 
 td {
-    background: rgba(255, 255, 255, 0.7);
-    color: #383838;
+    background: rgba(241, 245, 249, 0.94);
+    color: #1e293b;
     font-size: 14px;
 }
 
 td a {
     text-decoration: none;
-    color: #2F6F62;
+    color: #087f5b;
     font-weight: bold;
 }
 
 td a:hover {
-    color: #185796;
+    color: #2563eb;
 }
 
 .foto {
@@ -246,27 +228,27 @@ td a:hover {
 ========================= */
 
 .ok {
-    color: #2F6F62;
+    color: #4ade80;
     font-weight: bold;
 }
 
 .mal {
-    color: #aa3232;
+    color: #f87171;
     font-weight: bold;
 }
 
 .tarjeta p.mal {
-    color: #aa3232;
+    color: #f87171;
 }
 
 .vacio {
     text-align: center;
-    color: #383838;
+    color: #1e293b;
     padding: 15px;
 }
 
 td.vacio {
-    color: #383838;
+    color: #475569;
 }
 
 /* =========================
@@ -283,11 +265,17 @@ form.filtros {
 
 select,
 input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"],
+input[type="file"],
 textarea {
     padding: 10px;
-    border: 1px solid #BDB5A6;
+    border: 1px solid #cbd5e1;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(248, 250, 252, 0.95);
+    color: #1e293b;
     font-size: 14px;
     font-family: "Montserrat", sans-serif;
     outline: none;
@@ -295,9 +283,10 @@ textarea {
 }
 
 select:focus,
-input[type="text"]:focus,
+input:focus,
 textarea:focus {
-    border-color: #31387e;
+    border-color: #00d2ff;
+    box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
 }
 
 textarea {
@@ -305,14 +294,16 @@ textarea {
     min-height: 90px;
 }
 
-/* Botones */
+/* =========================
+   BOTONES
+========================= */
 
 button,
 input[type="submit"],
 .boton {
     background: #31387e;
-    color: white;
-    border: 1px solid #BDB5A6;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     padding: 10px 18px;
     font-size: 15px;
@@ -327,15 +318,16 @@ input[type="submit"],
 button:hover,
 input[type="submit"]:hover,
 .boton:hover {
-    background: rgb(24, 87, 150);
+    background: #185796;
 }
 
 button.rojo {
-    background: rgba(170, 50, 50, .85);
+    background: #b91c1c;
+    border-color: #dc2626;
 }
 
 button.rojo:hover {
-    background: rgb(140, 30, 30);
+    background: #991b1b;
 }
 
 /* =========================
@@ -343,9 +335,10 @@ button.rojo:hover {
 ========================= */
 
 footer {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(10, 15, 28, 0.80);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -359,11 +352,11 @@ footer p {
 }
 
 .footer .Datix {
-    color: #8d97ff;
+    color: #00d2ff;
 }
 
 .footer .Llave {
-    color: #525ccf;
+    color: #6366f1;
     position: relative;
     top: -2px;
 }
@@ -373,8 +366,8 @@ footer p {
 ========================= */
 
 .hoja {
-    background: #fff;
-    color: #000;
+    background: #ffffff;
+    color: #000000;
     padding: 25px;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -384,7 +377,7 @@ footer p {
     display: flex;
     align-items: center;
     gap: 20px;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #000000;
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
@@ -398,10 +391,11 @@ footer p {
 .encabezado h2,
 .encabezado h3 {
     margin: 0;
+    color: #000000;
 }
 
 .linea {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #000000;
     display: inline-block;
     min-width: 260px;
 }
@@ -412,22 +406,22 @@ footer p {
 
 .hoja table th,
 .hoja table td {
-    border: 1px solid #000;
+    border: 1px solid #000000;
     height: 28px;
 }
 
 .hoja table th {
     background: #e5e7eb;
-    color: #000;
+    color: #000000;
 }
 
 .hoja table td {
-    background: #fff;
-    color: #000;
+    background: #ffffff;
+    color: #000000;
 }
 
 .caja {
-    border: 1px solid #000;
+    border: 1px solid #000000;
     min-height: 110px;
     padding: 8px;
     margin-bottom: 15px;
@@ -440,7 +434,7 @@ footer p {
 }
 
 .firmas div {
-    border-top: 1px solid #000;
+    border-top: 1px solid #000000;
     width: 40%;
     text-align: center;
     padding-top: 5px;
@@ -451,25 +445,24 @@ footer p {
 ========================= */
 
 @media (max-width: 768px) {
-
     header {
-        height: auto;
-        padding: 10px 0;
+        height: 60px;
     }
 
-    header nav {
-        flex-direction: column;
-        align-items: center;
+    nav {
+        flex-wrap: wrap;
         gap: 5px;
+        padding: 8px;
     }
 
-    header nav a {
-        padding: 8px 20px;
+    nav a {
+        padding: 8px 12px;
         margin-top: 0;
+        font-size: 13px;
     }
 
     main {
-        padding: 15px;
+        padding: 80px 15px 20px;
         min-height: auto;
     }
 
@@ -516,13 +509,13 @@ footer p {
 ========================= */
 
 @media print {
-
     body {
-        background: #fff;
-        color: #000;
+        background: #ffffff;
+        color: #000000;
     }
 
     header,
+    nav,
     footer,
     form.filtros,
     .no-imprimir {
@@ -537,18 +530,22 @@ footer p {
     .tarjeta,
     .tabla-scroll {
         background: none;
+        color: #000000;
         box-shadow: none;
         backdrop-filter: none;
+        border: none;
     }
 
     h1,
-    .subtitulo {
-        color: #000;
+    .subtitulo,
+    .tarjeta h2 {
+        color: #000000;
         text-shadow: none;
     }
 
     td {
-        background: #fff;
+        background: #ffffff;
+        color: #000000;
     }
 
     .hoja {

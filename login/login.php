@@ -50,15 +50,12 @@
                 </div>    
                 
                 <div class="campo">
-
                     <input type="password" id="password" name="password" required placeholder="Contraseña">
-
-                </div>   
+                </div>
                 
                 <div class="campo">
-
                     <input type="submit" value="Iniciar Sesión">
-                    <p>¿Olvidaste tu contraseña? <a href="../admin/indexadmin.php">Haz clic aquí</a></p>
+
 
                 </div>
                 

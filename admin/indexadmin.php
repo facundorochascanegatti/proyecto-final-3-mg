@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/../conexion.php";
+require_once __DIR__ . "/../auth.php";
+requerirAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_anuncio'])) {
     $titulo = $conn->real_escape_string($_POST['titulo']);

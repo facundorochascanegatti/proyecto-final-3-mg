@@ -19,6 +19,8 @@ requerirAdmin();
         </nav>
     </header>
 
+
+
     <?php include "agregarJugador.php"; ?>
     <?php include "listarJugadores.php"; ?>
 

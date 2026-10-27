@@ -21,7 +21,7 @@ $resultado = mysqli_query($conn, $sql);
 <br><br>
 <!-- ESTO ES UNA TABLA PARA LISTAR LOS JUGADORES -->
 <div class="Tabla">
-<table class="tablaClubes" border="1">
+<table class="tablaJugadores" border="1">
     <tr>
         <th>Nombre</th>
         <th>Apellido</th>

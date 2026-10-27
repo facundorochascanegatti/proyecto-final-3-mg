@@ -51,10 +51,18 @@ $avisos = mysqli_query($conn, "SELECT * FROM avisos ORDER BY fecha DESC, id DESC
     <h1>Bienvenido, <?= h($club["nombre"]) ?></h1>
     <p class="subtitulo">Panel de tu club</p>
 
-    <div class="grilla">
-        <div class="tarjeta"><div class="numero"><?= $totalJugadores ?></div>Jugadores</div>
-        <div class="tarjeta"><div class="numero ok"><?= $vigentes ?></div>Con carnet vigente</div>
-        <div class="tarjeta"><div class="numero mal"><?= $suspendidos ?></div>Suspendidos</div>
+    <div class="tarjeta">
+        <h2>Últimos avisos</h2>
+        <?php if (mysqli_num_rows($avisos) == 0): ?>
+            <p class="vacio">No hay avisos publicados.</p>
+        <?php else: ?>
+            <?php while ($a = mysqli_fetch_assoc($avisos)): ?>
+                <div class="aviso">
+                    <b><?= h($a["titulo"]) ?></b> <small><?= date("d/m/Y", strtotime($a["fecha"])) ?></small>
+                    <div><?= nl2br(h($a["contenido"])) ?></div>
+                </div>
+            <?php endwhile; ?>
+        <?php endif; ?>
     </div>
 
     <div class="tarjeta">
@@ -69,18 +77,11 @@ $avisos = mysqli_query($conn, "SELECT * FROM avisos ORDER BY fecha DESC, id DESC
         <?php endif; ?>
     </div>
 
-    <div class="tarjeta">
-        <h2>Últimos avisos</h2>
-        <?php if (mysqli_num_rows($avisos) == 0): ?>
-            <p class="vacio">No hay avisos publicados.</p>
-        <?php else: ?>
-            <?php while ($a = mysqli_fetch_assoc($avisos)): ?>
-                <div class="aviso">
-                    <b><?= h($a["titulo"]) ?></b> <small><?= date("d/m/Y", strtotime($a["fecha"])) ?></small>
-                    <div><?= nl2br(h($a["contenido"])) ?></div>
-                </div>
-            <?php endwhile; ?>
-        <?php endif; ?>
+
+        <div class="grilla">
+        <div class="tarjeta"><div class="numero"><?= $totalJugadores ?></div>Jugadores</div>
+        <div class="tarjeta"><div class="numero ok"><?= $vigentes ?></div>Con carnet vigente</div>
+        <div class="tarjeta"><div class="numero mal"><?= $suspendidos ?></div>Suspendidos</div>
     </div>
 </main>
 </body>

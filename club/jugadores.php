@@ -37,34 +37,20 @@ $hoy = date("Y-m-d");
     <title>Jugadores</title>
     <link rel="stylesheet" href="club.css">
 </head>
+    <script src="../js/buscador.js"></script>
 <body>
 <?php include "menu.php"; ?>
 <main>
     <h1>Jugadores de <?= h($club["nombre"] ?? "-") ?></h1>
     <p class="subtitulo">Solo lectura<?= $verClub != $miClub ? " (estás viendo otro club)" : "" ?></p>
 
-    <form method="get" class="filtros">
-        <select name="club">
-            <?php while ($c = mysqli_fetch_assoc($clubes)): ?>
-                <option value="<?= $c["id"] ?>" <?= $c["id"] == $verClub ? "selected" : "" ?>>
-                    <?= h($c["nombre"]) ?><?= $c["id"] == $miClub ? " (mi club)" : "" ?>
-                </option>
-            <?php endwhile; ?>
-        </select>
-        <select name="categoria">
-            <option value="0">Todas las categorías</option>
-            <?php while ($cat = mysqli_fetch_assoc($categorias)): ?>
-                <option value="<?= $cat["id"] ?>" <?= $cat["id"] == $verCat ? "selected" : "" ?>>
-                    <?= h($cat["año"]) ?>
-                </option>
-            <?php endwhile; ?>
-        </select>
-        <input type="submit" value="Filtrar">
-        <button type="button" onclick="window.print()">Imprimir lista</button>
-    </form>
+<div class="filtros">
+    <input type="text" id="buscador" placeholder="Buscar jugador...">
+    <button type="button" onclick="window.print()">Imprimir lista</button>
+</div>
 
     <div class="tabla-scroll">
-    <table>
+    <table id="tablaJugadores">
         <tr>
             <th>Foto carnet</th>
             <th>Jugador</th>
@@ -80,7 +66,7 @@ $hoy = date("Y-m-d");
                     <a href="../carnets/fotos/<?= h($j["foto"]) ?>" target="_blank"><img class="foto" src="../carnets/fotos/<?= h($j["foto"]) ?>" alt="carnet"></a>
                 <?php else: ?>-<?php endif; ?>
             </td>
-            <td><?= h($j["apellido"] . ", " . $j["nombre"]) ?></td>
+            <td><?= h($j["nombre"] . " " . $j["apellido"]) ?></td>
             <td><?= h($j["cedula"]) ?></td>
             <td><?= $j["fecha_nacimiento"] ? date("d/m/Y", strtotime($j["fecha_nacimiento"])) : "-" ?></td>
             <td><?= h($j["año"]) ?></td>

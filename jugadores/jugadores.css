@@ -57,6 +57,7 @@ form label{
 
 form input[type="text"],
 form input[type="date"],
+form input[type="number"],
 form select{
     width:100%;
     box-sizing:border-box;
@@ -111,35 +112,35 @@ form input[type="submit"]:hover{
     margin-bottom:30px;
 }
 
-.tablaClubes{
+.tablaJugadores{
     border-collapse:collapse;
 }
 
-.tablaClubes th,
-.tablaClubes td{
+.tablaJugadores th,
+.tablaJugadores td{
     border:1px solid rgba(255,255,255,0.4);
     padding:10px;
 }
 
-.tablaClubes th{
+.tablaJugadores th{
     background:#252A2E;
     color:white;
     font-weight:700;
     letter-spacing:.5px;
 }
 
-.tablaClubes td{
+.tablaJugadores td{
     background:rgba(255,255,255,0.7);
     color:#383838;
 }
 
-.tablaClubes a{
+.tablaJugadores a{
     text-decoration:none;
     color:#2F6F62;
     font-weight:bold;
 }
 
-.tablaClubes a:hover{
+.tablaJugadores a:hover{
     color:#185796;
 }
 

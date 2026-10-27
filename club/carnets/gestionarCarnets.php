@@ -9,8 +9,11 @@
 </head>
 <body>
     <header>
-    <?php include_once __DIR__ . "/../../club/menu.php";
-    ?>
+
+    <nav>
+        <?php include_once __DIR__ . "/../../club/menu.php";
+        ?>
+    </nav>
     </header>
 <!-- INCLUDE: el formulario para subir el carnet y la lista de carnets -->
 <?php include("agregarCarnet.php"); ?>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../conexion.php";
-require_once __DIR__ . "/../auth.php";
+require_once __DIR__ . "/../sesion.php";
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: login.php");
@@ -18,6 +18,7 @@ $fila = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 // password_verify compara la contraseña escrita con el hash guardado
 if ($fila && password_verify($password, $fila["contraseña"])) {
+    iniciarSesionPorRol($fila["rol"]);
     session_regenerate_id(true);
     $_SESSION["usuario"] = $fila["usuario"];
     $_SESSION["rol"] = $fila["rol"];

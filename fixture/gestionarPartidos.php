@@ -21,6 +21,7 @@
         <a href="../clubes/gestionClubes.php">Clubes</a>
         <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
         <a href="gestionarPartidos.php">Partidos</a>
+        <a href="posiciones.php">Posiciones</a>
     </nav>
 </header>
 

@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tipo"])) {
 
     <label for="tipo">Tarjeta:</label>
     <select name="tipo" id="tipo" required>
-        <option value="Amarilla">🟨 Amarilla</option>
-        <option value="Roja">🟥 Roja</option>
+        <option value="Amarilla">Amarilla</option>
+        <option value="Roja">xRoja</option>
     </select><br>
 
     <label for="fecha">Fecha del partido:</label>

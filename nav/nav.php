@@ -15,7 +15,8 @@
         <a href="../clubes/gestionClubes.php">Clubes</a>
         <a href="../jugadores/gestionarJugadores.php">Jugadores</a>
         <a href="../fixture/gestionarPartidos.php">Partidos</a>
-        <a href="../login/logout.php">Cerrar Sesión</a>
+        <a href="../fixture/posiciones.php">Posiciones</a>
+        <a href="../login/logout.php?rol=admin">Cerrar Sesión</a>
     </nav>
 </body>
 </html>

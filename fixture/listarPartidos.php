@@ -6,7 +6,8 @@ require_once __DIR__ . "/../conexion.php";
 $sql = "SELECT partidos.*,
         local.nombre AS nombre_local,
         visitante.nombre AS nombre_visitante,
-        categorias.año AS nombre_categoria
+        categorias.año AS nombre_categoria,
+        competicion.nombre AS nombre_competicion
         FROM partidos
         INNER JOIN club AS local
         ON partidos.id_club_local = local.id
@@ -14,6 +15,8 @@ $sql = "SELECT partidos.*,
         ON partidos.id_club_visitante = visitante.id
         INNER JOIN categorias
         ON partidos.id_categoria = categorias.id
+        INNER JOIN competicion
+        ON partidos.id_competicion = competicion.id
         ORDER BY partidos.fecha IS NULL DESC, partidos.fecha ASC";
 
 $resultado = mysqli_query($conn, $sql);
@@ -25,6 +28,7 @@ $resultado = mysqli_query($conn, $sql);
             <th>Club local</th>
             <th>Club visitante</th>
             <th>Categoría</th>
+            <th>Competición</th>
             <th>Fecha</th>
             <th>Estado</th>
             <th>Resultado</th>
@@ -37,6 +41,7 @@ $resultado = mysqli_query($conn, $sql);
             <td><?php echo htmlspecialchars($fila['nombre_local']); ?></td>
             <td><?php echo htmlspecialchars($fila['nombre_visitante']); ?></td>
             <td><?php echo htmlspecialchars($fila['nombre_categoria']); ?></td>
+            <td><?php echo htmlspecialchars($fila['nombre_competicion']); ?></td>
 
             <td>
                 <?php

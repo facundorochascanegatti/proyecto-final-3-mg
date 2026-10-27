@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $local = (int) $_POST["EquipoLocal"];
     $visitante = (int) $_POST["EquipoVisitante"];
     $categoria = (int) $_POST["Categoria"];
+    $competicion = (int) $_POST["Competicion"];
     $fecha = $_POST["fecha"];
     $estado = $_POST["estado"];
     $golesLocal = $_POST["goles_local"];
@@ -55,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 id_club_local = $local,
                 id_club_visitante = $visitante,
                 id_categoria = $categoria,
+                id_competicion = $competicion,
                 fecha = $fechaSQL,
                 estado = '$estado',
                 goles_local = $golesLocalSQL,
@@ -72,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
+$resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
 ?>
 
 <!DOCTYPE html>
@@ -145,8 +148,20 @@ $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
             <?php } ?>
         </select>
 
+        <label for="Competicion">Competición:</label>
+        <select name="Competicion" id="Competicion" required>
+            <?php while ($competicion = mysqli_fetch_assoc($resultadoCompeticiones)) { ?>
+                <option value="<?php echo $competicion['id']; ?>"
+                    <?php if ($competicion['id'] == $partido['id_competicion']) {
+                        echo "selected";
+                    } ?>>
+                    <?php echo htmlspecialchars($competicion['nombre']); ?>
+                </option>
+            <?php } ?>
+        </select>
+
         <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha"
+        <input type="date" name="fecha" id="fecha" min="2026-01-01" max="2026-12-31"
             value="<?php
             if ($partido['fecha'] != NULL) {
                 echo htmlspecialchars($partido['fecha']);

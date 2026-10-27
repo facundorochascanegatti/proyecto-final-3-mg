@@ -40,21 +40,24 @@ $nombresEstado = [
     <div class="tabla-scroll">
     <table>
         <tr><th>Fecha</th><th>Local</th><th>Visitante</th><th>Categoría</th><th>Estado</th><th>Resultado</th></tr>
-        <?php while ($p = mysqli_fetch_assoc($partidos)): ?>
-        <tr>
-            <td><?= $p["fecha"] ? date("d/m/Y", strtotime($p["fecha"])) : "Sin fecha" ?></td>
-            <td><?= $p["id_club_local"] == $miClub ? "<b>" . h($p["nombre_local"]) . "</b>" : h($p["nombre_local"]) ?></td>
-            <td><?= $p["id_club_visitante"] == $miClub ? "<b>" . h($p["nombre_visitante"]) . "</b>" : h($p["nombre_visitante"]) ?></td>
-            <td><?= h($p["año"]) ?></td>
-            <td><?= h($nombresEstado[$p["estado"]] ?? $p["estado"]) ?></td>
-            <td><?= ($p["goles_local"] === null || $p["goles_visitante"] === null) ? "-" : (int) $p["goles_local"] . " - " . (int) $p["goles_visitante"] ?></td>
-        </tr>
-        <?php endwhile; ?>
-        <?php if (mysqli_num_rows($partidos) == 0): ?>
-            <tr><td colspan="6" class="vacio">Tu club no tiene partidos cargados.</td></tr>
-        <?php endif; ?>
+<?php while ($p = mysqli_fetch_assoc($partidos)): ?>
+<tr>
+    <td><?= $p["fecha"] ? date("d/m/Y", strtotime($p["fecha"])) : "Sin fecha" ?></td>
+    <td><?= h($p["nombre_local"]) ?></td>
+    <td><?= h($p["nombre_visitante"]) ?></td>
+    <td><?= h($p["año"]) ?></td>
+    <td><?= h($nombresEstado[$p["estado"]] ?? $p["estado"]) ?></td>
+    <td><?= $p["goles_local"] === null || $p["goles_visitante"] === null ? "-" : $p["goles_local"]." - ".$p["goles_visitante"] ?></td>
+</tr>
+<?php endwhile; ?>
+<?php if (mysqli_num_rows($partidos) == 0): ?>
+<tr><td colspan="6" class="vacio">Tu club no tiene partidos cargados.</td></tr>
+<?php endif; ?>
     </table>
     </div>
+
+    
+
 </main>
 </body>
 </html>

@@ -1,339 +1,512 @@
 /* =========================
-        GENERAL
+   FUENTES E ICONOS
 ========================= */
 
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background-image:url("../imagenes/BG.png");
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: #e2e8f0;
+    background: url("../imagenes/BG.png") center / cover fixed;
+}
+
+header {
+    height: 60px;
+}
+
+main {
+    padding: 80px 40px 30px;
+    min-height: 100vh;
+}
+
+h1,
+.tituloSeccion {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+h1 {
+    margin: 0 0 25px;
+}
+
+.tituloSeccion {
+    font-weight: normal;
+    margin: 40px 0 0;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #e2e8f0;
+    margin: 5px 0 20px;
 }
 
 
 /* =========================
-        NAVBAR
+   BARRA DE NAVEGACION
 ========================= */
 
-header{
-    height:50px;
-    background:#252A2E;
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+    background: rgba(10, 15, 28, 0.90);
+    backdrop-filter: blur(12px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-nav{
-    display:flex;
-    gap:30px;
-    justify-content:center;
+nav a {
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: 0.3s;
 }
 
-nav a{
-    text-decoration:none;
-    font-family:"Montserrat", sans-serif;
-    font-weight:300;
-    color:white;
-    padding:10px 30px;
-    border-radius:20px;
-    display:inline-block;
-    transition:.3s;
-    margin-top:5px;
+nav a:hover {
+    background: rgba(47, 111, 98, 0.65);
+    color: white;
 }
 
-nav a:hover{
-    background:#2F6F62
-}
-
-nav a .fa-house{
-    color:white;
-    font-size:25px;
+nav a.salir:hover {
+    color: #f87171;
+    background: rgba(170, 50, 50, 0.2);
 }
 
 
 /* =========================
-        FORMULARIO
+   FORMULARIOS
 ========================= */
 
-form{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:350px;
-    box-sizing:border-box;
-    margin:30px auto 0;
-    padding:30px;
-    background:rgba(255,255,255,0.15);
-    border-radius:8px;
-    box-shadow:3px 3px 6px 3px rgba(0,0,0,0.1);
-    backdrop-filter:blur(10px);
+form:not(.filtros) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 450px;
+    max-width: 95%;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(10, 15, 28, 0.30);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-form h1{
-    font-weight:normal;
-    text-align:center;
-    color:rgb(56,56,56);
-    text-shadow:3px 3px 5px rgba(0,0,0,0.3);
-    margin:0 0 25px;
+form h1 {
+    font-weight: normal;
 }
 
-form label{
-    align-self:flex-start;
-    font-weight:bold;
-    color: #FFFF;
-    margin-bottom: 5px;
+form label,
+.field label {
+    color: white;
+    font-weight: bold;
 }
 
-form input[type="text"],
-form input[type="date"],
-form select{
-    width:100%;
-    box-sizing:border-box;
-    padding:10px;
-    border:1px solid #BDB5A6;
-    border-radius:10px;
-    background:rgba(255,255,255,0.8);
-    font-size:14px;
-    outline:none;
-    transition:.3s;
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: white;
+    background: rgba(10, 15, 28, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
 }
 
-form input[type="text"]:focus,
-form input[type="date"]:focus,
-form select:focus{
-    border-color:#2F6F62;
-    box-shadow:  0 5px rgba(47,111,98,0.3);
+select option {
+    background: #252a40;
+    color: white;
 }
 
-form input[type="submit"]{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    background:#2F6F62;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+input[type="file"] {
+    font-size: 13px;
 }
 
-form input[type="submit"]:hover{
-    background:rgb(24,87,150);
+input[type="date"] {
+    color-scheme: dark;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2f6f62;
+    box-shadow: 0 0 0 3px rgba(47, 111, 98, 0.3);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input[type="submit"],
+button,
+.boton {
+    padding: 10px 18px;
+    color: white;
+    background: #2f6f62;
+    border: none;
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover,
+button:hover,
+.boton:hover {
+    background: #185796;
+}
+
+button.rojo {
+    background: #b91c1c;
+}
+
+button.rojo:hover {
+    background: #991b1b;
 }
 
 
 /* =========================
-        TABLA
+   FILTROS
 ========================= */
 
-.Tabla{
-    display:flex;
-    width:fit-content;
-    margin:30px auto 0;
+form.filtros {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 15px;
 }
 
-.tablaClubes{
-    border-collapse:collapse;
+form.filtros input,
+form.filtros select {
+    width: auto;
 }
 
+form.filtros input[type="submit"] {
+    margin: 0;
+}
+
+
+/* =========================
+   TABLAS
+========================= */
+
+.Tabla {
+    width: fit-content;
+    max-width: 100%;
+    margin: 30px auto;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+table,
+.tablaClubes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td,
 .tablaClubes th,
-.tablaClubes td{
-    border:1px solid #dddddd;
-    padding:8px;
+.tablaClubes td {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
 }
 
-.tablaClubes a{
-    text-decoration:none;
-    color:white;
-    text-shadow:
-        -1px -1px 0 #c3c9ff,
-         1px -1px 0 #c3c9ff,
-        -1px  1px 0 #c3c9ff,
-         1px  1px 0 #c3c9ff;
+th,
+.tablaClubes th {
+    background: #252a40;
+    color: white;
+    text-align: left;
 }
 
-.tablaClubes th{
-    color:#31387e;
-    font-weight:700;
-    letter-spacing:.5px;
+td,
+.tablaClubes td {
+    background: rgba(241, 245, 249, 0.94);
+    color: #1e293b;
+    font-size: 14px;
 }
 
+td a,
+.tablaClubes a {
+    color: #087f5b;
+    font-weight: bold;
+    text-decoration: none;
+}
 
+td a:hover,
+.tablaClubes a:hover {
+    color: #2563eb;
+}
+
+.foto,
+.fotoCarnet {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
 
 
 /* =========================
-        RESPONSIVE
+   MENSAJES Y ESTADOS
 ========================= */
 
-@media (max-width:768px){
+.mensajeError {
+    width: fit-content;
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: rgba(170, 50, 50, 0.85);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
 
-    body{
-        padding:15px;
-    }
+.aviso {
+    padding: 12px;
+    margin-bottom: 12px;
+    color: #1e293b;
+    background: rgba(241, 245, 249, 0.92);
+    border-left: 5px solid #2f6f62;
+    border-radius: 8px;
+}
 
-    header{
-        height:auto;
-        padding:10px 0;
-    }
+.vacio {
+    padding: 15px;
+    text-align: center;
+    color: #475569;
+}
 
-    nav{
-        flex-direction:column;
-        align-items:center;
-        gap:5px;
-    }
+.ok,
+.habilitado {
+    color: white;
+    background: rgba(47, 111, 98, 0.85);
+    font-weight: bold;
+}
 
-    nav a{
-        padding:8px 20px;
-        margin-top:0;
-    }
+.mal,
+.suspendido {
+    color: white;
+    background: rgba(160, 40, 40, 0.85);
+    font-weight: bold;
+}
 
-    form{
-        width:100%;
-        padding:20px;
-    }
-
-    .Tabla{
-        width:100%;
-        overflow-x:auto;
-        justify-content:flex-start;
-    }
-
-    .tablaClubes{
-        min-width:600px;
-    }
-    
-}   
 
 /* =========================
-   AGREGADOS (sanciones y carnets)
+   TARJETAS Y PANELES
 ========================= */
 
-/* el input para subir archivos con el mismo estilo que los otros */
-form input[type="file"]{
-    width:100%;
-    box-sizing:border-box;
-    padding:8px;
-    border:1px solid #BDB5A6;
-    border-radius:10px;
-    background:rgba(255,255,255,0.8);
-    font-size:13px;
+.tarjeta {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: rgba(10, 15, 28, 0.30);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* titulos de las tablas, igual que los de los formularios */
-.tituloSeccion{
-    font-weight:normal;
-    text-align:center;
-    color:rgb(56,56,56);
-    text-shadow:3px 3px 5px rgba(0,0,0,0.3);
-    margin:40px 0 0;
+.tarjeta h2 {
+    color: white;
+    font-size: 20px;
 }
 
-/* filtros por club y categoria, en una sola fila */
-form.filtros{
-    flex-direction:row;
-    gap:10px;
-    width:auto;
-    max-width:600px;
-    padding:15px;
+.grilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
 }
 
-form.filtros input[type="submit"]{
-    width:auto;
-    margin-top:0;
-    padding:10px 20px;
+.numero {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
 }
 
-.tablaClubes td{
-    color:white;
-    text-shadow:1px 1px 2px rgba(0,0,0,.6);
-}
-
-/* estado del jugador: verde si puede jugar, rojo si no */
-.habilitado{
-    background:rgba(47,111,98,.75);
-    font-weight:bold;
-}
-
-.suspendido{
-    background:rgba(160,40,40,.75);
-    font-weight:bold;
-}
-
-/* aviso de error al subir un archivo */
-.aviso{
-    color:#842029;
-    background:#f8d7da;
-    padding:8px;
-    border-radius:8px;
-}
-
-/* miniatura de la foto del carnet */
-.fotoCarnet{
-    width:45px;
-    height:45px;
-    object-fit:cover;
-    border-radius:6px;
-}
-
-@media (max-width:768px){
-    form.filtros{ flex-direction:column; width:100%; }
-}
 
 /* =========================
-   AJUSTES DE LECTURA
+   CAMPOS Y MODALES
 ========================= */
 
-/* titulos y textos blancos para que se lean sobre el fondo oscuro */
-.tituloSeccion{
-    color:white;
-    text-shadow:2px 2px 6px rgba(0,0,0,.7);
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
 }
 
-.subtitulo{
-    text-align:center;
-    color:#dfe6ff;
-    margin:5px 0 0;
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
 }
 
-form h1{
-    color:white;
-    text-shadow:2px 2px 6px rgba(0,0,0,.7);
+.botonera {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
 }
 
-/* encabezado de las tablas con fondo, asi se lee */
-.tablaClubes th{
-    background:rgba(49,56,126,.85);
-    color:white;
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 35px;
+    padding: 8px;
+    color: #e2e8f0;
+    background: rgba(10, 15, 28, 0.80);
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.tablaClubes td{
-    background:rgba(0,0,0,.25);
+.footer .Datix {
+    color: #00d2ff;
 }
 
-/* mensaje cuando la tabla esta vacia */
-.vacio{
-    text-align:center;
-    font-style:italic;
-    padding:15px 25px;
+.footer .Llave {
+    color: #6366f1;
 }
 
-/* boton para ir/volver entre tarjetas y boletines */
-.botonera{
-    display:flex;
-    justify-content:center;
-    margin-top:25px;
+
+/* =========================
+   ADAPTACION A CELULARES
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        height: auto;
+        min-height: 60px;
+    }
+
+    nav {
+        position: relative;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+
+    form:not(.filtros) {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    form.filtros {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    form.filtros input,
+    form.filtros select {
+        width: 100%;
+    }
+
+    .Tabla {
+        width: 100%;
+    }
+
+    .tablaClubes,
+    table {
+        min-width: 560px;
+    }
+
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta {
+        padding: 15px;
+    }
 }
 
-.boton{
-    text-decoration:none;
-    color:white;
-    background:#2F6F62;
-    padding:10px 25px;
-    border-radius:10px;
-    font-weight:bold;
-    transition:.3s;
-}
 
-.boton:hover{
-    background:rgb(24,87,150);
+/* =========================
+   IMPRESION
+========================= */
+
+@media print {
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    nav,
+    header,
+    footer,
+    form,
+    .no-imprimir {
+        display: none !important;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    h1,
+    .subtitulo,
+    .tituloSeccion,
+    .tarjeta h2 {
+        color: black;
+        text-shadow: none;
+    }
+
+    .tarjeta,
+    .Tabla {
+        background: white;
+        box-shadow: none;
+        border: none;
+    }
+
+    td {
+        background: white;
+        color: black;
+    }
 }

@@ -110,24 +110,22 @@ form {
 
 }
 
-form input[type="text"]{
-
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form select{
     width:100%;
-
     box-sizing:border-box;
-
-    padding:8px;
-
+    padding:10px;
     border:1px solid rgba(255, 255, 255, 0.18);
-
-    border-radius:8px;
-
-    background:rgba(0, 0, 0, 0.35);
-
-    font-size:13px;
-
     color: white;
-
+    border-radius:8px;
+    background:rgba(0, 0, 0, 0.35);
+    font-size:14px;
+    outline:none;
+    transition:.3s;
+    display: block;
+    box-sizing: border-box;
 }
 
 form input[type="submit"]{

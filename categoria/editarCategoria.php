@@ -4,7 +4,7 @@ require_once "../conexion.php";
 
 $id = (int) ($_GET["id"] ?? $_POST["id"] ?? 0);
 
-$resultado = mysqli_query($conn, "SELECT * FROM categorias WHERE id = $id AND genero = 'Masculino'");
+$resultado = mysqli_query($conn, "SELECT * FROM categorias WHERE id = $id");
 $categoria = mysqli_fetch_assoc($resultado);
 
 if (!$categoria) {
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <form action="editarCategoria.php?id=<?= $id ?>" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <label for="año">Año de categoría:</label>
-        <input type="text" id="año" name="año" maxlength="4" required value="<?= htmlspecialchars($categoria["año"]) ?>">
+        <input type="text" id="año" name="año" maxlength=10" required value="<?= htmlspecialchars($categoria["año"]) ?>">
         <input type="submit" value="Guardar">
     </form>
 </body>

@@ -25,7 +25,11 @@ function validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $i
     }
 
     // la fecha tiene que ser real (checkdate revisa mes, día y año)
+    // explode sirve pra separar la fecha en partes
+    // por ejemplo "2005-03-15" se convierte en ["2005", "03", "15"]
     $partes = explode("-", $fechaNacimiento);
+
+    //este if revisa que la fecha tenga el formato correcto y que sea una fecha real
     if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $fechaNacimiento) || !checkdate($partes[1], $partes[2], $partes[0])) {
         return "La fecha de nacimiento no es válida.";
     }

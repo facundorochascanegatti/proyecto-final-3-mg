@@ -8,11 +8,13 @@ $id = (int) ($_GET["id"] ?? $_POST["id"] ?? 0);
 $resultado = mysqli_query($conn, "SELECT * FROM jugadores WHERE id = $id");
 $jugador = mysqli_fetch_assoc($resultado);
 
+//esto es un comparador, si no encuentra el jugador, redirige a la pagina de gestionar jugadores
 if (!$jugador) {
     header("Location: gestionarJugadores.php");
     exit();
 }
 
+// inicializa la variable de error como cadena vacía
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -28,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // mismas reglas que al agregar (validarJugador.php), se pasa $id para que no choque con su propia cédula
     $error = validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $categoria, $club, $masa, $altura, $id);
 
+    // si no hay error, calcula peso y velocidad y actualiza el jugador
     if ($error == "") {
         $gravedad = 9.8;
         $peso = $masa * $gravedad;
@@ -62,8 +65,11 @@ $clubes = mysqli_query($conn, "SELECT * FROM club");
     <form action="editarJugador.php?id=<?= $id ?>" method="post">
         <h1>Editar Jugador</h1>
 
+        <!-- esto muestra el mensaje de error si hay alguno -->
         <?php if ($error): ?>
+            <!-- htmlspecialchars es para que si el mensaje de error tiene caracteres especiales, no rompa el html -->
             <p class="mensajeError"><?= htmlspecialchars($error) ?></p>
+            <!-- el mensaje de error se muestra solo si $error no es una cadena vacía, es decir, si hay un error -->
         <?php endif; ?>
 
         <input type="hidden" name="id" value="<?= $id ?>">

@@ -23,7 +23,7 @@ $resultado = mysqli_query($conn, $sql);
         <th>Club</th>
         <th>Masa</th>
         <th>Altura</th>
-        <th>Velocidad</th>
+        <th>Velocidad (m/s)</th>
         <th>F.Peso</th>
         <th>Editar</th>
         <th>Eliminar</th>

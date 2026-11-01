@@ -38,44 +38,50 @@ while ($partido = mysqli_fetch_assoc($partidos)) {
     $golesLocal = $partido["goles_local"];
     $golesVisitante = $partido["goles_visitante"];
 
-    $tabla[$local]["pj"]++;
-    $tabla[$visitante]["pj"]++;
+    $tabla[$local]["pj"]++; // partidos jugados
+    $tabla[$visitante]["pj"]++; 
 
-    $tabla[$local]["gf"] += $golesLocal;
-    $tabla[$local]["gc"] += $golesVisitante;
-    $tabla[$visitante]["gf"] += $golesVisitante;
-    $tabla[$visitante]["gc"] += $golesLocal;
+    $tabla[$local]["gf"] += $golesLocal; // goles a favor
+    $tabla[$local]["gc"] += $golesVisitante; // goles en contra
+    $tabla[$visitante]["gf"] += $golesVisitante; // goles a favor
+    $tabla[$visitante]["gc"] += $golesLocal; // goles en contra
 
-    if ($golesLocal > $golesVisitante) {
-        $tabla[$local]["g"]++;
-        $tabla[$local]["pts"] += 3;
-        $tabla[$visitante]["p"]++;
-    } elseif ($golesLocal < $golesVisitante) {
-        $tabla[$visitante]["g"]++;
-        $tabla[$visitante]["pts"] += 3;
-        $tabla[$local]["p"]++;
+    if ($golesLocal > $golesVisitante) { // el local ganó
+        $tabla[$local]["g"]++; // partidos ganados
+        $tabla[$local]["pts"] += 3; // puntos
+        $tabla[$visitante]["p"]++; //   partidos perdidos
+    } elseif ($golesLocal < $golesVisitante) { // el visitante ganó
+        $tabla[$visitante]["g"]++; // partidos ganados
+        $tabla[$visitante]["pts"] += 3; // puntos
+        $tabla[$local]["p"]++; // partidos perdidos
     } else {
-        $tabla[$local]["e"]++;
-        $tabla[$visitante]["e"]++;
-        $tabla[$local]["pts"]++;
-        $tabla[$visitante]["pts"]++;
+        $tabla[$local]["e"]++; // partidos empatados
+        $tabla[$visitante]["e"]++; // partidos empatados
+        $tabla[$local]["pts"]++; // puntos
+        $tabla[$visitante]["pts"]++; // puntos
     }
 }
 
 // Ordenar por puntos y diferencia de goles
-usort($tabla, function ($club1, $club2) {
-    if ($club1["pts"] != $club2["pts"]) {
-        return $club2["pts"] - $club1["pts"];
+
+// el usort ordena la tabla de posiciones primero por puntos y luego por diferencia de goles
+// el function compara dos clubes y devuelve un valor negativo, cero o positivo según el orden deseado, despues sigue un if basico
+usort($tabla, function ($club1, $club2) { // compara dos clubes
+    if ($club1["pts"] != $club2["pts"]) { // si los puntos son diferentes, ordena por puntos
+        return $club2["pts"] - $club1["pts"]; // ordena de mayor a menor
     }
 
-    $diferencia1 = $club1["gf"] - $club1["gc"];
-    $diferencia2 = $club2["gf"] - $club2["gc"];
+    $diferencia1 = $club1["gf"] - $club1["gc"]; // diferencia de goles del club 1
+    $diferencia2 = $club2["gf"] - $club2["gc"]; // diferencia de goles del club 2
 
-    return $diferencia2 - $diferencia1;
+    return $diferencia2 - $diferencia1; // ordena de mayor a menor
 });
 
 // Obtener las fechas con los nombres de los clubes
-$fechas = mysqli_query($conn, "SELECT p.*, l.nombre AS local, v.nombre AS visitante, c.`año` AS categoria
+// hacemos un join para obtener los nombres de los clubes y la categoría de cada partido, y ordenamos por fecha
+//el left join es para que si no hay categoria, igual se muestre el partido
+//$comp $filtro es para filtrar por competicion y categoria si se selecciono alguna
+$fechas = mysqli_query($conn, "SELECT p.*, l.nombre AS local, v.nombre AS visitante, c.`año` AS categoria 
     FROM partidos p
     JOIN club l ON p.id_club_local = l.id
     JOIN club v ON p.id_club_visitante = v.id

@@ -26,30 +26,32 @@ header {
 }
 
 main {
-    padding: 80px 40px 30px;
-    min-height: 100vh;
-}
-
-h1,
-.tituloSeccion {
-    text-align: center;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    padding: 80px 60px 30px;
+    min-height: calc(100vh - 85px);
 }
 
 h1 {
-    margin: 0 0 25px;
+    margin: 0 0 5px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 .tituloSeccion {
-    font-weight: normal;
     margin: 40px 0 0;
+    text-align: center;
+    font-weight: normal;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 .subtitulo {
+    margin: 0 0 20px;
     text-align: center;
     color: #e2e8f0;
-    margin: 5px 0 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 
@@ -62,10 +64,10 @@ nav {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 5px;
-    background: rgba(10, 15, 28, 0.90);
+    gap: 30px;
+    background: rgba(10, 15, 28, 0.75) !important;
     backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     top: 0;
     left: 0;
@@ -74,21 +76,32 @@ nav {
 }
 
 nav a {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 10px 30px;
     color: #e2e8f0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     text-decoration: none;
-    padding: 10px 20px;
     border-radius: 20px;
     transition: 0.3s;
 }
 
 nav a:hover {
-    background: rgba(47, 111, 98, 0.65);
-    color: white;
+    color: #00d2ff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 nav a.salir:hover {
     color: #f87171;
     background: rgba(170, 50, 50, 0.2);
+}
+
+.home {
+    margin-bottom: 5px;
+    color: #e2e8f0;
+    font-size: 25px;
+    text-decoration: none;
 }
 
 
@@ -111,13 +124,9 @@ form:not(.filtros) {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-form h1 {
-    font-weight: normal;
-}
-
 form label,
 .field label {
-    color: white;
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -128,72 +137,29 @@ textarea {
     padding: 10px;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    color: white;
-    background: rgba(10, 15, 28, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 8px;
-}
-
-select option {
-    background: #252a40;
-    color: white;
+    color: #1e293b;
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
 }
 
 input[type="file"] {
     font-size: 13px;
 }
 
-input[type="date"] {
-    color-scheme: dark;
-}
-
 input:focus,
 select:focus,
 textarea:focus {
-    outline: none;
-    border-color: #2f6f62;
-    box-shadow: 0 0 0 3px rgba(47, 111, 98, 0.3);
+    border-color: #00d2ff;
+    box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
 }
 
 textarea {
     min-height: 90px;
     resize: vertical;
 }
-
-input[type="submit"],
-button,
-.boton {
-    padding: 10px 18px;
-    color: white;
-    background: #2f6f62;
-    border: none;
-    border-radius: 10px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-input[type="submit"]:hover,
-button:hover,
-.boton:hover {
-    background: #185796;
-}
-
-button.rojo {
-    background: #b91c1c;
-}
-
-button.rojo:hover {
-    background: #991b1b;
-}
-
-
-/* =========================
-   FILTROS
-========================= */
 
 form.filtros {
     display: flex;
@@ -218,16 +184,73 @@ form.filtros input[type="submit"] {
 
 
 /* =========================
+   BOTONES
+========================= */
+
+input[type="submit"],
+button,
+.boton {
+    display: inline-block;
+    padding: 10px 18px;
+    color: #ffffff;
+    background: #31387e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover,
+button:hover,
+.boton:hover {
+    background: #185796;
+}
+
+button.rojo {
+    background: #b91c1c;
+    border-color: #dc2626;
+}
+
+button.rojo:hover {
+    background: #991b1b;
+}
+
+
+/* =========================
    TABLAS
 ========================= */
+
+.Tabla,
+.tabla-scroll {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(10, 15, 28, 0.30);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
 
 .Tabla {
     width: fit-content;
     max-width: 100%;
     margin: 30px auto;
-    overflow-x: auto;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta .Tabla,
+.tarjeta .tabla-scroll {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
 }
 
 table,
@@ -247,7 +270,9 @@ td,
 th,
 .tablaClubes th {
     background: #252a40;
-    color: white;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     text-align: left;
 }
 
@@ -272,8 +297,8 @@ td a:hover,
 
 .foto,
 .fotoCarnet {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     object-fit: cover;
     border-radius: 6px;
 }
@@ -289,38 +314,58 @@ td a:hover,
     margin: 10px auto;
     padding: 10px 20px;
     background: rgba(170, 50, 50, 0.85);
-    color: white;
+    color: #ffffff;
     border-radius: 8px;
     text-align: center;
 }
 
 .aviso {
-    padding: 12px;
+    padding: 12px 14px;
     margin-bottom: 12px;
     color: #1e293b;
     background: rgba(241, 245, 249, 0.92);
-    border-left: 5px solid #2f6f62;
+    border-left: 5px solid #6366f1;
     border-radius: 8px;
+}
+
+.aviso small {
+    margin-left: 8px;
+    color: #64748b;
 }
 
 .vacio {
     padding: 15px;
     text-align: center;
+    color: #1e293b;
+}
+
+td.vacio {
     color: #475569;
 }
 
 .ok,
 .habilitado {
-    color: white;
+    color: #ffffff;
     background: rgba(47, 111, 98, 0.85);
     font-weight: bold;
 }
 
 .mal,
 .suspendido {
-    color: white;
+    color: #ffffff;
     background: rgba(160, 40, 40, 0.85);
     font-weight: bold;
+}
+
+.tarjeta .numero.ok {
+    color: #4ade80;
+    background: none;
+}
+
+.tarjeta .numero.mal,
+.tarjeta p.mal {
+    color: #f87171;
+    background: none;
 }
 
 
@@ -339,25 +384,33 @@ td a:hover,
 }
 
 .tarjeta h2 {
-    color: white;
+    margin-top: 0;
+    color: #ffffff;
     font-size: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .grilla {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 16px;
+    margin-bottom: 20px;
+}
+
+.grilla .tarjeta {
+    margin-bottom: 0;
 }
 
 .numero {
-    color: white;
+    color: #ffffff;
     font-size: 36px;
     font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 
 /* =========================
-   CAMPOS Y MODALES
+   CAMPOS Y BOTONERA
 ========================= */
 
 .field {
@@ -390,12 +443,17 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 35px;
-    padding: 8px;
+    height: 35px;
     color: #e2e8f0;
     background: rgba(10, 15, 28, 0.80);
-    font-size: 16px;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 20px;
     font-weight: bold;
+}
+
+footer p {
+    margin: 0;
 }
 
 .footer .Datix {
@@ -403,7 +461,89 @@ footer {
 }
 
 .footer .Llave {
+    position: relative;
+    top: -2px;
     color: #6366f1;
+}
+
+
+/* =========================
+   PLANILLA IMPRIMIBLE
+========================= */
+
+.hoja {
+    padding: 25px;
+    margin-bottom: 20px;
+    color: #000000;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #000000;
+}
+
+.encabezado img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.encabezado h2,
+.encabezado h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.linea {
+    display: inline-block;
+    min-width: 260px;
+    border-bottom: 1px solid #000000;
+}
+
+.hoja p {
+    margin: 10px 0;
+}
+
+.hoja table th,
+.hoja table td {
+    height: 28px;
+    border: 1px solid #000000;
+}
+
+.hoja table th {
+    background: #e5e7eb;
+    color: #000000;
+}
+
+.hoja table td {
+    background: #ffffff;
+    color: #000000;
+}
+
+.caja {
+    min-height: 110px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #000000;
+}
+
+.firmas {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.firmas div {
+    width: 40%;
+    padding-top: 5px;
+    text-align: center;
+    border-top: 1px solid #000000;
 }
 
 
@@ -421,15 +561,27 @@ footer {
     nav {
         position: relative;
         gap: 5px;
+        padding: 8px;
     }
 
     nav a {
+        margin-top: 0;
         padding: 8px 12px;
         font-size: 13px;
     }
 
     main {
         padding: 25px 15px;
+        min-height: auto;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitulo {
+        padding: 0 15px;
+        font-size: 15px;
     }
 
     form:not(.filtros) {
@@ -464,6 +616,26 @@ footer {
     .tarjeta {
         padding: 15px;
     }
+
+    footer {
+        height: auto;
+        min-height: 35px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .encabezado {
+        flex-wrap: wrap;
+    }
+
+    .linea {
+        min-width: 150px;
+        max-width: 100%;
+    }
+
+    .firmas {
+        gap: 20px;
+    }
 }
 
 
@@ -474,39 +646,52 @@ footer {
 @media print {
 
     body {
-        background: white;
-        color: black;
+        background: #ffffff;
+        color: #000000;
     }
 
-    nav,
     header,
+    nav,
     footer,
-    form,
+    form.filtros,
     .no-imprimir {
         display: none !important;
     }
 
     main {
         padding: 0;
+        min-height: 0;
     }
 
     h1,
     .subtitulo,
     .tituloSeccion,
     .tarjeta h2 {
-        color: black;
+        color: #000000;
         text-shadow: none;
     }
 
     .tarjeta,
+    .tabla-scroll,
     .Tabla {
-        background: white;
+        background: none;
+        color: #000000;
         box-shadow: none;
+        backdrop-filter: none;
         border: none;
     }
 
     td {
-        background: white;
-        color: black;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .hoja {
+        padding: 0;
+        page-break-after: always;
+    }
+
+    .hoja:last-child {
+        page-break-after: auto;
     }
 }

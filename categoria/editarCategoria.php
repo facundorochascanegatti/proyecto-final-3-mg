@@ -2,6 +2,8 @@
 <?php
 require_once "../conexion.php";
 
+// Obtiene el ID de la categoría a editar desde GET o POST
+
 $id = (int) ($_GET["id"] ?? $_POST["id"] ?? 0);
 
 $resultado = mysqli_query($conn, "SELECT * FROM categorias WHERE id = $id");

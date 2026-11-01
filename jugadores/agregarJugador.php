@@ -1,8 +1,6 @@
 <?php
-require_once __DIR__ . "/../auth.php";
-requerirAdmin();
+
 require_once __DIR__ . "/../conexion.php";
-require_once __DIR__ . "/validarJugador.php";
 
 // Consulta para obtener todas las categorías
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
@@ -13,145 +11,149 @@ $resultadoClubes = mysqli_query($conn, "SELECT * FROM club");
 // Verifica si el formulario fue enviado mediante POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // esto obtiene los datos enviados desde el formulario
-    // real_escape_string escapa las comillas para que no se pueda meter SQL, y (int) deja solo números
-    $nombre = mysqli_real_escape_string($conn, trim($_POST["nombre"]));
-    $apellido = mysqli_real_escape_string($conn, trim($_POST["apellido"]));
-    $cedula = trim($_POST["cedula"]);
+    // Obtiene los datos enviados desde el formulario
+    $nombre = $_POST["nombre"];
+    $apellido = $_POST["apellido"];
+    $cedula = $_POST["cedula"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
-    $categorias = (int) $_POST["categorias"];
-    $club = (int) $_POST["club"];
+    $categorias = $_POST["categorias"];
+    $club = $_POST["club"];
     $masa = $_POST["masa"];
     $altura = $_POST["altura"];
+    $velocidad = $_POST["velocidad"];
 
-    // revisa nombre, apellido, cédula, fecha, categoría, club, masa y altura (está en validarJugador.php)
-    $error = validarJugador($conn, trim($_POST["nombre"]), trim($_POST["apellido"]), $cedula, $fecha_nacimiento, $categorias, $club, $masa, $altura, 0);
+    // Verifica que la cédula tenga 8 dígitos
+    if (!preg_match("/^[0-9]{8}$/", $cedula)) {
 
-    if ($error != "") {
-        echo "<p class='mensajeError'>" . htmlspecialchars($error) . "</p>";
+        echo "<p class='mensajeError'>La cédula debe tener 8 dígitos.</p>";
+
     } else {
 
-        // aca abajo se calcula la parte de fisica, lo de mecanica clasica.
+        // Calcula el peso usando la gravedad
         $gravedad = 9.8;
         $peso = $masa * $gravedad;
-        $velocidad = (2 * $gravedad * $altura) ** 0.5;
 
-        // Consulta SQL para insertar un nuevo jugador
-        $sql = "INSERT INTO jugadores
-                (nombre, apellido, cedula, fecha_nacimiento, id_categoria, id_club, masa, altura, peso, velocidad)
-                VALUES ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento', $categorias, $club, $masa, $altura, $peso, $velocidad)";
+        // Verifica si ya existe un jugador con esa cédula
+        $sqlChequeo = "SELECT * FROM jugadores WHERE cedula = '$cedula'";
+        $resultadoChequeo = mysqli_query($conn, $sqlChequeo);
 
-        // Ejecuta la consulta y verifica si se agregó correctamente
-        if (mysqli_query($conn, $sql)) {
+        if (mysqli_num_rows($resultadoChequeo) > 0) {
 
-            // Redirige a la página de gestión de jugadores
-            header("Location: gestionarJugadores.php");
-
-            // Detiene la ejecución del código
-            exit();
+            echo "<p class='mensajeError'>Esa cédula ya pertenece a otro jugador.</p>";
 
         } else {
 
-            // Muestra un mensaje con el error de la base de datos
-            echo "Error al agregar jugador: " . mysqli_error($conn);
+            // Inserta el nuevo jugador en la base de datos
+            $sql = "INSERT INTO jugadores
+                    (nombre, apellido, cedula, fecha_nacimiento, id_categoria, id_club, masa, altura, peso, velocidad)
+                    VALUES ('$nombre', '$apellido', '$cedula', '$fecha_nacimiento', $categorias, $club, $masa, $altura, $peso, $velocidad)";
+
+            // Ejecuta la consulta
+            if (mysqli_query($conn, $sql)) {
+
+                header("Location: gestionarJugadores.php");
+                exit();
+
+            } else {
+
+                echo "Error al agregar jugador: " . mysqli_error($conn);
+
+            }
         }
     }
 }
 ?>
 
 <!-- Formulario para agregar un nuevo jugador -->
-<form action="gestionarJugadores.php" method="post">
+<form action="agregarJugador.php" method="post">
 
-    <!-- Título del formulario -->
     <h1>Gestionar Jugadores</h1>
 
     <div class="field-row">
 
         <div class="field">
-            <!-- Campo para ingresar el nombre -->
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
         </div>
 
         <div class="field">
-            <!-- Campo para ingresar el apellido -->
             <label for="apellido">Apellido:</label>
             <input type="text" id="apellido" name="apellido" required>
         </div>
 
     </div>
-    
+
     <div class="field">
-        <!-- Campo para ingresar la cédula -->
         <label for="cedula">Cédula:</label>
         <input type="text" id="cedula" name="cedula" maxlength="8" required>
     </div>
-    
+
     <div class="field">
-        <!-- Campo para seleccionar la fecha de nacimiento -->
         <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" min="2013-01-01" max="2020-12-31" required>
-    </div>
-
-    <div class="field-row">
-        
-        <div class="field">
-            <!-- Campo para ingresar la masa -->
-            <label for="masa">Peso:</label>
-            <input type="number" id="masa" name="masa" required>
-        </div>
-
-        <div class="field">
-            <!-- Campo para ingresar la altura -->
-            <label for="altura">Altura:</label>
-            <input type="number" step="0.01" id="altura" name="altura" required>
-        </div>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+               min="2013-01-01" max="2020-12-31" required>
     </div>
 
     <div class="field-row">
 
         <div class="field">
-            <!-- Campo para seleccionar una categoría -->
-            <label for="categorias">Categorias:</label>
+            <label for="masa">Masa (kg):</label>
+            <input type="number" id="masa" name="masa"
+                   min="17" max="70" step="0.01" required>
+        </div>
+
+        <div class="field">
+            <label for="altura">Altura (m):</label>
+            <input type="number" step="0.01" id="altura" name="altura"
+                   min="1.20" max="1.75" required>
+        </div>
+
+        <div class="field">
+            <label for="velocidad">Velocidad (m/s):</label>
+            <input type="number" step="0.01" id="velocidad" name="velocidad"
+                   min="0" required>
+        </div>
+
+    </div>
+
+    <div class="field-row">
+
+        <div class="field">
+            <label for="categorias">Categorías:</label>
             <select name="categorias" id="categorias" required>
 
-            <!-- Opción inicial del menú desplegable -->
-            <option value="">Seleccione una categoría</option>
+                <option value="">Seleccione una categoría</option>
 
-            <!-- Recorre todas las categorías obtenidas de la base de datos -->
-            <?php while ($filaCategorias = mysqli_fetch_assoc($resultadoCategorias)): ?>
+                <?php while ($filaCategorias = mysqli_fetch_assoc($resultadoCategorias)): ?>
 
-                <!-- Muestra el ID y el año de cada categoría -->
-                <option value="<?= htmlspecialchars($filaCategorias['id']) ?>"><?= htmlspecialchars($filaCategorias['año']) ?></option>
-
-            <?php endwhile; ?>
-
-            </select>
-        </div>
-        
-        <div class="field">
-
-            <!-- Campo para seleccionar un club -->
-            <label for="club">Club:</label>
-            <select name="club" id="club" required>
-
-                <!-- Opción inicial del menú desplegable -->
-                <option value="">Seleccione un club</option>
-
-                <!-- Recorre todos los clubes obtenidos de la base de datos -->
-                <?php while ($filaClubes = mysqli_fetch_assoc($resultadoClubes)): ?>
-
-                    <!-- Muestra el ID y el nombre de cada club -->
-                    <option value="<?= htmlspecialchars($filaClubes['id']) ?>"><?= htmlspecialchars($filaClubes['nombre']) ?></option>
+                    <option value="<?= htmlspecialchars($filaCategorias['id']) ?>">
+                        <?= htmlspecialchars($filaCategorias['año']) ?>
+                    </option>
 
                 <?php endwhile; ?>
 
             </select>
-
         </div>
+
+        <div class="field">
+            <label for="club">Club:</label>
+            <select name="club" id="club" required>
+
+                <option value="">Seleccione un club</option>
+
+                <?php while ($filaClubes = mysqli_fetch_assoc($resultadoClubes)): ?>
+
+                    <option value="<?= htmlspecialchars($filaClubes['id']) ?>">
+                        <?= htmlspecialchars($filaClubes['nombre']) ?>
+                    </option>
+
+                <?php endwhile; ?>
+
+            </select>
+        </div>
+
     </div>
-  
-    <!-- Botón para enviar el formulario -->
+
     <input type="submit" value="Agregar Jugador">
 
 </form>

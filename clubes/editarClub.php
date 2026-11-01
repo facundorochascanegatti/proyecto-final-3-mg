@@ -9,6 +9,7 @@ $club = null;
 if (isset($_GET["id"])) {
     $id = (int) $_GET["id"];
     $resultado = mysqli_query($conn, "SELECT * FROM club WHERE id = $id");
+    //esto de $club es el resultado de lo de arriba, si no encuentra el club, $club queda en null
     $club = mysqli_fetch_assoc($resultado);
 }
 

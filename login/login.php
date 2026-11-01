@@ -23,7 +23,7 @@
             <div class="contenido">
                 <h1><b>¡BIENVENIDO!</b></h1>
                 <p>Inicia sesión para acceder a la administración de la liga de futbol.</p>
-            </div>   
+            </div>
 
             <div class="footer">
                 <p>© 2026 DATIX. Todos los derechos reservados.</p>

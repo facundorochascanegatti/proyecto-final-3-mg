@@ -1,7 +1,6 @@
 <?php
 // Revisa los datos de un partido antes de guardarlo. Lo usan agregarPartido.php y editarPartido.php.
 // Devuelve "" si está todo bien, o el mensaje del error.
-
 function validarPartido($local, $visitante, $fecha, $estado, $golesLocal, $golesVisitante) {
 
     if ($local == $visitante) {

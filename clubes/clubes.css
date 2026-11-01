@@ -113,6 +113,7 @@ form {
 form input[type="text"],
 form input[type="date"],
 form input[type="number"],
+form input[type="password"],
 form select{
     width:100%;
     box-sizing:border-box;

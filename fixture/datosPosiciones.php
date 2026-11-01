@@ -43,36 +43,36 @@ while ($p = mysqli_fetch_assoc($jugados)) {
         continue;
     }
 
-    $tabla[$local]["pj"]++;
-    $tabla[$visita]["pj"]++;
+    $tabla[$local]["pj"]++; //partidos jugados
+    $tabla[$visita]["pj"]++; //partidos jugados
 
-    $tabla[$local]["gf"] += $golesLocal;
-    $tabla[$local]["gc"] += $golesVisita;
-    $tabla[$visita]["gf"] += $golesVisita;
-    $tabla[$visita]["gc"] += $golesLocal;
+    $tabla[$local]["gf"] += $golesLocal; // goles a favor
+    $tabla[$local]["gc"] += $golesVisita; // goles en contra
+    $tabla[$visita]["gf"] += $golesVisita; // goles a favor
+    $tabla[$visita]["gc"] += $golesLocal; // goles en contra
 
-    if ($golesLocal > $golesVisita) {
-        $tabla[$local]["g"]++;
-        $tabla[$local]["pts"] += 3;
-        $tabla[$visita]["p"]++;
-    } elseif ($golesLocal < $golesVisita) {
-        $tabla[$visita]["g"]++;
-        $tabla[$visita]["pts"] += 3;
-        $tabla[$local]["p"]++;
-    } else {
-        $tabla[$local]["e"]++;
-        $tabla[$visita]["e"]++;
-        $tabla[$local]["pts"] += 1;
-        $tabla[$visita]["pts"] += 1;
+    if ($golesLocal > $golesVisita) { // el local ganó
+        $tabla[$local]["g"]++; // partidos ganados
+        $tabla[$local]["pts"] += 3; // puntos
+        $tabla[$visita]["p"]++; // partidos perdidos
+    } elseif ($golesLocal < $golesVisita) { // el visitante ganó
+        $tabla[$visita]["g"]++; // partidos ganados
+        $tabla[$visita]["pts"] += 3; // puntos
+        $tabla[$local]["p"]++; // partidos perdidos
+    } else { // empataron
+        $tabla[$local]["e"]++; // partidos empatados
+        $tabla[$visita]["e"]++; // partidos empatados
+        $tabla[$local]["pts"] += 1; // puntos
+        $tabla[$visita]["pts"] += 1; // puntos
     }
 }
 
 // 3. ordenamos: más puntos arriba, y si empatan, mejor diferencia de gol
-usort($tabla, function ($a, $b) {
-    if ($b["pts"] != $a["pts"]) {
-        return $b["pts"] - $a["pts"];
+usort($tabla, function ($a, $b) { // compara dos clubes
+    if ($b["pts"] != $a["pts"]) { // si los puntos son diferentes, ordena por puntos
+        return $b["pts"] - $a["pts"]; // ordena de mayor a menor
     }
-    return ($b["gf"] - $b["gc"]) - ($a["gf"] - $a["gc"]);
+    return ($b["gf"] - $b["gc"]) - ($a["gf"] - $a["gc"]); // ordena por diferencia de goles
 });
 
 // 4. consulta de las fechas (con los nombres de los clubes)

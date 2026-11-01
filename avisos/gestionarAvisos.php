@@ -8,6 +8,8 @@ $mensaje = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Si se apretó "Eliminar"
+    // el isset es para que no tire error si no se pasa el id del aviso por POST
+    // el (int) es para que no se pueda inyectar código malicioso por POST
     if (isset($_POST["eliminar"])) {
         $id = (int) $_POST["eliminar"];
 

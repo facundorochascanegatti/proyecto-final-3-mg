@@ -81,7 +81,7 @@ $resultado = mysqli_query($conn, $sql);
 
             <td>
                 <a href="eliminarPartido.php?id=<?php echo $fila['id']; ?>"
-                   onclick="return confirm('¿Seguro que querés eliminar este partido?');">
+                onclick="return confirm('¿Seguro que querés eliminar este partido?');">
                     Eliminar
                 </a>
             </td>

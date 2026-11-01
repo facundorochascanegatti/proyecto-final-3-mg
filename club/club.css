@@ -41,6 +41,7 @@ h1 {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
 
+
 /* =========================
    NAVBAR
 ========================= */
@@ -52,6 +53,8 @@ header {
 nav {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 30px;
     background: rgba(10, 15, 28, 0.75) !important;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -60,8 +63,6 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
-    gap: 30px;
-    justify-content: center;
 }
 
 nav a {
@@ -78,12 +79,10 @@ nav a {
 
 nav a:hover {
     color: #00d2ff;
-    background: rgba(255, 255, 255, 0.08);
 }
 
 nav a.salir:hover {
     color: #f87171;
-    background: rgba(170, 50, 50, 0.2);
 }
 
 .home {
@@ -92,6 +91,7 @@ nav a.salir:hover {
     text-decoration: none;
     margin-bottom: 5px;
 }
+
 
 /* =========================
    PANELES TRANSPARENTES
@@ -440,14 +440,12 @@ footer p {
     padding-top: 5px;
 }
 
+
 /* =========================
-   RESPONSIVE
+        RESPONSIVE
 ========================= */
 
 @media (max-width: 768px) {
-    header {
-        height: 60px;
-    }
 
     nav {
         flex-wrap: wrap;
@@ -457,13 +455,16 @@ footer p {
 
     nav a {
         padding: 8px 12px;
-        margin-top: 0;
+        margin: 0;
         font-size: 13px;
     }
 
     main {
-        padding: 80px 15px 20px;
-        min-height: auto;
+        padding: 100px 15px 20px;
+    }
+
+    .grilla {
+        grid-template-columns: 1fr;
     }
 
     .tarjeta {
@@ -474,15 +475,9 @@ footer p {
         font-size: 28px;
     }
 
-    .subtitulo {
-        font-size: 15px;
-        padding: 0 15px;
-    }
-
     footer {
         font-size: 16px;
         height: auto;
-        min-height: 35px;
         padding: 10px;
     }
 
@@ -490,13 +485,12 @@ footer p {
         min-width: 560px;
     }
 
-    .encabezado {
-        flex-wrap: wrap;
+    .tabla-scroll {
+        overflow-x: auto;
     }
 
-    .linea {
-        min-width: 150px;
-        max-width: 100%;
+    .encabezado {
+        flex-wrap: wrap;
     }
 
     .firmas {
@@ -504,56 +498,35 @@ footer p {
     }
 }
 
-/* =========================
-   IMPRESIÓN
-========================= */
+@media (max-width: 480px) {
 
-@media print {
-    body {
-        background: #ffffff;
-        color: #000000;
+    nav {
+        gap: 2px;
     }
 
-    header,
-    nav,
-    footer,
-    form.filtros,
-    .no-imprimir {
-        display: none !important;
+    nav a {
+        padding: 7px 9px;
+        font-size: 11px;
     }
 
     main {
-        padding: 0;
-        min-height: 0;
+        padding: 110px 10px 15px;
     }
 
-    .tarjeta,
-    .tabla-scroll {
-        background: none;
-        color: #000000;
-        box-shadow: none;
-        backdrop-filter: none;
-        border: none;
+    h1 {
+        font-size: 23px;
     }
 
-    h1,
-    .subtitulo,
-    .tarjeta h2 {
-        color: #000000;
-        text-shadow: none;
+    button, .boton, input[type="submit"] {
+        max-width: 100%;
     }
 
-    td {
-        background: #ffffff;
-        color: #000000;
+    .firmas {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .hoja {
-        padding: 0;
-        page-break-after: always;
-    }
-
-    .hoja:last-child {
-        page-break-after: auto;
+    .firmas div {
+        width: 80%;
     }
 }

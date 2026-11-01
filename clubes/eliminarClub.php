@@ -3,6 +3,7 @@
 require "../conexion.php";   // esto reemplaza al mysqli_connect
 
 // Verifica si se recibió un ID por la URL
+//el isset sirve para 
 if (isset($_GET["id"])) {
 
     // Guarda el ID recibido, (int) hace que solo pueda ser un número

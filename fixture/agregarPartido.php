@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $golesVisitanteSQL = (int) $golesVisitante;
     }
 
-    // el estado sale solo: sin fecha, programado, o jugado si ya se cargaron los goles
+    // el if este (linea 30 a la 36) sirve para
     if ($fecha == "") {
         $estado = "sin_fecha";
     } elseif ($golesLocal != "" || $golesVisitante != "") {
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
 
         <label for="fecha">Fecha (opcional):</label>
-        <input type="date" name="fecha" id="fecha">
+        <input type="date" name="fecha" id="fecha" min="2026-01-01" max="2026-12-31">
 
         <label for="golesLocal">Goles del club local (solo si ya se jugó):</label>
         <input type="number" name="goles_local" id="golesLocal" min="0">

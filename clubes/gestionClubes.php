@@ -2,11 +2,11 @@
 require_once __DIR__ . "/../auth.php";
 requerirAdmin();
 require "../conexion.php";
- 
+
 $sql = "SELECT * FROM club";
 $resultado = mysqli_query($conn, $sql);
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,45 +17,69 @@ $resultado = mysqli_query($conn, $sql);
     <title>Agregar clubes</title>
 </head>
 <body>
- 
+
     <header>
         <?php include '../nav/nav.php'; ?>
     </header>
-        <form action="guardarClub.php" method="post">
-            <h1>Agregar Club</h1>
-            <?php
-            // eliminarClub.php vuelve con ?enUso=1 si el club tenía jugadores o partidos
-            if (isset($_GET["enUso"])) {
-                echo "<p style='color: white;'>No se puede eliminar un club que tiene jugadores o partidos.</p>";
-            }
-            ?>
-            <label for="nombreClub">Nombre del Club:</label>
-            <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" value="">
-            <br><br>
-            <input type="submit" value="Agregar" class="Agregar">
-        </form>
- 
+
+    <form action="guardarClub.php" method="post">
+        <h1>Agregar Club</h1>
+
+        <?php if (isset($_GET["error"])): ?>
+            <?php if ($_GET["error"] == "usuario"): ?>
+                <p style="color: white;">Ese nombre de usuario ya existe.</p>
+            <?php else: ?>
+                <p style="color: white;">No se pudo crear el club. Revisá los datos.</p>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if (isset($_GET["enUso"])): ?>
+            <p style="color: white;">No se puede eliminar un club que tiene jugadores o partidos.</p>
+        <?php endif; ?>
+
+        <label for="nombreClub">Nombre del Club:</label>
+        <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" maxlength="100">
+
+        <br><br>
+
+        <br><br>
+
+        <label for="password">Contraseña del Club:</label>
+        <input type="password" id="password" name="password" minlength="6" required>
+
+        <br><br>
+
+        <input type="submit" value="Agregar" class="Agregar">
+    </form>
+
     <div class="Tabla">
-    <table class="tablaClubes">
-        <tr>
-            <th><i class="fa-solid fa-hashtag"></i></th>
-            <th><i class="fa-solid fa-futbol"></i> Club</th>
-            <th><i class="fa-solid fa-trash"></i></th>
-            <th><i class="fa-solid fa-pen-to-square"></i></th>
-        </tr>
- 
-        <?php
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
-            echo "<td>" . $fila["id"] . "</td>";
-            echo "<td>" . htmlspecialchars($fila["nombre"]) . "</td>";
-            echo "<td><a href='eliminarClub.php?id=" . $fila["id"] . "' onclick=\"return confirm('¿Eliminar este club?')\">Eliminar</a></td>";
-            echo "<td><a href='editarClub.php?id=" . $fila["id"] . "'>Editar Nombre</a></td>";
-            echo "</tr>";
-        }
-        ?>
- 
-    </table>
+        <table class="tablaClubes">
+            <tr>
+                <th><i class="fa-solid fa-hashtag"></i></th>
+                <th><i class="fa-solid fa-futbol"></i> Club</th>
+                <th><i class="fa-solid fa-trash"></i></th>
+                <th><i class="fa-solid fa-pen-to-square"></i></th>
+            </tr>
+
+            <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
+                <tr>
+                    <td><?= $fila["id"] ?></td>
+                    <td><?= htmlspecialchars($fila["nombre"]) ?></td>
+                    <td>
+                        <a href="eliminarClub.php?id=<?= $fila["id"] ?>"
+                            onclick="return confirm('¿Eliminar este club?')">
+                            Eliminar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="editarClub.php?id=<?= $fila["id"] ?>">
+                            Editar Nombre
+                        </a>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
     </div>
+
 </body>
 </html>

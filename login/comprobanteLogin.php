@@ -12,8 +12,13 @@ $password = $_POST["password"] ?? "";
 
 // Consulta con prepare: así no se puede meter SQL en el usuario
 $stmt = mysqli_prepare($conn, "SELECT usuario, `contraseña`, rol, id_club FROM usuarios WHERE usuario = ?");
+
+// lo de abajo vincula la variable $usuario con el parámetro ? de la consulta preparada.
+// La "s" indica que el dato es de tipo texto (string).
 mysqli_stmt_bind_param($stmt, "s", $usuario);
 mysqli_stmt_execute($stmt);
+
+// obtiene el resultado de la consulta y lo guarda en un array asociativo
 $fila = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 // password_verify compara la contraseña escrita con el hash guardado

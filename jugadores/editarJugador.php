@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // para los desplegables de categoría y club
-$categorias = mysqli_query($conn, "SELECT * FROM categorias");
+$categorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activo = 1 OR id = " . (int) $jugador["id_categoria"]);
 $clubes = mysqli_query($conn, "SELECT * FROM club");
 ?>
 <!DOCTYPE html>

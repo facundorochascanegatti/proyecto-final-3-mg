@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2026 a las 02:27:40
+-- Tiempo de generación: 03-11-2026 a las 21:33:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -85,23 +85,23 @@ CREATE TABLE `carnets` (
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `año` varchar(45) NOT NULL,
-  `cantidad_jugadores` int(11) NOT NULL DEFAULT 0
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id`, `año`, `cantidad_jugadores`) VALUES
-(12, '2013', 0),
-(13, '2014', 0),
-(14, '2015', 0),
-(15, '2016', 0),
-(16, '2017', 0),
-(18, '2018', 0),
-(19, '2019', 0),
-(20, '2020', 0),
-(21, 'Femenino', 0);
+INSERT INTO `categorias` (`id`, `año`, `activo`) VALUES
+(12, '2013', 1),
+(13, '2014', 1),
+(14, '2015', 1),
+(15, '2016', 1),
+(16, '2017', 1),
+(18, '2018', 1),
+(19, '2019', 1),
+(20, '2020', 1),
+(21, 'Femenino', 1);
 
 -- --------------------------------------------------------
 
@@ -113,31 +113,30 @@ CREATE TABLE `club` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1,
-  `password` varchar(255) NOT NULL
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `club`
 --
 
-INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`, `password`) VALUES
-(18, 'Montevideo City Torque', 'club_18.png', 1, ''),
-(19, 'Nacional', 'club_19.png', 1, ''),
-(20, 'Cerro Largo', 'club_20.png', 1, ''),
-(21, 'Peñarol', 'club_21.png', 1, ''),
-(22, 'Deportivo Maldonado', 'club_22.png', 1, ''),
-(23, 'Racing', 'club_23.png', 1, ''),
-(24, 'Liverpool', 'club_24.png', 1, ''),
-(25, 'Wanderers', 'club_25.png', 1, ''),
-(26, 'Albion', 'club_26.png', 1, ''),
-(27, 'Juventud', 'club_27.png', 1, ''),
-(28, 'Central Español', 'club_28.png', 1, ''),
-(29, 'Boston River', 'club_29.png', 1, ''),
-(30, 'Cerro', 'club_30.png', 1, ''),
-(31, 'Danubio', 'club_31.png', 1, ''),
-(32, 'Progreso', 'club_32.png', 1, ''),
-(40, 'Defensor Sporting', 'club_40.png', 1, '');
+INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`) VALUES
+(18, 'Montevideo City Torque', 'club_18.png', 1),
+(19, 'Nacional', 'club_19.png', 1),
+(20, 'Cerro Largo', 'club_20.png', 1),
+(21, 'Peñarol', 'club_21.png', 1),
+(22, 'Deportivo Maldonado', 'club_22.png', 1),
+(23, 'Racing', 'club_23.png', 1),
+(24, 'Liverpool', 'club_24.png', 1),
+(25, 'Wanderers', 'club_25.png', 1),
+(26, 'Albion', 'club_26.png', 1),
+(27, 'Juventud', 'club_27.png', 1),
+(28, 'Central Español', 'club_28.png', 1),
+(29, 'Boston River', 'club_29.png', 1),
+(30, 'Cerro', 'club_30.png', 1),
+(31, 'Danubio', 'club_31.png', 1),
+(32, 'Progreso', 'club_32.png', 1),
+(40, 'Defensor Sporting', 'club_40.png', 1);
 
 -- --------------------------------------------------------
 
@@ -161,19 +160,6 @@ INSERT INTO `competicion` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `goles`
---
-
-CREATE TABLE `goles` (
-  `id` int(11) NOT NULL,
-  `id_partido` int(11) NOT NULL,
-  `id_jugador` int(11) NOT NULL,
-  `minuto` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `jugadores`
 --
 
@@ -183,8 +169,8 @@ CREATE TABLE `jugadores` (
   `apellido` varchar(45) DEFAULT NULL,
   `cedula` varchar(45) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `id_club` int(11) DEFAULT NULL,
-  `id_categoria` varchar(45) DEFAULT NULL,
+  `id_club` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
   `masa` decimal(5,2) DEFAULT NULL,
   `altura` decimal(4,2) DEFAULT NULL,
   `peso` decimal(10,2) DEFAULT NULL,
@@ -196,67 +182,67 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`id`, `nombre`, `apellido`, `cedula`, `fecha_nacimiento`, `id_club`, `id_categoria`, `masa`, `altura`, `peso`, `velocidad`) VALUES
-(348, 'Mateo', 'Silva', '12345672', '2013-03-15', 18, '12', 48.50, 1.58, 475.79, 22.50),
-(349, 'Thiago', 'Pereira', '23456783', '2014-07-21', 18, '13', 45.00, 1.54, 441.45, 21.00),
-(350, 'Lucia', 'Fernandez', '34567894', '2013-05-10', 18, '21', 43.00, 1.55, 421.83, 20.00),
-(351, 'Martina', 'Rodriguez', '45678911', '2015-09-12', 18, '21', 40.00, 1.48, 392.40, 19.00),
-(352, 'Santiago', 'Martinez', '56789129', '2015-01-18', 19, '14', 40.00, 1.47, 392.40, 19.50),
-(353, 'Joaquin', 'Suarez', '67891234', '2016-06-12', 19, '15', 38.00, 1.43, 372.78, 19.00),
-(354, 'Valentina', 'Mendez', '78912348', '2014-04-22', 19, '21', 44.00, 1.53, 431.64, 20.00),
-(355, 'Camila', 'Acosta', '89123451', '2016-11-08', 19, '21', 37.00, 1.42, 362.97, 18.00),
-(356, 'Felipe', 'Gonzalez', '91234563', '2017-03-11', 20, '16', 32.00, 1.32, 313.92, 16.50),
-(357, 'Nicolas', 'Mendez', '13579246', '2018-08-19', 20, '18', 30.00, 1.28, 294.30, 15.00),
-(358, 'Sofia', 'Castro', '24681351', '2017-06-17', 20, '21', 34.00, 1.36, 333.54, 17.00),
-(359, 'Agustina', 'Lopez', '35792462', '2018-02-14', 20, '21', 30.00, 1.29, 294.30, 15.00),
-(360, 'Tomas', 'Olivera', '46813576', '2019-02-14', 21, '19', 27.00, 1.23, 264.87, 14.00),
-(361, 'Franco', 'Acosta', '57924687', '2020-10-03', 21, '20', 24.00, 1.18, 235.44, 12.50),
-(362, 'Emma', 'Ramos', '68135790', '2019-05-16', 21, '21', 26.00, 1.21, 255.06, 13.50),
-(363, 'Mia', 'Vazquez', '79246817', '2020-12-01', 21, '21', 23.00, 1.16, 225.63, 12.00),
-(364, 'Dylan', 'Morales', '81357929', '2013-04-09', 22, '12', 49.00, 1.59, 480.69, 22.00),
-(365, 'Iker', 'Cabrera', '12468021', '2014-09-24', 22, '13', 44.00, 1.52, 431.64, 20.50),
-(366, 'Isabella', 'Pereira', '23579132', '2013-07-07', 22, '21', 42.00, 1.53, 412.02, 20.00),
-(367, 'Renata', 'Silva', '34680243', '2015-03-25', 22, '21', 39.00, 1.46, 382.59, 18.50),
-(368, 'Bruno', 'Fernandez', '45791354', '2015-06-20', 23, '14', 41.00, 1.48, 402.21, 19.00),
-(369, 'Lautaro', 'Ramos', '56802465', '2016-08-12', 23, '15', 37.00, 1.42, 362.97, 18.00),
-(370, 'Julieta', 'Martinez', '20135791', '2014-01-19', 23, '21', 43.00, 1.52, 421.83, 20.00),
-(371, 'Florencia', 'Suarez', '31246802', '2016-10-29', 23, '21', 36.00, 1.40, 353.16, 17.50),
-(372, 'Martin', 'Castro', '42357913', '2017-05-11', 24, '16', 33.00, 1.34, 323.73, 16.50),
-(373, 'Facundo', 'Mendez', '53468024', '2018-12-19', 24, '18', 29.00, 1.27, 284.49, 15.00),
-(374, 'Antonella', 'Gonzalez', '64579135', '2017-08-08', 24, '21', 34.00, 1.35, 333.54, 16.50),
-(375, 'Pilar', 'Olivera', '75680246', '2018-04-16', 24, '21', 29.00, 1.26, 284.49, 14.50),
-(376, 'Benicio', 'Lopez', '86791357', '2019-04-12', 25, '19', 26.00, 1.22, 255.06, 13.50),
-(377, 'Gael', 'Acosta', '97802468', '2020-07-25', 25, '20', 23.00, 1.17, 225.63, 12.00),
-(378, 'Olivia', 'Morales', '18913579', '2019-09-14', 25, '21', 25.00, 1.20, 245.25, 13.00),
-(379, 'Alma', 'Cabrera', '29024680', '2020-02-03', 25, '21', 22.00, 1.14, 215.82, 11.50),
-(380, 'Matias', 'Vazquez', '30135791', '2013-11-02', 26, '12', 51.00, 1.62, 500.31, 23.00),
-(381, 'Ignacio', 'Ramos', '41246802', '2014-03-17', 26, '13', 46.00, 1.56, 451.26, 21.50),
-(382, 'Josefina', 'Silva', '52357913', '2013-08-22', 26, '21', 44.00, 1.56, 431.64, 20.50),
-(383, 'Clara', 'Pereira', '63468024', '2015-12-09', 26, '21', 41.00, 1.49, 402.21, 19.00),
-(384, 'Emiliano', 'Suarez', '74579135', '2015-04-08', 27, '14', 39.00, 1.46, 382.59, 19.00),
-(385, 'Alejo', 'Martinez', '85680246', '2016-09-14', 27, '15', 36.00, 1.41, 353.16, 18.00),
-(386, 'Bianca', 'Fernandez', '96791357', '2014-06-15', 27, '21', 42.00, 1.51, 412.02, 19.50),
-(387, 'Catalina', 'Castro', '17802468', '2016-02-27', 27, '21', 37.00, 1.43, 362.97, 18.00),
-(388, 'Valentino', 'Gonzalez', '28913579', '2017-10-05', 28, '16', 34.00, 1.35, 333.54, 17.00),
-(389, 'Bautista', 'Olivera', '39024680', '2018-05-23', 28, '18', 30.00, 1.29, 294.30, 15.50),
-(390, 'Maite', 'Lopez', '40135791', '2017-01-13', 28, '21', 33.00, 1.33, 323.73, 16.00),
-(391, 'Lola', 'Ramos', '51246802', '2018-09-18', 28, '21', 28.00, 1.25, 274.68, 14.50),
-(392, 'Ciro', 'Pereira', '62357913', '2019-08-17', 29, '19', 27.00, 1.23, 264.87, 14.00),
-(393, 'Juan', 'Silva', '73468024', '2020-03-21', 29, '20', 24.00, 1.18, 235.44, 12.50),
-(394, 'Delfina', 'Acosta', '84579135', '2019-11-02', 29, '21', 26.00, 1.21, 255.06, 13.50),
-(395, 'Ambar', 'Morales', '95680246', '2020-06-12', 29, '21', 23.00, 1.16, 225.63, 12.00),
-(396, 'Pedro', 'Cabrera', '16791357', '2013-01-28', 30, '12', 47.00, 1.57, 461.07, 22.00),
-(397, 'Aaron', 'Mendez', '27802468', '2014-12-11', 30, '13', 45.00, 1.55, 441.45, 21.00),
-(398, 'Miranda', 'Vazquez', '38913579', '2013-10-06', 30, '21', 43.00, 1.54, 421.83, 20.00),
-(399, 'Victoria', 'Gonzalez', '49024680', '2015-07-29', 30, '21', 40.00, 1.47, 392.40, 19.00),
-(400, 'Salvador', 'Ramos', '50135791', '2015-10-14', 31, '14', 42.00, 1.49, 412.02, 19.50),
-(401, 'Maximo', 'Lopez', '61246802', '2016-03-09', 31, '15', 37.00, 1.42, 362.97, 18.00),
-(402, 'Ana', 'Olivera', '72357913', '2014-08-21', 31, '21', 44.00, 1.54, 431.64, 20.00),
-(403, 'Belen', 'Suarez', '83468024', '2016-05-05', 31, '21', 36.00, 1.41, 353.16, 17.50),
-(404, 'Lorenzo', 'Castro', '94579135', '2017-09-19', 32, '16', 33.00, 1.34, 323.73, 16.50),
-(405, 'Simón', 'Fernandez', '15680246', '2018-01-07', 32, '18', 31.00, 1.30, 303.21, 15.50),
-(406, 'Zoe', 'Martinez', '26791357', '2017-04-24', 32, '21', 34.00, 1.36, 333.54, 16.50),
-(407, 'Aitana', 'Pereira', '37802468', '2018-11-30', 32, '21', 29.00, 1.27, 284.49, 15.00),
-(409, 'Lionel', 'Messias', '59911010', '2016-10-20', 24, '15', 60.00, 1.70, 588.00, 5.00);
+(348, 'Mateo', 'Silva', '12345672', '2013-03-15', 18, 12, 48.50, 1.58, 475.79, 22.50),
+(349, 'Thiago', 'Pereira', '23456783', '2014-07-21', 18, 13, 45.00, 1.54, 441.45, 21.00),
+(350, 'Lucia', 'Fernandez', '34567894', '2013-05-10', 18, 21, 43.00, 1.55, 421.83, 20.00),
+(351, 'Martina', 'Rodriguez', '45678911', '2015-09-12', 18, 21, 40.00, 1.48, 392.40, 19.00),
+(352, 'Santiago', 'Martinez', '56789129', '2015-01-18', 19, 14, 40.00, 1.47, 392.40, 19.50),
+(353, 'Joaquin', 'Suarez', '67891234', '2016-06-12', 19, 15, 38.00, 1.43, 372.78, 19.00),
+(354, 'Valentina', 'Mendez', '78912348', '2014-04-22', 19, 21, 44.00, 1.53, 431.64, 20.00),
+(355, 'Camila', 'Acosta', '89123451', '2016-11-08', 19, 21, 37.00, 1.42, 362.97, 18.00),
+(356, 'Felipe', 'Gonzalez', '91234563', '2017-03-11', 20, 16, 32.00, 1.32, 313.92, 16.50),
+(357, 'Nicolas', 'Mendez', '13579246', '2018-08-19', 20, 18, 30.00, 1.28, 294.30, 15.00),
+(358, 'Sofia', 'Castro', '24681351', '2017-06-17', 20, 21, 34.00, 1.36, 333.54, 17.00),
+(359, 'Agustina', 'Lopez', '35792462', '2018-02-14', 20, 21, 30.00, 1.29, 294.30, 15.00),
+(360, 'Tomas', 'Olivera', '46813576', '2019-02-14', 21, 19, 27.00, 1.23, 264.87, 14.00),
+(361, 'Franco', 'Acosta', '57924687', '2020-10-03', 21, 20, 24.00, 1.18, 235.44, 12.50),
+(362, 'Emma', 'Ramos', '68135790', '2019-05-16', 21, 21, 26.00, 1.21, 255.06, 13.50),
+(363, 'Mia', 'Vazquez', '79246817', '2020-12-01', 21, 21, 23.00, 1.16, 225.63, 12.00),
+(364, 'Dylan', 'Morales', '81357929', '2013-04-09', 22, 12, 49.00, 1.59, 480.69, 22.00),
+(365, 'Iker', 'Cabrera', '12468021', '2014-09-24', 22, 13, 44.00, 1.52, 431.64, 20.50),
+(366, 'Isabella', 'Pereira', '23579132', '2013-07-07', 22, 21, 42.00, 1.53, 412.02, 20.00),
+(367, 'Renata', 'Silva', '34680243', '2015-03-25', 22, 21, 39.00, 1.46, 382.59, 18.50),
+(368, 'Bruno', 'Fernandez', '45791354', '2015-06-20', 23, 14, 41.00, 1.48, 402.21, 19.00),
+(369, 'Lautaro', 'Ramos', '56802465', '2016-08-12', 23, 15, 37.00, 1.42, 362.97, 18.00),
+(370, 'Julieta', 'Martinez', '20135791', '2014-01-19', 23, 21, 43.00, 1.52, 421.83, 20.00),
+(371, 'Florencia', 'Suarez', '31246802', '2016-10-29', 23, 21, 36.00, 1.40, 353.16, 17.50),
+(372, 'Martin', 'Castro', '42357913', '2017-05-11', 24, 16, 33.00, 1.34, 323.73, 16.50),
+(373, 'Facundo', 'Mendez', '53468024', '2018-12-19', 24, 18, 29.00, 1.27, 284.49, 15.00),
+(374, 'Antonella', 'Gonzalez', '64579135', '2017-08-08', 24, 21, 34.00, 1.35, 333.54, 16.50),
+(375, 'Pilar', 'Olivera', '75680246', '2018-04-16', 24, 21, 29.00, 1.26, 284.49, 14.50),
+(376, 'Benicio', 'Lopez', '86791357', '2019-04-12', 25, 19, 26.00, 1.22, 255.06, 13.50),
+(377, 'Gael', 'Acosta', '97802468', '2020-07-25', 25, 20, 23.00, 1.17, 225.63, 12.00),
+(378, 'Olivia', 'Morales', '18913579', '2019-09-14', 25, 21, 25.00, 1.20, 245.25, 13.00),
+(379, 'Alma', 'Cabrera', '29024680', '2020-02-03', 25, 21, 22.00, 1.14, 215.82, 11.50),
+(380, 'Matias', 'Vazquez', '30135791', '2013-11-02', 26, 12, 51.00, 1.62, 500.31, 23.00),
+(381, 'Ignacio', 'Ramos', '41246802', '2014-03-17', 26, 13, 46.00, 1.56, 451.26, 21.50),
+(382, 'Josefina', 'Silva', '52357913', '2013-08-22', 26, 21, 44.00, 1.56, 431.64, 20.50),
+(383, 'Clara', 'Pereira', '63468024', '2015-12-09', 26, 21, 41.00, 1.49, 402.21, 19.00),
+(384, 'Emiliano', 'Suarez', '74579135', '2015-04-08', 27, 14, 39.00, 1.46, 382.59, 19.00),
+(385, 'Alejo', 'Martinez', '85680246', '2016-09-14', 27, 15, 36.00, 1.41, 353.16, 18.00),
+(386, 'Bianca', 'Fernandez', '96791357', '2014-06-15', 27, 21, 42.00, 1.51, 412.02, 19.50),
+(387, 'Catalina', 'Castro', '17802468', '2016-02-27', 27, 21, 37.00, 1.43, 362.97, 18.00),
+(388, 'Valentino', 'Gonzalez', '28913579', '2017-10-05', 28, 16, 34.00, 1.35, 333.54, 17.00),
+(389, 'Bautista', 'Olivera', '39024680', '2018-05-23', 28, 18, 30.00, 1.29, 294.30, 15.50),
+(390, 'Maite', 'Lopez', '40135791', '2017-01-13', 28, 21, 33.00, 1.33, 323.73, 16.00),
+(391, 'Lola', 'Ramos', '51246802', '2018-09-18', 28, 21, 28.00, 1.25, 274.68, 14.50),
+(392, 'Ciro', 'Pereira', '62357913', '2019-08-17', 29, 19, 27.00, 1.23, 264.87, 14.00),
+(393, 'Juan', 'Silva', '73468024', '2020-03-21', 29, 20, 24.00, 1.18, 235.44, 12.50),
+(394, 'Delfina', 'Acosta', '84579135', '2019-11-02', 29, 21, 26.00, 1.21, 255.06, 13.50),
+(395, 'Ambar', 'Morales', '95680246', '2020-06-12', 29, 21, 23.00, 1.16, 225.63, 12.00),
+(397, 'Aaron', 'Mendez', '27802468', '2014-12-11', 30, 13, 45.00, 1.55, 441.45, 21.00),
+(398, 'Miranda', 'Vazquez', '38913579', '2013-10-06', 30, 21, 43.00, 1.54, 421.83, 20.00),
+(399, 'Victoria', 'Gonzalez', '49024680', '2015-07-29', 30, 21, 40.00, 1.47, 392.40, 19.00),
+(400, 'Salvador', 'Ramos', '50135791', '2015-10-14', 31, 14, 42.00, 1.49, 412.02, 19.50),
+(401, 'Maximo', 'Lopez', '61246802', '2016-03-09', 31, 15, 37.00, 1.42, 362.97, 18.00),
+(402, 'Ana', 'Olivera', '72357913', '2014-08-21', 31, 21, 44.00, 1.54, 431.64, 20.00),
+(403, 'Belen', 'Suarez', '83468024', '2016-05-05', 31, 21, 36.00, 1.41, 353.16, 17.50),
+(404, 'Lorenzo', 'Castro', '94579135', '2017-09-19', 32, 16, 33.00, 1.34, 323.73, 16.50),
+(405, 'Simón', 'Fernandez', '15680246', '2018-01-07', 32, 18, 31.00, 1.30, 303.21, 15.50),
+(406, 'Zoe', 'Martinez', '26791357', '2017-04-24', 32, 21, 34.00, 1.36, 333.54, 16.50),
+(407, 'Aitana', 'Pereira', '37802468', '2018-11-30', 32, 21, 29.00, 1.27, 284.49, 15.00),
+(409, 'Lionel', 'Messias', '59911010', '2016-10-20', 24, 15, 60.00, 1.70, 588.00, 5.00),
+(410, 'Pedro', 'Cabrera', '52457274', '2013-02-10', 30, 12, 60.00, 1.70, 588.00, 6.00);
 
 -- --------------------------------------------------------
 
@@ -312,8 +298,8 @@ CREATE TABLE `sanciones` (
 --
 
 INSERT INTO `sanciones` (`id`, `id_jugador`, `tipo`, `fecha`, `motivo`) VALUES
-(9, 396, 'Amarilla', '2026-07-24', 'homicidio'),
-(10, 394, 'Roja', '2026-10-29', 'Diarrea Explosiva Masiva en Plan OMG');
+(10, 394, 'Roja', '2026-10-29', 'Diarrea Explosiva Masiva en Plan OMG'),
+(11, 361, 'Roja', '2026-11-02', 'Tirar un garrafon');
 
 -- --------------------------------------------------------
 
@@ -393,25 +379,23 @@ ALTER TABLE `competicion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `goles`
---
-ALTER TABLE `goles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_partido` (`id_partido`),
-  ADD KEY `id_jugador` (`id_jugador`);
-
---
 -- Indices de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cedula` (`cedula`);
+  ADD UNIQUE KEY `cedula` (`cedula`),
+  ADD KEY `fk_jugadores_club` (`id_club`),
+  ADD KEY `fk_jugadores_categoria` (`id_categoria`);
 
 --
 -- Indices de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_partidos_local` (`id_club_local`),
+  ADD KEY `fk_partidos_visitante` (`id_club_visitante`),
+  ADD KEY `fk_partidos_categoria` (`id_categoria`),
+  ADD KEY `fk_partidos_competicion` (`id_competicion`);
 
 --
 -- Indices de la tabla `sanciones`
@@ -468,16 +452,10 @@ ALTER TABLE `competicion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `goles`
---
-ALTER TABLE `goles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=410;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
 
 --
 -- AUTO_INCREMENT de la tabla `partidos`
@@ -489,7 +467,7 @@ ALTER TABLE `partidos`
 -- AUTO_INCREMENT de la tabla `sanciones`
 --
 ALTER TABLE `sanciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -502,11 +480,20 @@ ALTER TABLE `carnets`
   ADD CONSTRAINT `carnets_ibfk_1` FOREIGN KEY (`id_jugador`) REFERENCES `jugadores` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `goles`
+-- Filtros para la tabla `jugadores`
 --
-ALTER TABLE `goles`
-  ADD CONSTRAINT `goles_ibfk_1` FOREIGN KEY (`id_partido`) REFERENCES `partidos` (`id`),
-  ADD CONSTRAINT `goles_ibfk_2` FOREIGN KEY (`id_jugador`) REFERENCES `jugadores` (`id`);
+ALTER TABLE `jugadores`
+  ADD CONSTRAINT `fk_jugadores_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `fk_jugadores_club` FOREIGN KEY (`id_club`) REFERENCES `club` (`id`);
+
+--
+-- Filtros para la tabla `partidos`
+--
+ALTER TABLE `partidos`
+  ADD CONSTRAINT `fk_partidos_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `fk_partidos_competicion` FOREIGN KEY (`id_competicion`) REFERENCES `competicion` (`id`),
+  ADD CONSTRAINT `fk_partidos_local` FOREIGN KEY (`id_club_local`) REFERENCES `club` (`id`),
+  ADD CONSTRAINT `fk_partidos_visitante` FOREIGN KEY (`id_club_visitante`) REFERENCES `club` (`id`);
 
 --
 -- Filtros para la tabla `sanciones`

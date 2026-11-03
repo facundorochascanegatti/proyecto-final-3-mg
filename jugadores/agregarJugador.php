@@ -1,9 +1,10 @@
 <?php
 
+//esto sirve para conectar la base de datos
 require_once __DIR__ . "/../conexion.php";
 
 // Consulta para obtener todas las categorías
-$resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
+$resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activo = 1");
 
 // Consulta para obtener todos los clubes
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club");

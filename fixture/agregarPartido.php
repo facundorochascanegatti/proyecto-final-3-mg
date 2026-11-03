@@ -5,7 +5,7 @@ require_once __DIR__ . "/../conexion.php";
 require_once __DIR__ . "/validarPartido.php";
 
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club WHERE activo = 1");
-$resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias");
+$resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activo = 1");
 $resultadoCompeticiones = mysqli_query($conn, "SELECT * FROM competicion");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -42,13 +42,15 @@ function validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $i
     }
 
     // la categoría tiene que existir y ser la de su año (o Femenino)
-    $categoria = mysqli_fetch_assoc(mysqli_query($conn, "SELECT año FROM categorias WHERE id = $idCategoria"));
-    if (!$categoria) {
-        return "Seleccione una categoría.";
-    }
-    if ($categoria["año"] != "Femenino" && $categoria["año"] != $añoNacimiento) {
-        return "El jugador nació en $añoNacimiento, tiene que ir en la categoría $añoNacimiento o en Femenino.";
-    }
+    $categoria = mysqli_fetch_assoc(mysqli_query($conn, "SELECT año, activo FROM categorias WHERE id = $idCategoria"));
+if (!$categoria) {
+    return "Seleccione una categoría.";
+}
+
+// una categoría inactiva no se puede usar para jugadores nuevos
+if ($categoria["activo"] == 0 && $idJugador == 0) {
+    return "Esa categoría está inactiva.";
+}
 
     // el club tiene que existir
     $club = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM club WHERE id = $idClub"));

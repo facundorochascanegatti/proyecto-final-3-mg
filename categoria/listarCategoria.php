@@ -3,7 +3,7 @@ require_once __DIR__ . "/../auth.php";
 requerirAdmin();
 require_once __DIR__ . "/../conexion.php";
 
-$sql = "SELECT año, id FROM categorias ORDER BY año";
+$sql = "SELECT año, id, activo FROM categorias ORDER BY año";
 $resultado = mysqli_query($conn, $sql);
 ?>
 
@@ -11,23 +11,31 @@ $resultado = mysqli_query($conn, $sql);
 <table class="tablaClubes" border="1">
     <tr>
         <th>Año</th>
+        <th>Estado</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+        <th>Activar / Desactivar</th>
     </tr>
 
     <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
     <tr>
-        <?php
-        echo "<td>" . htmlspecialchars($fila["año"]) . "</td>";
-        echo "<td><a href='editarCategoria.php?id=" . (int) $fila["id"] . "'>Editar</a></td>";
-        echo "<td><a href='eliminarCategoria.php?id=" . (int) $fila["id"] . "' onclick=\"return confirm('¿Eliminar esta categoría?')\">Eliminar</a></td>";
-        ?>
+        <td><?= htmlspecialchars($fila["año"]) ?></td>
+        <td><?= $fila["activo"] ? "Activa" : "Inactiva" ?></td>
+        <td><a href="editarCategoria.php?id=<?= (int) $fila["id"] ?>">Editar</a></td>
+        <td>
+            <!-- es un formulario POST: cambiar el estado no se puede hacer entrando a un enlace -->
+            <form action="gestionarCategoria.php" method="post"
+                  onsubmit="return confirm('¿Cambiar el estado de esta categoría?')">
+                <input type="hidden" name="id" value="<?= (int) $fila["id"] ?>">
+                <input type="hidden" name="cambiar_estado" value="1">
+                <input type="submit" value="<?= $fila["activo"] ? "Desactivar" : "Activar" ?>">
+            </form>
+        </td>
     </tr>
     <?php endwhile; ?>
 
     <?php if (mysqli_num_rows($resultado) == 0): ?>
     <tr>
-        <td colspan="3">No hay categorías registradas.</td>
+        <td colspan="4">No hay categorías registradas.</td>
     </tr>
     <?php endif; ?>
 </table>

@@ -5,24 +5,43 @@ require "../conexion.php";
 
 $mensaje = "";
 
-// eliminarCategoria.php vuelve con ?enUso=1 si la categoría tenía jugadores o partidos
-if (isset($_GET["enUso"])) {
-    $mensaje = "No se puede eliminar una categoría que tiene jugadores o partidos.";
+// botón Activar / Desactivar de la lista (viene de listarCategoria.php)
+if (isset($_POST["cambiar_estado"])) {
+    $id = (int) $_POST["id"];
+
+    // 1 - activo da la vuelta el valor: si estaba en 1 pasa a 0, y si estaba en 0 pasa a 1
+    $stmt = mysqli_prepare($conn, "UPDATE categorias SET activo = 1 - activo WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    // vuelve a cargar la página para que no se repita al actualizar
+    header("Location: gestionarCategoria.php");
+    exit();
 }
 
 if (isset($_POST["año"])) {
-    $año = mysqli_real_escape_string($conn, $_POST["año"]);
+    $año = trim($_POST["año"]);
 
-    $buscar = "SELECT * FROM categorias WHERE año = '$año'";
-    $resultado = mysqli_query($conn, $buscar);
-
-    if (mysqli_num_rows($resultado) > 0) {
-        $mensaje = "Esa categoria ya esta registrada, intente con otra.";
+    // tiene que ser un año de 4 números (por ejemplo 2015) o la palabra Femenino
+    if (!preg_match('/^\d{4}$/', $año) && $año != "Femenino") {
+        $mensaje = "Escriba un año de 4 números (por ejemplo 2015) o Femenino.";
     } else {
-        $sql = "INSERT INTO categorias (año) VALUES ('$año')";
-        mysqli_query($conn, $sql);
+        // consulta preparada: el ? se reemplaza por el dato de forma segura
+        $stmt = mysqli_prepare($conn, "SELECT id FROM categorias WHERE año = ?");
+        mysqli_stmt_bind_param($stmt, "s", $año);
+        mysqli_stmt_execute($stmt);
+        $resultado = mysqli_stmt_get_result($stmt);
 
-        $mensaje = "Categoría guardada correctamente";
+        if (mysqli_num_rows($resultado) > 0) {
+            $mensaje = "Esa categoria ya esta registrada, intente con otra.";
+        } else {
+            // la categoría nueva queda activa porque el campo activo vale 1 por defecto
+            $stmt = mysqli_prepare($conn, "INSERT INTO categorias (año) VALUES (?)");
+            mysqli_stmt_bind_param($stmt, "s", $año);
+            mysqli_stmt_execute($stmt);
+
+            $mensaje = "Categoría guardada correctamente";
+        }
     }
 }
 ?>

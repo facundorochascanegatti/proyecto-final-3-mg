@@ -196,6 +196,38 @@ form input[type="submit"]:hover{
     color:#185796;
 }
 
+
+/* Botones de activar y desactivar */
+.tablaClubes form {
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    background: transparent;
+}
+
+.tablaClubes input[type="submit"] {
+    width: auto;
+    padding: 8px 12px;
+    margin: 0;
+    border: none;
+    border-radius: 6px;
+    background: #2F6F62;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tablaClubes input[type="submit"]:hover {
+    background: #245448;
+}
+
+
 /* =========================
    RESPONSIVE
 ========================= */

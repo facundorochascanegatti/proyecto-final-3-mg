@@ -19,6 +19,7 @@ mysqli_stmt_bind_param($stmt, "s", $usuario);
 mysqli_stmt_execute($stmt);
 
 // obtiene el resultado de la consulta y lo guarda en un array asociativo
+// stmt es statment, que es un objeto que representa la consulta preparada para poder obtener el resultado de la consulta, se usa mysqli_stmt_get_result
 $fila = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 // password_verify compara la contraseña escrita con el hash guardado

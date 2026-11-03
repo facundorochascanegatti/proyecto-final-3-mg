@@ -59,3 +59,29 @@ nav a:hover{
 
     margin-bottom: 5px; /* Lo mueve hacia arriba */
 }
+
+/* Tablets */
+@media (max-width: 768px) {
+    nav {
+        gap: 10px;
+        padding: 5px;
+    }
+
+    nav a {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+    nav {
+        gap: 5px;
+        padding: 5px;
+    }
+
+    nav a {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+}

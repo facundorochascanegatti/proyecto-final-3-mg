@@ -56,6 +56,7 @@ $resultado = mysqli_query($conn, $sql);
         <table class="tablaClubes">
             <tr>
                 <th><i class="fa-solid fa-hashtag"></i></th>
+                <th><i class="fa-solid fa-image"></i></th>
                 <th><i class="fa-solid fa-futbol"></i> Club</th>
                 <th><i class="fa-solid fa-trash"></i></th>
                 <th><i class="fa-solid fa-pen-to-square"></i></th>
@@ -64,6 +65,13 @@ $resultado = mysqli_query($conn, $sql);
             <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
                 <tr>
                     <td><?= $fila["id"] ?></td>
+                    <td>
+                        <?php if ($fila["logo"]): ?>
+                            <img src="logos/<?= htmlspecialchars($fila["logo"]) ?>" alt="logo" width="40">
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                    </td>
                     <td><?= htmlspecialchars($fila["nombre"]) ?></td>
                     <td>
                         <a href="eliminarClub.php?id=<?= $fila["id"] ?>"
@@ -73,7 +81,7 @@ $resultado = mysqli_query($conn, $sql);
                     </td>
                     <td>
                         <a href="editarClub.php?id=<?= $fila["id"] ?>">
-                            Editar Nombre
+                            Editar
                         </a>
                     </td>
                 </tr>

@@ -1,317 +1,251 @@
-body{
-
-    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-    
-    margin:0;
-
-    background-image: url("../imagenes/BG.png");
-
-    background-size:cover;
-    
-    background-position:center;
-
-    background-attachment:fixed;
+* {
+    box-sizing: border-box;
 }
 
-main{ /* Ordenar el contenido en forma de Grid */
+body {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    margin: 0;
+    background: url("../imagenes/BG.png") center / cover fixed;
+}
 
-    padding-left: 60px;
-
-    padding-right: 60px;
-    
-    padding-top: 90px;
-
-    padding-bottom: 30px;
-    
-    min-height:calc(100vh - 50px); /* Asigana el tamaño para que ocupe toda la pantalla menos el tamaño del NavBar */
+main {
+    padding: 90px 60px 30px;
+    min-height: calc(100vh - 50px);
 }
 
 .parent {
-
-  display: flex;
-
-  gap: 16px;
-  
+    display: flex;
+    gap: 16px;
 }
 
-.contenido{
-
+.contenido, .tabla {
     width: 50%;
-
-    background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */
-
-    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
-
-    border-radius:15px; /* Agrega bordes redondeados */
-
-    padding:20px; /* Agrega un padding para darle espacio interno */
-
-    overflow: hidden; /* Evita que el contenido se desborde del contenedor */
-
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
 }
 
-.tabla{
-    
-    width: 50%;
-
-    background:rgba(255,255,255,0.15); /* Color de fondo para los Asides y Sections (Red, Green, Blue, Transparencia) */
-
-    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
-
-    border-radius:15px; /* Agrega bordes redondeados */
-
-    padding:20px; /* Agrega un padding para darle espacio interno */  
-
+.contenido {
+    overflow: hidden;
 }
 
-section{
-
-    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
-
-    border-radius:15px; /* Agrega bordes redondeados */
-
-    padding:20px; /* Agrega un padding para darle espacio interno */
-
-    box-shadow:0 5px 20px rgba(0,0,0,.3); /* Sombra suave para dar profundidad */
-
+section {
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
 }
 
-footer{
-
-    color: rgba(255, 255, 255, 0.7); /* Blanco semitransparente */
-
-    backdrop-filter:blur(10px); /* Filtro borroso estilo vidrio para el fondo */
-
-    border-top:1px solid #555; /* Borde superior */
-
-    display:flex;
-
-    justify-content:center; /* Centra el contenido del footer */
-
-    font-family: "Montserrat", sans-serif; /* Fuente del texto */
-
-    font-weight: bold; /* Negrita */
-
-    font-size: 20px; /* Tamaño de la fuente */
-
-    align-items:center; /* Alinea los items del footer al medio */
-
-    height:35px; /* Altura del footer */
-
+footer {
+    color: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    height: 35px;
 }
 
-.footer .Datix { /* Palabra "Datix" del logo */
-
-	position: relative;
-
-	top: 8px; /* Valores positivos lo mueven hacia abajo y valores negativos lo mueven hacia arriba */
-
-	color: rgba(255, 255, 255, 0.7); /* Color de la palabra "Datix" */
-
-    font-weight: 700; /* Grosor de la palabra "Datix" */
+.footer .Datix {
+    position: relative;
+    top: 8px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 700;
 }
 
-.footer .Llave { /* Llave del logo */
-
-	position: relative; /* Posicionamiento relativo para poder mover la llave */
-
-	top: 6px; /* Valores positivos lo mueven hacia abajo y valores negativos lo mueven hacia arriba */
-
-	right: -1px; /* Valores positivos lo mueven hacia la derecha y valores negativos lo mueven hacia la izquierda */
-
-	color: rgba(255, 255, 255, 0.7); /* Color de la llave */
-
+.footer .Llave {
+    position: relative;
+    top: 6px;
+    right: -1px;
+    color: rgba(255,255,255,0.7);
 }
 
+.dashboard-container {
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.panel-glass {
+    background: rgba(18,26,43,0.65);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+}
+
+.form-control-custom {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white;
+    border-radius: 8px;
+    padding: 10px 14px;
+    width: 100%;
+}
+
+.anuncio-card {
+    background: rgba(0,0,0,0.3);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border-left: 4px solid #00d2ff;
+    text-align: left;
+}
+
+.tituloA {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.fechaA {
+    color: #7dd3fc;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contenidoA {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.publicarA {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.publicarA:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40,167,69,0.4);
+}
+
+.eliminarA {
+    background: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.eliminarA:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200,35,51,0.4);
+}
+
+.anuncios-panel {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+/* Tablets */
 @media (max-width: 768px) {
-
-    /* Navbar */
-    header {
-        height: auto;
-        padding: 10px 0;
+    nav {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+        overflow-x: auto;
     }
 
-    nav {
+    nav a {
+        padding: 8px 12px;
+        font-size: 14px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    main {
+        padding: 80px 15px 20px;
+        min-height: auto;
+    }
+
+    .parent {
         flex-direction: column;
-        align-items: center;
+    }
+
+    .contenido, .tabla {
+        width: 100%;
+    }
+
+    .panel-glass {
+        padding: 18px;
+    }
+
+    footer {
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+    nav {
         gap: 5px;
     }
 
     nav a {
-        padding: 8px 20px;
-        margin-top: 0;
+        padding: 8px 9px;
+        font-size: 12px;
     }
 
-
-    /* Contenido principal */
     main {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 15px;
-        min-height: auto;
+        padding: 75px 10px 15px;
     }
 
-
-    /* Asides y secciones */
-    aside,
-    section {
-        padding: 15px;
+    .contenido, .tabla {
+        padding: 12px;
     }
 
+    .dashboard-container {
+        padding: 0 10px;
+    }
 
-    /* Footer */
-    footer {
-        font-size: 16px;
-        height: auto;
-        min-height: 35px;
+    .panel-glass {
+        padding: 14px;
+    }
+
+    .panel-glass h1 {
+        font-size: 21px;
+    }
+
+    .panel-glass h3 {
+        font-size: 18px;
+    }
+
+    .form-control-custom {
+        font-size: 14px;
+        padding: 9px;
+    }
+
+    .anuncios-panel {
+        max-height: none;
+    }
+
+    .anuncio-card {
         padding: 10px;
-        box-sizing: border-box;
     }
-}
-/* ------------------------------------------------------------------------------------------------------------------------------------ */
 
-/* Estilos generales y del panel */
-body {
+    .tituloA {
+        font-size: 14px;
+    }
 
-    font-family: 'Inter', sans-serif;
+    .contenidoA {
+        font-size: 12px;
+    }
 
-}
-
-.dashboard-container {
-
-    max-width: 1300px;
-
-    margin: 20px auto;
-
-    padding: 0 20px;
-
-}
-
-/* Estilos de las tarjetas y contenedores */
-.panel-glass {
-
-    background: rgba(18, 26, 43, 0.65);
-
-    backdrop-filter: blur(16px);
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-    border-radius: 16px;
-
-    padding: 24px;
-
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    
-}
-
-.form-control-custom {
-
-    background: rgba(0, 0, 0, 0.35);
-
-    border: 1px solid rgba(255, 255, 255, 0.18);
-
-    color: #ffffff;
-
-    border-radius: 8px;
-
-    padding: 10px 14px;
-
-    width: 100%;
-
-}
-
-.anuncio-card {
-
-    background: rgba(0,0,0,0.3);
-
-    padding: 12px;
-
-    border-radius: 6px;
-
-    margin-bottom: 12px;
-
-    border-left: 4px solid #00d2ff;
-
-    text-align: left;
-    
-}
-
-.tituloA {
-
-    color: #ffffff; /* Color del título */
-
-    font-weight: 600; /* Grosor del título */
-    
-    font-size: 16px; /* Tamaño del título */
-
-}
-
-.fechaA {
-
-    color: #7dd3fc; /* Color de la fecha */
-
-    font-size: 12px; /* Tamaño de la fecha */
-
-    font-weight: 500;/* Grosor de la fecha */
-
-}
-
-.contenidoA {
-
-    color: #cbd5e1; /* Color del contenido */
-
-    font-size: 14px; /* Tamaño del contenido */
-
-}
-
-.publicarA {
-
-    background: #28a745; /* Color de fondo del botón */
-
-    color: #ffffff; /* Color del texto del botón */
-
-    border: none; /* Sin borde */
-
-    padding: 10px 20px; /* Espaciado interno del botón */
-
-    border-radius: 6px; /* Bordes redondeados del botón */
-
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-
-    font-weight: bold; /* Grosor del texto del botón */
-
-    width: 100%; /* Ancho completo del contenedor */
-
-}
-
-.publicarA:hover {
-
-    transform: translateY(-2px);/* Mueve el botón hacia arriba al pasar el mouse */
-
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);/* Agrega una sombra al botón al pasar el mouse */
-
-}
-
-.eliminarA {
-
-    background: #dc3545; /* Color de fondo del botón */
-
-    color: white; /* Color del texto del botón */
-
-    padding: 3px 8px; /* Espaciado interno del botón */
-
-    border-radius: 3px; /* Bordes redondeados del botón */
-
-    text-decoration: none; /* Elimina el subrayado del enlace */
-
-    font-size: 11px; /* Tamaño del texto del botón */
-
-}
-
-.eliminarA:hover {
-
-    transform: translateY(-2px);/* Mueve el botón hacia arriba al pasar el mouse */
-
-    box-shadow: 0 4px 12px rgba(200, 35, 51, 0.4);/* Agrega una sombra al botón al pasar el mouse */
-
+    footer {
+        font-size: 14px;
+    }
 }

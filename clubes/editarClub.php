@@ -13,12 +13,35 @@ if (isset($_GET["id"])) {
     $club = mysqli_fetch_assoc($resultado);
 }
 
-/* verifica si se recibio un formulario por POST, si es asi, actualiza el nombre del club */
+/* verifica si se recibio un formulario por POST, si es asi, actualiza el nombre y el logo del club */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = (int) $_POST["id"];
     $nombreClub = mysqli_real_escape_string($conn, trim($_POST["nombreClub"]));
 
     mysqli_query($conn, "UPDATE club SET nombre = '$nombreClub' WHERE id = $id");
+
+    // si eligió un logo nuevo, lo guarda
+    // $_FILES["logo"]["error"] == 0 significa que el archivo se subió bien
+    if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] == 0) {
+
+        // la extensión tiene que ser jpg, jpeg o png
+        $extension = strtolower(pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION));
+
+        if (in_array($extension, ["jpg", "jpeg", "png"])) {
+
+            // nombre del archivo basado en el id del club, así no se repite
+            $nombreLogo = "club_" . $id . "." . $extension;
+
+            // mueve el archivo a la carpeta logos, si no se pudo no se guarda nada en la base
+            if (move_uploaded_file($_FILES["logo"]["tmp_name"], __DIR__ . "/logos/" . $nombreLogo)) {
+
+                // guarda el nombre del archivo en la base de datos
+                $stmt = mysqli_prepare($conn, "UPDATE club SET logo = ? WHERE id = ?");
+                mysqli_stmt_bind_param($stmt, "si", $nombreLogo, $id);
+                mysqli_stmt_execute($stmt);
+            }
+        }
+    }
 
     header("Location: gestionClubes.php");
     exit();
@@ -41,10 +64,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php if ($club): ?>
     <h1 class="tituloClubes">Editar Club</h1>
     <div class="Casilla">
-        <form action="editarClub.php" method="post">
+        <form action="editarClub.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $club['id'] ?>">
             <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" value="<?= htmlspecialchars($club['nombre']) ?>">
             <br><br>
+
+            <?php if ($club["logo"]): ?>
+                <p>Logo actual:</p>
+                <img src="logos/<?= htmlspecialchars($club['logo']) ?>" alt="logo" width="80">
+                <br><br>
+            <?php endif; ?>
+
+            <label for="logo">Logo (JPG o PNG):</label>
+            <input type="file" id="logo" name="logo" accept="image/png, image/jpeg">
+            <br><br>
+
             <input type="submit" value="Guardar Cambios" class="Agregar">
         </form>
     </div>

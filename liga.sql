@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2026 a las 21:33:54
+-- Tiempo de generación: 06-11-2026 a las 23:33:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -76,6 +76,13 @@ CREATE TABLE `carnets` (
   `fecha_vencimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `carnets`
+--
+
+INSERT INTO `carnets` (`id`, `id_jugador`, `foto`, `fecha_vencimiento`) VALUES
+(5, 355, 'jugador_355.png', '2027-02-10');
+
 -- --------------------------------------------------------
 
 --
@@ -113,30 +120,33 @@ CREATE TABLE `club` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `presidente` text NOT NULL,
+  `estadio` varchar(70) NOT NULL,
+  `fundacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `club`
 --
 
-INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`) VALUES
-(18, 'Montevideo City Torque', 'club_18.png', 1),
-(19, 'Nacional', 'club_19.png', 1),
-(20, 'Cerro Largo', 'club_20.png', 1),
-(21, 'Peñarol', 'club_21.png', 1),
-(22, 'Deportivo Maldonado', 'club_22.png', 1),
-(23, 'Racing', 'club_23.png', 1),
-(24, 'Liverpool', 'club_24.png', 1),
-(25, 'Wanderers', 'club_25.png', 1),
-(26, 'Albion', 'club_26.png', 1),
-(27, 'Juventud', 'club_27.png', 1),
-(28, 'Central Español', 'club_28.png', 1),
-(29, 'Boston River', 'club_29.png', 1),
-(30, 'Cerro', 'club_30.png', 1),
-(31, 'Danubio', 'club_31.png', 1),
-(32, 'Progreso', 'club_32.png', 1),
-(40, 'Defensor Sporting', 'club_40.png', 1);
+INSERT INTO `club` (`id`, `nombre`, `logo`, `activo`, `presidente`, `estadio`, `fundacion`) VALUES
+(18, 'Montevideo City Torque', 'club_18.png', 1, 'Raúl Aquino', 'Estadio Charrua', 2007),
+(19, 'Nacional', 'club_19.png', 1, 'Ricardo Vairo', 'Gran Parque Central', 1899),
+(20, 'Cerro Largo', 'club_20.png', 1, 'Ernesto Dehl.', 'Estadio Municipal Arq. Antonio Eleuterio Ubilla', 2002),
+(21, 'Peñarol', 'club_21.png', 1, 'Ignacio Ruglio', 'Campeon del Siglo', 1913),
+(22, 'Deportivo Maldonado', 'club_22.png', 1, 'Malcom Caine', 'Estadio Domingo Burgueño Miguel', 1928),
+(23, 'Racing', 'club_23.png', 1, 'Washington Lizandro', 'Parque Osvaldo Roberto', 1919),
+(24, 'Liverpool', 'club_24.png', 1, '', '0', 0),
+(25, 'Wanderers', 'club_25.png', 1, '', '0', 0),
+(26, 'Albion', 'club_26.png', 1, '', '0', 0),
+(27, 'Juventud', 'club_27.png', 1, '', '0', 0),
+(28, 'Central Español', 'club_28.png', 1, '', '0', 0),
+(29, 'Boston River', 'club_29.png', 1, '', '0', 0),
+(30, 'Cerro', 'club_30.png', 1, '', '0', 0),
+(31, 'Danubio', 'club_31.png', 1, '', '0', 0),
+(32, 'Progreso', 'club_32.png', 1, '', '0', 0),
+(40, 'Defensor Sporting', 'club_40.png', 1, '', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -182,16 +192,16 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`id`, `nombre`, `apellido`, `cedula`, `fecha_nacimiento`, `id_club`, `id_categoria`, `masa`, `altura`, `peso`, `velocidad`) VALUES
-(348, 'Mateo', 'Silva', '12345672', '2013-03-15', 18, 12, 48.50, 1.58, 475.79, 22.50),
-(349, 'Thiago', 'Pereira', '23456783', '2014-07-21', 18, 13, 45.00, 1.54, 441.45, 21.00),
+(348, 'Mateo', 'Silva', '97954763', '2013-03-15', 18, 12, 48.50, 1.58, 475.30, 5.56),
+(349, 'Thiago', 'Pereira', '55101443', '2014-07-21', 18, 13, 45.00, 1.54, 441.00, 5.49),
 (350, 'Lucia', 'Fernandez', '34567894', '2013-05-10', 18, 21, 43.00, 1.55, 421.83, 20.00),
 (351, 'Martina', 'Rodriguez', '45678911', '2015-09-12', 18, 21, 40.00, 1.48, 392.40, 19.00),
-(352, 'Santiago', 'Martinez', '56789129', '2015-01-18', 19, 14, 40.00, 1.47, 392.40, 19.50),
+(352, 'Santiago', 'Martinez', '56789129', '2015-01-18', 19, 15, 40.00, 1.47, 392.00, 5.37),
 (353, 'Joaquin', 'Suarez', '67891234', '2016-06-12', 19, 15, 38.00, 1.43, 372.78, 19.00),
 (354, 'Valentina', 'Mendez', '78912348', '2014-04-22', 19, 21, 44.00, 1.53, 431.64, 20.00),
 (355, 'Camila', 'Acosta', '89123451', '2016-11-08', 19, 21, 37.00, 1.42, 362.97, 18.00),
-(356, 'Felipe', 'Gonzalez', '91234563', '2017-03-11', 20, 16, 32.00, 1.32, 313.92, 16.50),
-(357, 'Nicolas', 'Mendez', '13579246', '2018-08-19', 20, 18, 30.00, 1.28, 294.30, 15.00),
+(356, 'Felipe', 'Gonzalez', '91234563', '2017-03-11', 20, 21, 32.00, 1.32, 313.60, 5.09),
+(357, 'Nicolas', 'Mendez', '13579247', '2018-08-19', 20, 16, 30.00, 1.28, 294.00, 5.01),
 (358, 'Sofia', 'Castro', '24681351', '2017-06-17', 20, 21, 34.00, 1.36, 333.54, 17.00),
 (359, 'Agustina', 'Lopez', '35792462', '2018-02-14', 20, 21, 30.00, 1.29, 294.30, 15.00),
 (360, 'Tomas', 'Olivera', '46813576', '2019-02-14', 21, 19, 27.00, 1.23, 264.87, 14.00),
@@ -242,7 +252,9 @@ INSERT INTO `jugadores` (`id`, `nombre`, `apellido`, `cedula`, `fecha_nacimiento
 (406, 'Zoe', 'Martinez', '26791357', '2017-04-24', 32, 21, 34.00, 1.36, 333.54, 16.50),
 (407, 'Aitana', 'Pereira', '37802468', '2018-11-30', 32, 21, 29.00, 1.27, 284.49, 15.00),
 (409, 'Lionel', 'Messias', '59911010', '2016-10-20', 24, 15, 60.00, 1.70, 588.00, 5.00),
-(410, 'Pedro', 'Cabrera', '52457274', '2013-02-10', 30, 12, 60.00, 1.70, 588.00, 6.00);
+(410, 'Pedro', 'Cabrera', '52457274', '2013-02-10', 30, 12, 60.00, 1.70, 588.00, 6.00),
+(412, 'Cristiano', 'Sakpal', '33781015', '2013-02-10', 19, 12, 45.00, 1.72, 441.00, 6.00),
+(413, '1sre', 'se12', '13579246', '2013-01-12', 30, 13, 60.00, 1.75, 588.00, 18.00);
 
 -- --------------------------------------------------------
 
@@ -277,7 +289,8 @@ INSERT INTO `partidos` (`id`, `id_club_local`, `id_club_visitante`, `id_categori
 (9, 18, 22, 14, '2026-10-21', 'jugado', 3, 5, 1),
 (10, 20, 21, 13, '2026-12-12', 'programado', NULL, NULL, 2),
 (11, 27, 25, 14, '2026-12-31', 'programado', NULL, NULL, 1),
-(12, 23, 29, 15, '2026-08-20', 'jugado', 2, 1, 2);
+(12, 23, 29, 15, '2026-08-20', 'jugado', 2, 1, 2),
+(13, 19, 18, 12, '2026-02-10', 'jugado', 5, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -431,19 +444,19 @@ ALTER TABLE `boletines`
 -- AUTO_INCREMENT de la tabla `carnets`
 --
 ALTER TABLE `carnets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `club`
 --
 ALTER TABLE `club`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `competicion`
@@ -455,13 +468,13 @@ ALTER TABLE `competicion`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=414;
 
 --
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `sanciones`

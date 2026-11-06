@@ -39,13 +39,21 @@ $resultado = mysqli_query($conn, $sql);
 
         <label for="nombreClub">Nombre del Club:</label>
         <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" maxlength="100">
-
         <br><br>
 
+        <label for="presidente">Nombre del Presidente:</label>
+        <input type="text" id="presidente" name="presidente" required class="presidente" maxlength="100">
+
+        <label for="estadio">Nombre del Estadio:</label>
+        <input type="text" id="estadio" name="estadio" required class="estadio" maxlength="100">
         <br><br>
+
+        <label for="fundacion">Año de fundación:</label>
+        <input type="number" id="fundacion" name="fundacion" required class="fundacion" min="1800" max="<?= date("Y") ?>">
 
         <label for="password">Contraseña del Club:</label>
         <input type="password" id="password" name="password" minlength="6" required>
+        <button type="button" onclick="password.type = password.type === 'password' ? 'text' : 'password'">👁</button>
 
         <br><br>
 
@@ -53,41 +61,53 @@ $resultado = mysqli_query($conn, $sql);
     </form>
 
     <div class="Tabla">
-        <table class="tablaClubes">
-            <tr>
-                <th><i class="fa-solid fa-hashtag"></i></th>
-                <th><i class="fa-solid fa-image"></i></th>
-                <th><i class="fa-solid fa-futbol"></i> Club</th>
-                <th><i class="fa-solid fa-trash"></i></th>
-                <th><i class="fa-solid fa-pen-to-square"></i></th>
-            </tr>
+    <table class="tablaClubes">
 
-            <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
-                <tr>
-                    <td><?= $fila["id"] ?></td>
-                    <td>
-                        <?php if ($fila["logo"]): ?>
-                            <img src="logos/<?= htmlspecialchars($fila["logo"]) ?>" alt="logo" width="40">
-                        <?php else: ?>
-                            -
-                        <?php endif; ?>
-                    </td>
-                    <td><?= htmlspecialchars($fila["nombre"]) ?></td>
-                    <td>
-                        <a href="eliminarClub.php?id=<?= $fila["id"] ?>"
-                            onclick="return confirm('¿Eliminar este club?')">
-                            Eliminar
-                        </a>
-                    </td>
-                    <td>
-                        <a href="editarClub.php?id=<?= $fila["id"] ?>">
-                            Editar
-                        </a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </table>
-    </div>
+        <tr>
+            <th><i class="fa-solid fa-hashtag"></i></th>
+            <th><i class="fa-solid fa-image"></i></th>
+            <th><i class="fa-solid fa-futbol"></i> Club</th>
+            <th>Presidente</th>
+            <th>Estadio</th>
+            <th>Año de fundación</th>
+            <th><i class="fa-solid fa-trash"></i></th>
+            <th><i class="fa-solid fa-pen-to-square"></i></th>
+        </tr>
+
+        <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
+            <tr>
+                <td><?= $fila["id"] ?></td>
+
+                <td>
+                    <?php if ($fila["logo"]): ?>
+                        <img src="logos/<?= htmlspecialchars($fila["logo"]) ?>" alt="logo" width="40">
+                    <?php else: ?>
+                        -
+                    <?php endif; ?>
+                </td>
+
+                <td><?= htmlspecialchars($fila["nombre"]) ?></td>
+                <td><?= htmlspecialchars($fila["presidente"]) ?></td>
+                <td><?= htmlspecialchars($fila["estadio"]) ?></td>
+                <td><?= htmlspecialchars($fila["fundacion"]) ?></td>
+
+                <td>
+                    <a href="eliminarClub.php?id=<?= $fila["id"] ?>"
+                        onclick="return confirm('¿Eliminar este club?')">
+                        Eliminar
+                    </a>
+                </td>
+
+                <td>
+                    <a href="editarClub.php?id=<?= $fila["id"] ?>">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+
+    </table>
+</div>
 
 </body>
 </html>

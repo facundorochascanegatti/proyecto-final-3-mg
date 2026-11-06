@@ -16,13 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["pdf"])) {
     if ($extension != "pdf") {
         $errorBoletin = "Solo se pueden subir archivos PDF.";
     } else {
-        // Nombre único para que no se pise con otro boletín
+               // Nombre único para que no se pise con otro boletín
         $nombreArchivo = "boletin_" . time() . ".pdf";
 
-        // si el archivo no se pudo guardar en la carpeta, no se anota en la base
-        if (!move_uploaded_file($_FILES["pdf"]["tmp_name"], __DIR__ . "/boletines/" . $nombreArchivo)) {
-            $errorBoletin = "No se pudo subir el PDF.";
-        } else {
+        try {
+            if (!move_uploaded_file($_FILES["pdf"]["tmp_name"], __DIR__ . "/boletines/" . $nombreArchivo)) {
+                throw new Exception("No se pudo subir el PDF.");
+            }
+
             $fecha = date("Y-m-d");
             $stmt = mysqli_prepare($conn, "INSERT INTO boletines (titulo, archivo, fecha) VALUES (?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "sss", $titulo, $nombreArchivo, $fecha);
@@ -30,6 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["pdf"])) {
 
             header("Location: boletines.php");
             exit();
+
+        } catch (Exception $e) {
+            $errorBoletin = "No se pudo guardar el boletín.";
         }
     }
 }

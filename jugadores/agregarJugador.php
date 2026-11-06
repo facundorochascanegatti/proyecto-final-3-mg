@@ -1,7 +1,17 @@
 <?php
-
-//esto sirve para conectar la base de datos
+// esto sirve para conectar la base de datos
 require_once __DIR__ . "/../conexion.php";
+
+// Revisa que el último dígito de la cédula sea el verificador correcto
+function validar_ci($ci) {
+    $pesos = [2, 9, 8, 7, 6, 3, 4];
+    $suma = 0;
+    for ($i = 0; $i < 7; $i++) {
+        $suma += ($pesos[$i] * $ci[$i]) % 10;
+    }
+    $digito = ($suma % 10 == 0) ? 0 : 10 - ($suma % 10);
+    return $digito == $ci[7];
+}
 
 // Consulta para obtener todas las categorías
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activo = 1");
@@ -9,16 +19,19 @@ $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activ
 // Consulta para obtener todos los clubes
 $resultadoClubes = mysqli_query($conn, "SELECT * FROM club");
 
+// variable para guardar los errores
+$error = "";
+
 // Verifica si el formulario fue enviado mediante POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Obtiene los datos enviados desde el formulario
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $cedula = $_POST["cedula"];
+    $nombre = trim($_POST["nombre"]);
+    $apellido = trim($_POST["apellido"]);
+    $cedula = trim($_POST["cedula"]);
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
-    $categorias = $_POST["categorias"];
-    $club = $_POST["club"];
+    $categorias = (int) $_POST["categorias"];
+    $club = (int) $_POST["club"];
     $masa = $_POST["masa"];
     $altura = $_POST["altura"];
     $velocidad = $_POST["velocidad"];
@@ -26,7 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica que la cédula tenga 8 dígitos
     if (!preg_match("/^[0-9]{8}$/", $cedula)) {
 
-        echo "<p class='mensajeError'>La cédula debe tener 8 dígitos.</p>";
+        $error = "La cédula debe tener 8 dígitos.";
+
+    } elseif (!validar_ci($cedula)) {
+
+        // Verifica que el dígito verificador sea correcto
+        $error = "La cédula no es válida.";
 
     } else {
 
@@ -40,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_num_rows($resultadoChequeo) > 0) {
 
-            echo "<p class='mensajeError'>Esa cédula ya pertenece a otro jugador.</p>";
+            $error = "Esa cédula ya pertenece a otro jugador.";
 
         } else {
 
@@ -57,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             } else {
 
-                echo "Error al agregar jugador: " . mysqli_error($conn);
+                $error = "Error al agregar jugador: " . mysqli_error($conn);
 
             }
         }
@@ -66,9 +84,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!-- Formulario para agregar un nuevo jugador -->
-<form action="agregarJugador.php" method="post">
+<form action="gestionarJugadores.php" method="post">
 
     <h1>Gestionar Jugadores</h1>
+
+    <!-- muestra el mensaje si hay algun error -->
+    <?php if ($error != "") { ?>
+        <p class="mensajeError"><?= htmlspecialchars($error) ?></p>
+    <?php } ?>
 
     <div class="field-row">
 
@@ -154,7 +177,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
     </div>
-
-    <input type="submit" value="Agregar Jugador">
-
+        <input type="submit" value="Agregar Jugador">
 </form>
+
+<!-- Scripts para avisar en vivo si la cédula es válida (ajustá la ruta si hace falta) -->
+<script src="../js/ci.js"></script>
+<script src="../js/validarCedula.js"></script>

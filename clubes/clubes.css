@@ -109,6 +109,14 @@ form {
     gap:7px;
 
 }
+button {
+    background: #2f6f62;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
 form input[type="text"],
 form input[type="date"],

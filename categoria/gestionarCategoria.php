@@ -67,7 +67,7 @@ if (isset($_POST["año"])) {
         <?php endif; ?>
 
         <label for="año">Año de categoría:</label>
-        <input type="text" id="año" name="año" required>
+        <input type="text" id="año" name="año" min="2015" max="2020" required>
         <br><br>
 
         <input type="submit" value="Agregar Categoría">

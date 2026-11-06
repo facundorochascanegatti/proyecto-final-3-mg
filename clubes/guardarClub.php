@@ -8,8 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtiene los datos del formulario
     $nombreClub = trim($_POST["nombreClub"] ?? "");
     $password = $_POST["password"] ?? "";
+    $presidente = $_POST["presidente"] ?? "";
+    $estadio = $_POST["estadio"] ?? "";
+    $fundacion = $_POST["fundacion"] ?? "";
 
-    if ($nombreClub == "" || $password == "") {
+    if ($nombreClub == "" || $password == "" || $fundacion == "") {
         header("Location: gestionClubes.php?error=datos");
         exit();
     }
@@ -34,28 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     mysqli_begin_transaction($conn);
 
-    // Crea el club
-    $sqlClub = "INSERT INTO club (nombre) VALUES ('$nombreSeguro')";
-
-    if (mysqli_query($conn, $sqlClub)) {
-
+    try {
+        mysqli_query($conn, "INSERT INTO club (nombre) VALUES ('$nombreSeguro')");
         $idClub = mysqli_insert_id($conn);
 
-        // Crea la cuenta usando el nombre del club como usuario
-        $sqlUsuario = "INSERT INTO usuarios
-                        (usuario, `contraseña`, rol, id_club)
-                        VALUES ('$nombreSeguro', '$passwordSeguro', 'club', $idClub)";
+        mysqli_query($conn, "INSERT INTO usuarios
+                    (usuario, `contraseña`, rol, id_club)
+                    VALUES ('$nombreSeguro', '$passwordSeguro', 'club', $idClub)");
 
-        if (mysqli_query($conn, $sqlUsuario)) {
-            mysqli_commit($conn);
-            header("Location: gestionClubes.php");
-            exit();
-        }
+        mysqli_commit($conn);
+        header("Location: gestionClubes.php");
+        exit();
+
+    } catch (mysqli_sql_exception $e) {
+        // si falló cualquiera de los dos inserts, se deshace todo
+        mysqli_rollback($conn);
+        header("Location: gestionClubes.php?error=datos");
+        exit();
     }
-
-    mysqli_rollback($conn);
-
-    header("Location: gestionClubes.php?error=datos");
-    exit();
 }
 ?>

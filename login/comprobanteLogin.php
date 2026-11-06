@@ -22,21 +22,27 @@ mysqli_stmt_execute($stmt);
 // stmt es statment, que es un objeto que representa la consulta preparada para poder obtener el resultado de la consulta, se usa mysqli_stmt_get_result
 $fila = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
-// password_verify compara la contraseña escrita con el hash guardado
-if ($fila && password_verify($password, $fila["contraseña"])) {
-    iniciarSesionPorRol($fila["rol"]);
-    session_regenerate_id(true);
-    $_SESSION["usuario"] = $fila["usuario"];
-    $_SESSION["rol"] = $fila["rol"];
-    $_SESSION["id_club"] = $fila["id_club"];
-
-    if ($fila["rol"] === "admin") {
-        header("Location: ../admin/indexadmin.php");
-    } else {
-        header("Location: ../club/indexclub.php");
+try {
+    if (!$fila || !password_verify($password, $fila["contraseña"])) {
+        throw new Exception("Usuario o contraseña incorrectos.");
     }
+} catch (Exception $e) {
+    header("Location: login.php?error=1");
     exit();
 }
+
+iniciarSesionPorRol($fila["rol"]);
+session_regenerate_id(true);
+$_SESSION["usuario"] = $fila["usuario"];
+$_SESSION["rol"] = $fila["rol"];
+$_SESSION["id_club"] = $fila["id_club"];
+
+if ($fila["rol"] === "admin") {
+    header("Location: ../admin/indexadmin.php");
+} else {
+    header("Location: ../club/indexclub.php");
+}
+exit();
 
 header("Location: login.php?error=1");
 exit();

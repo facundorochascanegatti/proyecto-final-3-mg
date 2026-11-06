@@ -1,41 +1,35 @@
 <?php require_once __DIR__ . "/../auth.php"; requerirAdmin(); ?>
 <?php
-require "../conexion.php";   // esto reemplaza al mysqli_connect
+require "../conexion.php";
 
-/* esta variable guarda los datos del club, la iniciamos en null por si no se encuentra */
 $club = null;
 
-/* verifica si se recibio un id por GET, si es asi, busca el club en la base de datos */
 if (isset($_GET["id"])) {
     $id = (int) $_GET["id"];
     $resultado = mysqli_query($conn, "SELECT * FROM club WHERE id = $id");
-    //esto de $club es el resultado de lo de arriba, si no encuentra el club, $club queda en null
     $club = mysqli_fetch_assoc($resultado);
 }
 
-/* verifica si se recibio un formulario por POST, si es asi, actualiza el nombre y el logo del club */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = (int) $_POST["id"];
     $nombreClub = mysqli_real_escape_string($conn, trim($_POST["nombreClub"]));
+    $fundacion = (int) $_POST["fundacion"];
+    $presidente = mysqli_real_escape_string($conn, trim($_POST["presidente"]));
+    $estadio = mysqli_real_escape_string($conn, trim($_POST["estadio"]));
 
-    mysqli_query($conn, "UPDATE club SET nombre = '$nombreClub' WHERE id = $id");
+    mysqli_query($conn, "UPDATE club SET nombre = '$nombreClub', fundacion = $fundacion, presidente = '$presidente', estadio = '$estadio' WHERE id = $id");
 
     // si eligió un logo nuevo, lo guarda
-    // $_FILES["logo"]["error"] == 0 significa que el archivo se subió bien
     if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] == 0) {
 
-        // la extensión tiene que ser jpg, jpeg o png
         $extension = strtolower(pathinfo($_FILES["logo"]["name"], PATHINFO_EXTENSION));
 
         if (in_array($extension, ["jpg", "jpeg", "png"])) {
 
-            // nombre del archivo basado en el id del club, así no se repite
             $nombreLogo = "club_" . $id . "." . $extension;
 
-            // mueve el archivo a la carpeta logos, si no se pudo no se guarda nada en la base
             if (move_uploaded_file($_FILES["logo"]["tmp_name"], __DIR__ . "/logos/" . $nombreLogo)) {
 
-                // guarda el nombre del archivo en la base de datos
                 $stmt = mysqli_prepare($conn, "UPDATE club SET logo = ? WHERE id = ?");
                 mysqli_stmt_bind_param($stmt, "si", $nombreLogo, $id);
                 mysqli_stmt_execute($stmt);
@@ -47,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -65,8 +60,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1 class="tituloClubes">Editar Club</h1>
     <div class="Casilla">
         <form action="editarClub.php" method="post" enctype="multipart/form-data">
+
             <input type="hidden" name="id" value="<?= $club['id'] ?>">
+
             <input type="text" id="nombreClub" name="nombreClub" required class="nombreClub" value="<?= htmlspecialchars($club['nombre']) ?>">
+            <br><br>
+
+            <label for="fundacion">Año de fundación:</label>
+            <input type="number" id="fundacion" name="fundacion" required value="<?= htmlspecialchars($club['fundacion']) ?>">
+            <br><br>
+
+            <label for="presidente">Presidente:</label>
+            <input type="text" id="presidente" name="presidente" required value="<?= htmlspecialchars($club['presidente']) ?>">
+            <br><br>
+
+            <label for="estadio">Estadio:</label>
+            <input type="text" id="estadio" name="estadio" required value="<?= htmlspecialchars($club['estadio']) ?>">
             <br><br>
 
             <?php if ($club["logo"]): ?>

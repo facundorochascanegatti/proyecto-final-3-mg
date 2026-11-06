@@ -1,19 +1,30 @@
+
 <?php
 require_once __DIR__ . "/../auth.php";
 requerirAdmin();
-require_once __DIR__ . "/../conexion.php";   // esto reemplaza al mysqli_connect
+require_once __DIR__ . "/../conexion.php";
 
-// LEFT JOIN: si un jugador tiene una categoría o un club que no existe igual aparece, y se puede editar para corregirlo
+// LEFT JOIN: si un jugador tiene una categoría o un club que no existe igual aparece
 $sql = "SELECT jugadores.*, categorias.año, club.nombre AS nombre_club
         FROM jugadores
         LEFT JOIN categorias ON jugadores.id_categoria = categorias.id
         LEFT JOIN club ON jugadores.id_club = club.id";
+
 $resultado = mysqli_query($conn, $sql);
 ?>
+
 <br><br>
-<!-- ESTO ES UNA TABLA PARA LISTAR LOS JUGADORES -->
+
+<!-- buscador para filtrar jugadores -->
+<div class="buscadorAdmin">
+    <input type="text" id="buscador" placeholder="Buscar jugador por nombre, apellido, cédula, club...">
+</div>
+
+<!-- tabla de jugadores -->
 <div class="Tabla">
-<table class="tablaJugadores" border="1">
+
+<table class="tablaJugadores" id="tablaJugadores" border="1">
+
     <tr>
         <th>Nombre</th>
         <th>Apellido</th>
@@ -28,10 +39,10 @@ $resultado = mysqli_query($conn, $sql);
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>
-    <!-- ESTO ES UN WHILE PARA LISTAR LOS JUGADORES EN LA TABLA -->
-    <!-- EL MYSQLI_FETCH_ASSOC() ES PARA QUE LOS DATOS SE MUESTREN EN LA TABLA -->
+
     <?php
     while ($fila = mysqli_fetch_assoc($resultado)) {
+
         echo "<tr>";
         echo "<td>" . htmlspecialchars($fila["nombre"]) . "</td>";
         echo "<td>" . htmlspecialchars($fila["apellido"]) . "</td>";
@@ -48,6 +59,6 @@ $resultado = mysqli_query($conn, $sql);
         echo "</tr>";
     }
     ?>
-<!-- ESTO ES PARA CERRAR LA TABLA -->
+
 </table>
 </div>

@@ -98,6 +98,15 @@ form input[type="submit"]:hover{
     background:rgb(24,87,150);
 }
 
+.mensajeError {
+    color: #d62828;
+    background-color: #ffe5e5;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+
 
 /* =========================
         TABLA
@@ -155,6 +164,27 @@ form input[type="submit"]:hover{
     text-align:center;
 }
 
+
+.buscadorAdmin {
+    width: 450px;
+    max-width: 95%;
+    margin: 30px auto 10px;
+}
+
+.buscadorAdmin input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+.buscadorAdmin input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
 
 
 /* =========================

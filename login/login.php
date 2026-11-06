@@ -43,15 +43,23 @@
             </div>
         
             <form action="comprobanteLogin.php" method="post">
+                        <?php if (isset($_GET["error"])) { ?>
+                            <p style="color: red;">Usuario o contraseña incorrectos.</p>
+                        <?php } ?>
 
                 <div class="campo">
 
                     <input type="text" id="username" name="username" required placeholder="Usuario">
 
-                </div>    
+                </div>
                 
                 <div class="campo">
                     <input type="password" id="password" name="password" required placeholder="Contraseña">
+
+    <button type="button" onclick="password.type = password.type === 'password' ? 'text' : 'password'">
+👁
+</button>
+                    
                 </div>
                 
                 <div class="campo">
@@ -63,6 +71,7 @@
             </form>
         </div>
         
-    </div>    
+    </div>
+    
 </body>
 </html>

@@ -2,16 +2,8 @@
 // esto sirve para conectar la base de datos
 require_once __DIR__ . "/../conexion.php";
 
-// Revisa que el último dígito de la cédula sea el verificador correcto
-function validar_ci($ci) {
-    $pesos = [2, 9, 8, 7, 6, 3, 4];
-    $suma = 0;
-    for ($i = 0; $i < 7; $i++) {
-        $suma += ($pesos[$i] * $ci[$i]) % 10;
-    }
-    $digito = ($suma % 10 == 0) ? 0 : 10 - ($suma % 10);
-    return $digito == $ci[7];
-}
+// las reglas para revisar un jugador (las mismas que usa editarJugador.php)
+require_once "validarJugador.php";
 
 // Consulta para obtener todas las categorías
 $resultadoCategorias = mysqli_query($conn, "SELECT * FROM categorias WHERE activo = 1");
@@ -36,31 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $altura = $_POST["altura"];
     $velocidad = $_POST["velocidad"];
 
-    // Verifica que la cédula tenga 8 dígitos
-    if (!preg_match("/^[0-9]{8}$/", $cedula)) {
+    // revisa todo con las mismas reglas que al editar: letras en el nombre, cédula válida y sin repetir,
+    // fecha real, categoría del año de nacimiento, club, masa y altura (0 = jugador nuevo)
+    $error = validarJugador($conn, $nombre, $apellido, $cedula, $fecha_nacimiento, $categorias, $club, $masa, $altura, 0);
 
-        $error = "La cédula debe tener 8 dígitos.";
+    // la velocidad tiene que ser un número que no sea negativo
+    if ($error == "" && (!is_numeric($velocidad) || $velocidad < 0)) {
+        $error = "La velocidad tiene que ser un número positivo.";
+    }
 
-    } elseif (!validar_ci($cedula)) {
-
-        // Verifica que el dígito verificador sea correcto
-        $error = "La cédula no es válida.";
-
-    } else {
+    if ($error == "") {
 
         // Calcula el peso usando la gravedad
         $gravedad = 9.8;
         $peso = $masa * $gravedad;
-
-        // Verifica si ya existe un jugador con esa cédula
-        $sqlChequeo = "SELECT * FROM jugadores WHERE cedula = '$cedula'";
-        $resultadoChequeo = mysqli_query($conn, $sqlChequeo);
-
-        if (mysqli_num_rows($resultadoChequeo) > 0) {
-
-            $error = "Esa cédula ya pertenece a otro jugador.";
-
-        } else {
 
             // Inserta el nuevo jugador en la base de datos
             $sql = "INSERT INTO jugadores
@@ -78,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error = "Error al agregar jugador: " . mysqli_error($conn);
 
             }
-        }
     }
 }
 ?>

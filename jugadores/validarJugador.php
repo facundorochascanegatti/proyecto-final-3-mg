@@ -4,6 +4,20 @@
 // Devuelve "" si está todo bien, o el mensaje del error.
 // $idJugador es 0 cuando se agrega uno nuevo (sirve para que al editar no choque con su propia cédula).
 
+// Revisa que el último dígito de la cédula sea el verificador correcto
+// (if !function_exists para que no choque si otro archivo ya la tiene)
+if (!function_exists("validar_ci")) {
+    function validar_ci($ci) {
+        $pesos = [2, 9, 8, 7, 6, 3, 4];
+        $suma = 0;
+        for ($i = 0; $i < 7; $i++) {
+            $suma += ($pesos[$i] * $ci[$i]) % 10;
+        }
+        $digito = ($suma % 10 == 0) ? 0 : 10 - ($suma % 10);
+        return $digito == $ci[7];
+    }
+}
+
 function validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $idCategoria, $idClub, $masa, $altura, $idJugador) {
 
     // nombre y apellido: empiezan con letra y solo tienen letras (con tildes y ñ), espacios, apóstrofe o guion, entre 2 y 45
@@ -16,6 +30,11 @@ function validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $i
     // la cédula tiene que tener 8 dígitos
     if (!preg_match("/^[0-9]{8}$/", $cedula)) {
         return "La cédula debe tener 8 dígitos.";
+    }
+
+    // el último dígito de la cédula tiene que ser el verificador correcto (cédula uruguaya)
+    if (!validar_ci($cedula)) {
+        return "La cédula no es válida.";
     }
 
     // la cédula no puede ser de otro jugador
@@ -45,6 +64,11 @@ function validarJugador($conn, $nombre, $apellido, $cedula, $fechaNacimiento, $i
     $categoria = mysqli_fetch_assoc(mysqli_query($conn, "SELECT año, activo FROM categorias WHERE id = $idCategoria"));
 if (!$categoria) {
     return "Seleccione una categoría.";
+}
+
+// la categoría tiene que ser la del año en que nació (la Femenino sirve para cualquier año)
+if ($categoria["año"] != "Femenino" && (int) $categoria["año"] != $añoNacimiento) {
+    return "La categoría no coincide con el año de nacimiento (nació en $añoNacimiento).";
 }
 
 // una categoría inactiva no se puede usar para jugadores nuevos

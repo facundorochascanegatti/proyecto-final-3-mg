@@ -1,0 +1,145 @@
+@startuml
+title Diagrama de Clases - Sistema de Gestión de Liga de Fútbol
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam nodesep 60
+skinparam ranksep 70
+hide circle
+
+class Usuario {
+  - usuario: String
+  - contraseña: String
+  - rol: String
+  + iniciarSesion(): boolean
+  + cerrarSesion(): void
+  + verificarPermisos(): boolean
+}
+
+class Club {
+  - id: int
+  - nombre: String
+  - logo: String
+  - activo: boolean
+  - presidente: String
+  - estadio: String
+  - fundacion: int
+  + agregarClub(): void
+  + editarClub(): void
+  + eliminarClub(): void
+  + listarClubes(): void
+  + activarClub(): void
+  + desactivarClub(): void
+}
+
+class Partido {
+  - id: int
+  - fecha: Date
+  - estado: String
+  - golesLocal: int
+  - golesVisitante: int
+  + crearPartido(): void
+  + editarPartido(): void
+  + eliminarPartido(): void
+  + registrarResultado(): void
+  + listarPartidos(): void
+}
+
+class Competicion {
+  - id: int
+  - nombre: String
+  + agregarCompeticion(): void
+  + editarCompeticion(): void
+  + eliminarCompeticion(): void
+  + listarCompeticiones(): void
+}
+
+class Carnet {
+  - id: int
+  - foto: String
+  - fechaVencimiento: Date
+  + generarCarnet(): void
+  + editarCarnet(): void
+  + eliminarCarnet(): void
+  + verificarVencimiento(): boolean
+}
+
+class Jugador {
+  - id: int
+  - nombre: String
+  - apellido: String
+  - cedula: String
+  - fechaNacimiento: Date
+  - masa: decimal
+  - altura: decimal
+  - peso: decimal
+  - velocidad: decimal
+  + agregarJugador(): void
+  + editarJugador(): void
+  + eliminarJugador(): void
+  + listarJugadores(): void
+  + buscarJugador(): void
+}
+
+class Categoria {
+  - id: int
+  - año: String
+  - activo: boolean
+  + agregarCategoria(): void
+  + editarCategoria(): void
+  + eliminarCategoria(): void
+  + listarCategorias(): void
+}
+
+class Sancion {
+  - id: int
+  - tipo: String
+  - fecha: Date
+  - motivo: String
+  + registrarSancion(): void
+  + eliminarSancion(): void
+  + listarSanciones(): void
+  + verificarSuspension(): boolean
+}
+
+class Aviso {
+  - id: int
+  - titulo: String
+  - contenido: String
+  - fecha: Date
+  + crearAviso(): void
+  + editarAviso(): void
+  + eliminarAviso(): void
+  + listarAvisos(): void
+}
+
+class Boletin {
+  - id: int
+  - titulo: String
+  - archivo: String
+  - fecha: Date
+  + publicarBoletin(): void
+  + eliminarBoletin(): void
+  + listarBoletines(): void
+}
+
+' Fila 1: Usuario - Club - Partido - Competicion
+Usuario "0..*" -right- "0..1" Club : pertenece
+Club "1" -right- "0..*" Partido : local
+Club "1" -right- "0..*" Partido : visitante
+Partido "0..*" -right- "1" Competicion : organiza
+
+' Fila 2: Carnet - Jugador - Categoria
+Club "1" -down- "0..*" Jugador : tiene
+Partido "0..*" -down- "1" Categoria : corresponde
+Jugador "0..*" -right- "1" Categoria : pertenece
+Jugador "1" -left- "0..1" Carnet : tiene
+
+' Fila 3: Sancion
+Jugador "1" -down- "0..*" Sancion : recibe
+
+' Clases sin relación, solo para acomodarlas abajo
+Sancion -[hidden]right- Aviso
+Aviso -[hidden]right- Boletin
+
+@enduml

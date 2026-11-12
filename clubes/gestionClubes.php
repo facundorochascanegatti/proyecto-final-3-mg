@@ -19,6 +19,7 @@ $resultado = mysqli_query($conn, $sql);
 <body>
 
     <header>
+        //esto incluye el menú de navegación de la página.
         <?php include '../nav/nav.php'; ?>
     </header>
 
@@ -26,15 +27,17 @@ $resultado = mysqli_query($conn, $sql);
         <h1>Agregar Club</h1>
 
         <?php if (isset($_GET["error"])): ?>
+            <!-- esto muestra un mensaje de error si el nombre de usuario ya existe o si no se pudo crear el club -->
             <?php if ($_GET["error"] == "usuario"): ?>
-                <p style="color: white;">Ese nombre de usuario ya existe.</p>
+                <p>Ese nombre de usuario ya existe.</p>
             <?php else: ?>
-                <p style="color: white;">No se pudo crear el club. Revisá los datos.</p>
+                <!-- esto muestra un mensaje de error si no se pudo crear el club -->
+                <p>No se pudo crear el club. Revisá los datos.</p>
             <?php endif; ?>
         <?php endif; ?>
 
         <?php if (isset($_GET["enUso"])): ?>
-            <p style="color: white;">No se puede eliminar un club que tiene jugadores o partidos.</p>
+            <p>No se puede eliminar un club que tiene jugadores o partidos.</p>
         <?php endif; ?>
 
         <label for="nombreClub">Nombre del Club:</label>

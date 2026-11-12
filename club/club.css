@@ -1,3 +1,4 @@
+
 /* Iconos y fuentes */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
@@ -41,7 +42,6 @@ h1 {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
 
-
 /* =========================
    NAVBAR
 ========================= */
@@ -53,8 +53,6 @@ header {
 nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
     background: rgba(10, 15, 28, 0.75) !important;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -63,6 +61,8 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
+    gap: 30px;
+    justify-content: center;
 }
 
 nav a {
@@ -91,7 +91,6 @@ nav a.salir:hover {
     text-decoration: none;
     margin-bottom: 5px;
 }
-
 
 /* =========================
    PANELES TRANSPARENTES
@@ -440,23 +439,21 @@ footer p {
     padding-top: 5px;
 }
 
-
 /* =========================
-        RESPONSIVE
+   RESPONSIVE
 ========================= */
 
+/* Tablets */
 @media (max-width: 768px) {
 
     nav {
-        flex-wrap: wrap;
-        gap: 5px;
-        padding: 8px;
+        gap: 10px;
+        padding: 5px;
     }
 
     nav a {
-        padding: 8px 12px;
-        margin: 0;
-        font-size: 13px;
+        padding: 8px 15px;
+        font-size: 14px;
     }
 
     main {
@@ -498,14 +495,16 @@ footer p {
     }
 }
 
+/* Celulares */
 @media (max-width: 480px) {
 
     nav {
-        gap: 2px;
+        gap: 5px;
+        padding: 5px;
     }
 
     nav a {
-        padding: 7px 9px;
+        padding: 8px 6px;
         font-size: 11px;
     }
 
